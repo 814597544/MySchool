@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/ebm__menu_overlay"
+        android:layout_width="match_parent"
+        android:background="#ddffffff"
+        android:layout_height="match_parent"/>
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="100dp"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="九月九号"
+            android:textColor="#5ec4d4"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#5ec4d4"
+            android:text="人生就像巧克力，你永远不知道下一颗是什么味道"/>
+    </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ebm__menu_middle_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        >
+        <ImageButton
+            android:id="@+id/ebm__menu_middle_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            />
+        <TextView
+            android:id="@+id/ebm__menu_middle_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#5ec4d4"
+            android:textSize="10sp"
+            android:layout_marginBottom="@dimen/dip"
+            android:gravity="center"
+            android:maxLines="2"
+            android:lines="2"
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ebm__menu_left_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        >
+        <ImageButton
+            android:id="@+id/ebm__menu_left_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            />
+        <TextView
+            android:id="@+id/ebm__menu_left_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#5ec4d4"
+            android:layout_marginBottom="@dimen/dip"
+            android:gravity="center"
+            android:lines="2"
+            android:maxLines="2"
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ebm__menu_right_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        >
+        <ImageButton
+            android:id="@+id/ebm__menu_right_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            />
+        <TextView
+            android:id="@+id/ebm__menu_right_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dip"
+            android:textSize="10sp"
+            android:textColor="#5ec4d4"
+            android:gravity="center"
+            android:lines="2"
+            android:maxLines="2"
+            />
+
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ebm__menu_close_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        />
+
+
+</RelativeLayout>
