@@ -21,6 +21,9 @@
         <activity android:name=".ZklActivity" />
         <activity android:name=".MyTableActivity" />
         <activity android:name=".YaoYiYaoActivity" />
+        <activity android:name=".MyTableListActivity" />
+        <activity android:name=".AddMyTableActivity" />
+        <activity android:name=".UpDateMyTableActivity" />
     </application>
 
 </manifest>
