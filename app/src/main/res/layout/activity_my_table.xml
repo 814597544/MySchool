@@ -53,12 +53,15 @@
 
             <TextView
                 android:id="@+id/my_table_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="21dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:contentDescription="#ff000000"
-                android:paddingRight="20.0dip"
+                android:layout_marginRight="10dp"
+                android:text="5"
+                android:textSize="10sp"
+                android:gravity="center_horizontal"
+                android:background="@drawable/settext_bag"
                 />
         </RelativeLayout>
 <ListView
@@ -111,12 +114,16 @@
 
             <TextView
                 android:id="@+id/update_my_table_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="21dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="5"
+                android:textSize="10sp"
+                android:gravity="center_horizontal"
                 android:contentDescription="#ff000000"
-                android:paddingRight="20.0dip"
+                android:background="@drawable/settext_bag"
                 />
                 />
         </RelativeLayout>
@@ -148,7 +155,6 @@
                 android:src="@drawable/android_list_idex"/>
 
             <TextView
-                android:id="@+id/my_table_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
