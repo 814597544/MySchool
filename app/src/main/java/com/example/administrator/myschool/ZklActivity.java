@@ -8,6 +8,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.github.OrangeGangsters.circularbarpager.library.CircularBarPager;
+import com.nineoldandroids.animation.Animator;
+import com.rao.MySchool.adapter.CircularPagerAdapter;
+import com.viewpagerindicator.CirclePageIndicator;
+
+import static com.nineoldandroids.animation.Animator.*;
 
 /**
  * Created by Administrator on 2015/3/6.
@@ -75,7 +81,7 @@ public class ZklActivity extends Activity{
         circlePageIndicator.setStrokeColor(getResources().getColor(R.color.transparent));
 
         //Do stuff based on animation
-        mCircularBarPager.addListener(new Animator.AnimatorListener() {
+        mCircularBarPager.addListener(new AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 

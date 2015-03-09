@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".ZklActivity" />
         <activity android:name=".MyTableActivity" />
+        <activity android:name=".YaoYiYaoActivity" />
     </application>
 
 </manifest>

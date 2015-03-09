@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile project(':progressLibrary')
     compile project(':library')
+    compile project(':circular')
 }

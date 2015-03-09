@@ -1,54 +1,61 @@
 package com.example.administrator.myschool;
 
+import android.app.TabActivity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.view.WindowManager.LayoutParams;
+
+import com.example.administrator.myschool.R;
+
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableButtonMenu;
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay;
 
-public class MainActivity extends ActionBarActivity {
+
+/**
+ * @author Adil Soomro
+ *
+ */
+@SuppressWarnings("deprecation")
+public class MainActivity extends TabActivity {
     private ExpandableMenuOverlay menuOverlay;
-/*----test----*/
     private PopupWindow popupWindow;
     TabHost tabHost;
+    /** Called when the activity is first created. */
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-    menuOverlay = (ExpandableMenuOverlay) findViewById(R.id.button_menu);
-    tabHost = getTabHost();
-    setTabs();
-    menuOverlay.setOnMenuButtonClickListener(new ExpandableButtonMenu.OnMenuButtonClick() {
-        @Override
-        public void onClick(ExpandableButtonMenu.MenuButton action) {
-            switch (action) {
-                case MID:
-                    startActivity3();
-                    break;
-                case LEFT:
-                    startActivity1();
-                    break;
-                case RIGHT:
-                    startActivity2();
-                    break;
+        menuOverlay = (ExpandableMenuOverlay) findViewById(R.id.button_menu);
+        tabHost = getTabHost();
+        setTabs();
+        menuOverlay.setOnMenuButtonClickListener(new ExpandableButtonMenu.OnMenuButtonClick() {
+            @Override
+            public void onClick(ExpandableButtonMenu.MenuButton action) {
+                switch (action) {
+                    case MID:
+                        startActivity2();
+                        break;
+                   /* case LEFT:
+                        startActivity1();
+                        break;
+                    case RIGHT:
+                        startActivity3();
+                        break;*/
+                }
             }
-        }
-    });
-}
+        });
+    }
     private void setTabs()
     {
-        addTab("自控力", R.drawable.tab_search, ZKLActivity.class);
-        addTab("课表", R.drawable.tab_search, ChartToday.class);
+        addTab("自控力", R.drawable.tab_search, ZklActivity.class);
+        addTab("课  表", R.drawable.tab_search, MyTableActivity.class);
     }
     private void addTab(String labelId, int drawableId, Class<?> c)
     {
@@ -67,7 +74,7 @@ public class MainActivity extends ActionBarActivity {
     private void initPopupWindows(View v){
 
         View pop_view=getLayoutInflater().inflate(R.layout.edit_time,null,false);
-        popupWindow=new PopupWindow(pop_view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT,true );
+        popupWindow=new PopupWindow(pop_view,LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,true );
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.update();
@@ -77,20 +84,19 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
-    private void startActivity1(){
-        Intent intent=new Intent(MainActivity.this,EditTimeActivity.class);
+  /*  private void startActivity1(){
+        Intent intent=new Intent(HomeActivity.this,EditTimeActivity.class);
         startActivity(intent);
 
-    }
+    }*/
     private void startActivity2(){
-        Intent intent=new Intent(MainActivity.this,CalendarActivity.class);
+        Intent intent=new Intent(MainActivity.this,YaoYiYaoActivity.class);
         startActivity(intent);
 
     }
-    private void startActivity3(){
-        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+   /* private void startActivity3(){
+        Intent intent=new Intent(HomeActivity.this,LoginActivity.class);
         startActivity(intent);
 
-    }
-
+    }*/
 }

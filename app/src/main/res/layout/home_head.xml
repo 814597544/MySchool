@@ -9,7 +9,21 @@
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:background="#51d5d5" >
+        <LinearLayout
+            android:id="@+id/title_return"
+            android:layout_width="66dp"
+            android:layout_height="48dp"
+            android:visibility="gone"
+            android:layout_gravity="left|center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="6dip" >
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:src="@drawable/cart_return" />
+        </LinearLayout>
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
