@@ -72,7 +72,7 @@
             style="@style/line" />
         <RelativeLayout
             android:id="@+id/update_my_table_list"
-            android:layout_height="49dp"
+            android:layout_height="46dp"
             android:layout_width="fill_parent"
             android:clickable="true"
             android:paddingLeft="16.0dip" >
@@ -123,7 +123,7 @@
             style="@style/line" />
         <RelativeLayout
             android:id="@+id/add_my_table_list"
-            android:layout_height="49dp"
+            android:layout_height="46dp"
             android:layout_width="fill_parent"
             android:clickable="true"
             android:paddingLeft="16.0dip" >
