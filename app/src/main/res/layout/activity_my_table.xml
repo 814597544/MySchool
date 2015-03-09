@@ -71,7 +71,7 @@
         <View
             style="@style/line" />
         <RelativeLayout
-            android:id="@+id/update_my_table_list"
+            android:id="@+id/update_my_table"
             android:layout_height="46dp"
             android:layout_width="fill_parent"
             android:clickable="true"
@@ -109,11 +109,19 @@
                 android:textColor="#ff000000"
                 android:textSize="15.0sp" />
 
-
+            <TextView
+                android:id="@+id/update_my_table_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="#ff000000"
+                android:paddingRight="20.0dip"
+                />
                 />
         </RelativeLayout>
         <ListView
-            android:id="@+id/update_mytable_list"
+            android:id="@+id/update_mytable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone">
@@ -122,7 +130,7 @@
         <View
             style="@style/line" />
         <RelativeLayout
-            android:id="@+id/add_my_table_list"
+            android:id="@+id/add_my_table"
             android:layout_height="46dp"
             android:layout_width="fill_parent"
             android:clickable="true"
