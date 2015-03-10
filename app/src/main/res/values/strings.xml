@@ -10,6 +10,7 @@
         <item>  日 历  </item>
         <item>  图 表  </item>
     </string-array>
+    <!--shake-->
     <string name="gain_nothing">摇动手机，看看会有什么收获！</string>
     <string name="gain_1">摇动手机，看看</string>
     <string name="gain_2">看看有什么收获吧！</string>
@@ -17,6 +18,10 @@
     <string name="gain_4">有什么收获吧！</string>
     <string name="gain_5">看有什么！</string>
     <string name="gain_6">摇动手机，看看有什么！</string>
-
-
+    <!--星期-->
+    <string name="monday">星期一</string>
+    <string name="tuesday">星期二</string>
+    <string name="wednesday">星期三</string>
+    <string name="thursday">星期四</string>
+    <string name="friday">星期五</string>
 </resources>

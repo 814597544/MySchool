@@ -1,12 +1,15 @@
 package com.rao.MySchool.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.administrator.myschool.MyTableListActivity;
 import com.example.administrator.myschool.R;
 
 import java.util.List;
@@ -15,6 +18,7 @@ import java.util.List;
  * Created by Administrator on 2015/3/9.
  */
 public class TabaleAdapter extends BaseAdapter{
+    private Context context;// 当前上下文
     private LayoutInflater listContainer;// 视图容器
     private List<String> tableList = null; // 数据集合
 
@@ -32,6 +36,7 @@ public class TabaleAdapter extends BaseAdapter{
     public TabaleAdapter(Context context, List<String> list) {
         this.listContainer = LayoutInflater.from(context);
         this.tableList = list;
+        this.context = context;
 
     }
 
@@ -62,6 +67,14 @@ public class TabaleAdapter extends BaseAdapter{
         }
 
         viewHolder.tableitem.setText(tableList.get(position));
+        viewHolder.tableitem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity activity=(Activity) context;
+                Intent intent=new Intent(activity,MyTableListActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
         return convertView;
     }
