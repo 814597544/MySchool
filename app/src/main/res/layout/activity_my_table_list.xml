@@ -29,19 +29,13 @@
         android:src="@drawable/ic_launcher"
         circle:name="@string/monday" />
 
-    <com.circlemenu.CircleImageView
-        android:id="@+id/tuesday_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher"
-        circle:name="@string/tuesday" />
+        <com.circlemenu.CircleImageView
+            android:id="@+id/friday_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher"
+            circle:name="@string/friday" />
 
-    <com.circlemenu.CircleImageView
-        android:id="@+id/wednesday_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher"
-        circle:name="@string/wednesday" />
 
     <com.circlemenu.CircleImageView
         android:id="@+id/thursday_image"
@@ -51,11 +45,19 @@
         circle:name="@string/thursday" />
 
     <com.circlemenu.CircleImageView
-        android:id="@+id/friday_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher"
-        circle:name="@string/friday" />
+            android:id="@+id/wednesday_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher"
+            circle:name="@string/wednesday" />
+
+    <com.circlemenu.CircleImageView
+            android:id="@+id/tuesday_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher"
+            circle:name="@string/tuesday" />
+
 
    <!-- <com.circlemenu.CircleImageView
         android:id="@+id/saturday_image"
