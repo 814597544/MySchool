@@ -302,5 +302,6 @@
 
     <color name="grey21">#363636</color>
     <color name="gold">#b89766</color>
+    <color name="texttitlecolor">#51d5d5</color>
 
 </resources>

@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/home_head"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/id_swipe_ly"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -16,7 +20,7 @@
             android:id="@+id/my_table"
             android:layout_height="46dp"
             android:layout_width="fill_parent"
-            android:clickable="true"
+
             android:paddingLeft="16.0dip" >
 
             <ImageView
@@ -66,8 +70,7 @@
         </RelativeLayout>
 <ListView
     android:id="@+id/mytable_list"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    style="@style/listview"
     android:visibility="gone">
 
     </ListView>
@@ -77,7 +80,6 @@
             android:id="@+id/update_my_table"
             android:layout_height="46dp"
             android:layout_width="fill_parent"
-            android:clickable="true"
             android:paddingLeft="16.0dip" >
 
             <ImageView
@@ -127,20 +129,18 @@
                 />
                 />
         </RelativeLayout>
-        <ListView
+        <com.deletelistview.ListViewCompat
             android:id="@+id/update_mytable_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/listview"
             android:visibility="gone">
 
-        </ListView>
+        </com.deletelistview.ListViewCompat>
         <View
             style="@style/line" />
         <RelativeLayout
             android:id="@+id/add_my_table"
             android:layout_height="46dp"
             android:layout_width="fill_parent"
-            android:clickable="true"
             android:paddingLeft="16.0dip" >
 
             <ImageView
@@ -171,4 +171,6 @@
             style="@style/line" />
 
     </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>

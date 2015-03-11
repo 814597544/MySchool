@@ -24,6 +24,7 @@
         <activity android:name=".MyTableListActivity" />
         <activity android:name=".AddMyTableActivity" />
         <activity android:name=".UpDateMyTableActivity" />
+        <activity android:name=".MyTableDetailActivity" />
     </application>
 
 </manifest>

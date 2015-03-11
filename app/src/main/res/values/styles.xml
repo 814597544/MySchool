@@ -28,4 +28,20 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">1.0px</item>
     </style>
+
+    <!-- ListView 的基本布局 -->
+    <style name="listview">
+        <item name="android:scrollbars">none</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <!-- listview拖动时，背景为白色 -->
+        <item name="android:cacheColorHint">#00000000</item>
+    </style>
+
+    <!-- View线的样式 -->
+    <style name="viewlinestyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">@color/texttitlecolor</item>
+    </style>
 </resources>

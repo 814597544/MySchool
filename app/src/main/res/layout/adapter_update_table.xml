@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:paddingLeft="6.0dip" >
         <TextView
-            android:id="@+id/my_table_list_text"
+            android:id="@+id/my_table_list_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
