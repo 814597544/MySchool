@@ -21,7 +21,7 @@ import java.util.List;
 public class UpDateMyTableDetailActivity extends Activity{
     TextView title;
     ListView update_mytable_detail_listview;
-    LinearLayout title_return;
+    LinearLayout title_return,finish;
     List<String> list =new ArrayList<String>();
     UpdateTableDetailAdapter updateTableDetailAdapter;
     String titleName;
@@ -31,6 +31,13 @@ public class UpDateMyTableDetailActivity extends Activity{
         setContentView(R.layout.activity_update_mytable_detail);
         findView();
         loadData();
+
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void loadData() {
@@ -47,6 +54,8 @@ public class UpDateMyTableDetailActivity extends Activity{
         titleName=intent.getStringExtra("titleName");
         title= (TextView) findViewById(R.id.title);
         title_return= (LinearLayout) findViewById(R.id.title_return);
+        finish= (LinearLayout) findViewById(R.id.finish);
+        finish.setVisibility(View.VISIBLE);
         update_mytable_detail_listview= (ListView) findViewById(R.id.update_mytable_detail_listview);
 
         title.setText(titleName);
