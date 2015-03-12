@@ -6,7 +6,7 @@ import com.deleteItem.DelSlideListView;
 import com.deleteItem.ListViewonSingleTapUpListenner;
 import com.deleteItem.OnDeleteListioner;
 import com.rao.MySchool.adapter.TabaleAdapter;
-
+import com.rao.MySchool.been.MyTable;
 
 
 import android.content.Context;
@@ -39,7 +39,8 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
     TextView title;
     TabaleAdapter tableAdapter;
     TabaleDeleteAdapter tabledeleteAdapter;
-    List<String> tableNameList = new ArrayList<String>();
+    MyTable myTable;
+    List<MyTable> tableNameList = new ArrayList<MyTable>();
     RelativeLayout my_table,update_my_table,add_my_table;
     ImageView my_table_image0,my_table_image1,update_my_table_image0,update_my_table_image1,add_my_table_image;
     TextView my_table_num,update_my_table_num;
@@ -54,8 +55,7 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
       loadData();
       layoutClick();
 
-        update_mytable_list.setDeleteListioner(this);
-        update_mytable_list.setSingleTapUpListenner(this);
+
 
         mytable_list.setOnItemClickListener(new  OnItemClickListener() {
             @Override
@@ -78,11 +78,12 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
     }
 
     private void loadData() {
-        tableNameList.add("大一课表");
-        tableNameList.add("大二课表");
-        tableNameList.add("大三课表");
-        tableNameList.add("大四课表");
+        for (int i=0;i<4;i++){
+            myTable=new MyTable();
+            myTable.setTableName("大"+(i+1)+"课表");
+            tableNameList.add(myTable);
 
+        }
         tableAdapter=new TabaleAdapter(this,tableNameList);
         tabledeleteAdapter=new TabaleDeleteAdapter(this,tableNameList);
 
@@ -129,7 +130,7 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
         add_my_table.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MyTableActivity.this,MyTableListActivity.class);
+                Intent intent=new Intent(MyTableActivity.this,AddMyTableActivity.class);
                 startActivity(intent);
             }
         });
@@ -211,7 +212,7 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
     public class TabaleDeleteAdapter extends BaseAdapter {
         private Context context;// 当前上下文
         private LayoutInflater listContainer;// 视图容器
-        private List<String> tableList = null; // 数据集合
+        private List<MyTable> tableList = null; // 数据集合
 
 
         public  class ViewHolder {// 视图
@@ -223,7 +224,7 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
 
 
 
-        public TabaleDeleteAdapter(Context context, List<String> list) {
+        public TabaleDeleteAdapter(Context context, List<MyTable> list) {
             this.listContainer = LayoutInflater.from(context);
             this.tableList = list;
             this.context = context;
@@ -243,7 +244,7 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
         }
 
 
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder = null;
             if (null == convertView) {
                 // 加载视图文件
@@ -258,20 +259,17 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
-
+            viewHolder.tableitem.setText(tableList.get(position).getTableName());
 
             viewHolder.delete_item.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-
+                    tableList.remove(position);
                   tabledeleteAdapter.notifyDataSetChanged();
 
                 }
             });
-
-            viewHolder.tableitem.setText(tableList.get(position));
-
 
             return convertView;
         }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.administrator.myschool.MyTableListActivity;
 import com.example.administrator.myschool.R;
+import com.rao.MySchool.been.MyTable;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ import java.util.List;
 public class TabaleAdapter extends BaseAdapter{
     private Context context;// 当前上下文
     private LayoutInflater listContainer;// 视图容器
-    private List<String> tableList = null; // 数据集合
+    private List<MyTable> tableList = null; // 数据集合
 
     public static class ViewHolder {// 视图
         TextView tableitem;
@@ -33,7 +34,7 @@ public class TabaleAdapter extends BaseAdapter{
      * @param context
 
      */
-    public TabaleAdapter(Context context, List<String> list) {
+    public TabaleAdapter(Context context, List<MyTable> list) {
         this.listContainer = LayoutInflater.from(context);
         this.tableList = list;
         this.context = context;
@@ -66,15 +67,8 @@ public class TabaleAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tableitem.setText(tableList.get(position));
-        viewHolder.tableitem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Activity activity=(Activity) context;
-                Intent intent=new Intent(activity,MyTableListActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        viewHolder.tableitem.setText(tableList.get(position).getTableName());
+
 
         return convertView;
     }

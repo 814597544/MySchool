@@ -1,15 +1,50 @@
 package com.example.administrator.myschool;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * Created by Administrator on 2015/3/9.
  */
 public class AddMyTableActivity extends Activity {
+    TextView title,next;
+    EditText add_table_name;
+    LinearLayout title_return;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_mytable);
+
+        findView();
+    }
+
+    private void findView() {
+        title= (TextView) findViewById(R.id.title);
+        next= (TextView) findViewById(R.id.next);
+        add_table_name= (EditText) findViewById(R.id.add_table_name);
+        title_return= (LinearLayout) findViewById(R.id.title_return);
+
+        title.setText("添加课表");
+        title_return.setVisibility(View.VISIBLE);
+
+        title_return.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AddMyTableActivity.this,MyTableListActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <include layout="@layout/home_head"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="66dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"
+        android:textColor="#ff000000"
+        android:textSize="15.0sp"
+        android:text="课表名称:"/>
+   <EditText
+        android:id="@+id/add_table_name"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/setbar_bag"
+        android:gravity="center_vertical"
+        android:textColor="#51d5d5"
+        android:textSize="21.0sp"/>
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="fill_parent"
+        android:layout_height="46dp"
+        android:layout_marginLeft="46dp"
+        android:layout_marginRight="46dp"
+        android:layout_marginTop="216dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff"
+        android:background="@drawable/settext_bag"
+        android:textSize="20.0sp"
+        android:text="下一步"/>
 </LinearLayout>

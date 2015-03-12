@@ -28,9 +28,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="#ff0000"
-        android:drawableLeft="@drawable/delete_icon_normal"
         android:gravity="center"
         android:padding="7dip"
+        android:textColor="#ffffff"
         android:text="删除"
-        android:textSize="18dip" />
+        android:textSize="16dip" />
 </com.deleteItem.ScrollLinerLayout>

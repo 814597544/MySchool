@@ -26,5 +26,5 @@
     <dimen name="demo_view_height">172dp</dimen>
     <dimen name="demo_view_margin">16dp</dimen>
 
-    <dimen name="delete_action_len">90dip</dimen>
+    <dimen name="delete_action_len">66dip</dimen>
 </resources>
