@@ -129,12 +129,12 @@
                 />
                 />
         </RelativeLayout>
-        <com.deletelistview.ListViewCompat
+        <com.deleteItem.DelSlideListView
             android:id="@+id/update_mytable_list"
             style="@style/listview"
             android:visibility="gone">
 
-        </com.deletelistview.ListViewCompat>
+        </com.deleteItem.DelSlideListView>
         <View
             style="@style/line" />
         <RelativeLayout

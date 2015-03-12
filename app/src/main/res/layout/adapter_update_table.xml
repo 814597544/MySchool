@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.deleteItem.ScrollLinerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
 
     <RelativeLayout
         android:id="@+id/add_my_table"
@@ -22,5 +22,15 @@
 
         />
     </RelativeLayout>
-
-</LinearLayout>
+    <TextView
+        android:id="@+id/delete_item"
+        android:layout_width="@dimen/delete_action_len"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="#ff0000"
+        android:drawableLeft="@drawable/delete_icon_normal"
+        android:gravity="center"
+        android:padding="7dip"
+        android:text="删除"
+        android:textSize="18dip" />
+</com.deleteItem.ScrollLinerLayout>
