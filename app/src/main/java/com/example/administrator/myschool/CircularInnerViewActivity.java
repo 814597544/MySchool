@@ -28,7 +28,7 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
 /**
- * Created by oliviergoutay on 12/8/14.
+ * Created by oliviergoutay on 2015/3/5.
  */
 public class CircularInnerViewActivity extends LinearLayout {
     /**

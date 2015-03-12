@@ -20,6 +20,7 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
     private TextView selectedTextView,title;
     private CircleLayout circleMenu;
     LinearLayout title_return;
+    String fromId,titleName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,9 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
     }
 
     private void findView() {
+        Intent intent=getIntent();
+        fromId=intent.getStringExtra("fromId");
+        titleName=intent.getStringExtra("titleName");
         circleMenu = (CircleLayout)findViewById(R.id.main_circle_layout);
         title_return= (LinearLayout) findViewById(R.id.title_return);
         selectedTextView = (TextView)findViewById(R.id.main_selected_textView);
@@ -44,14 +48,33 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
 
         title_return.setVisibility(View.VISIBLE);
         selectedTextView.setText(((CircleImageView)circleMenu.getSelectedItem()).getName());
-        title.setText("课表名称");
+        title.setText(titleName);
+
+    }
+    private void intentTo(Class class1){
+        Intent intent=new Intent(MyTableListActivity.this,class1);
+        startActivity(intent);
     }
 
     @Override
        public void onItemClick(View view, int position, long id, String name) {
         Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(MyTableListActivity.this,MyTableDetailActivity.class);
-        startActivity(intent);
+        switch (fromId){
+
+            case "1":
+               intentTo(MyTableDetailActivity.class);
+                break;
+            case "2":
+                intentTo(UpDateMyTableDetailActivity.class);
+                break;
+            case "3":
+                intentTo(UpDateMyTableDetailActivity.class);
+                break;
+            default:
+                break;
+
+        }
+
     }
 
     @Override

@@ -61,6 +61,8 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(MyTableActivity.this,MyTableListActivity.class);
+                intent.putExtra("fromId","1");
+                intent.putExtra("titleName",tableNameList.get(position).getTableName());
                 startActivity(intent);
             }
 
@@ -70,6 +72,8 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(MyTableActivity.this,MyTableListActivity.class);
+                intent.putExtra("fromId","2");
+                intent.putExtra("titleName",tableNameList.get(position).getTableName());
                 startActivity(intent);
             }
 
@@ -84,6 +88,9 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
             tableNameList.add(myTable);
 
         }
+        my_table_num.setText(""+tableNameList.size());
+        update_my_table_num.setText(""+tableNameList.size());
+
         tableAdapter=new TabaleAdapter(this,tableNameList);
         tabledeleteAdapter=new TabaleDeleteAdapter(this,tableNameList);
 
@@ -266,7 +273,9 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
                 @Override
                 public void onClick(View v) {
                     tableList.remove(position);
-                  tabledeleteAdapter.notifyDataSetChanged();
+                    tabledeleteAdapter.notifyDataSetChanged();
+
+                    update_my_table_num.setText(""+tableList.size());
 
                 }
             });

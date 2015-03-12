@@ -23,7 +23,7 @@
         <activity android:name=".YaoYiYaoActivity" />
         <activity android:name=".MyTableListActivity" />
         <activity android:name=".AddMyTableActivity" />
-        <activity android:name=".UpDateMyTableActivity" />
+        <activity android:name=".UpDateMyTableDetailActivity" />
         <activity android:name=".MyTableDetailActivity" />
     </application>
 

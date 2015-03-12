@@ -3,6 +3,7 @@ package com.example.administrator.myschool;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ public class AddMyTableActivity extends Activity {
     TextView title,next;
     EditText add_table_name;
     LinearLayout title_return;
+    String addTableName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,11 @@ public class AddMyTableActivity extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addTableName=add_table_name.getText().toString();
+
                 Intent intent=new Intent(AddMyTableActivity.this,MyTableListActivity.class);
+                intent.putExtra("fromId","3");
+                intent.putExtra("titleName",addTableName);
                 startActivity(intent);
             }
         });
