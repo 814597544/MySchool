@@ -1,6 +1,7 @@
 package com.example.administrator.myschool;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -23,6 +24,7 @@ public class UpDateMyTableDetailActivity extends Activity{
     LinearLayout title_return;
     List<String> list =new ArrayList<String>();
     UpdateTableDetailAdapter updateTableDetailAdapter;
+    String titleName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +43,13 @@ public class UpDateMyTableDetailActivity extends Activity{
     }
 
     private void findView() {
+        Intent intent=getIntent();
+        titleName=intent.getStringExtra("titleName");
         title= (TextView) findViewById(R.id.title);
         title_return= (LinearLayout) findViewById(R.id.title_return);
         update_mytable_detail_listview= (ListView) findViewById(R.id.update_mytable_detail_listview);
 
-        title.setText("课表名称-星期");
+        title.setText(titleName);
         title_return.setVisibility(View.VISIBLE);
         title_return.setOnClickListener(new View.OnClickListener() {
             @Override

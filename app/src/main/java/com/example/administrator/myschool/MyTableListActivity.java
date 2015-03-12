@@ -51,24 +51,25 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
         title.setText(titleName);
 
     }
-    private void intentTo(Class class1){
+    private void intentTo(Class class1,String name){
         Intent intent=new Intent(MyTableListActivity.this,class1);
+        intent.putExtra("titleName",titleName+"-"+name);
         startActivity(intent);
     }
 
     @Override
        public void onItemClick(View view, int position, long id, String name) {
-        Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
         switch (fromId){
 
             case "1":
-               intentTo(MyTableDetailActivity.class);
+               intentTo(MyTableDetailActivity.class,name);
                 break;
             case "2":
-                intentTo(UpDateMyTableDetailActivity.class);
+                intentTo(UpDateMyTableDetailActivity.class,name);
                 break;
             case "3":
-                intentTo(UpDateMyTableDetailActivity.class);
+                intentTo(UpDateMyTableDetailActivity.class,name);
                 break;
             default:
                 break;
