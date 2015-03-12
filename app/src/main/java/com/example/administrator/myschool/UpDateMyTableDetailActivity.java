@@ -8,9 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.rao.MySchool.adapter.TableDetailAdapter;
-import com.rao.MySchool.adapter.UpdateTableDetailAdapter;
-import com.rao.MySchool.been.MyCourse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +19,13 @@ public class UpDateMyTableDetailActivity extends Activity{
     TextView title;
     ListView update_mytable_detail_listview;
     LinearLayout title_return,finish;
-    List<String> list =new ArrayList<String>();
-    UpdateTableDetailAdapter updateTableDetailAdapter;
     String titleName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_mytable_detail);
         findView();
-        loadData();
+
 
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,14 +35,7 @@ public class UpDateMyTableDetailActivity extends Activity{
         });
     }
 
-    private void loadData() {
-        for (int i=0;i<10;i++){
-            list.add(""+i);
-        }
 
-        updateTableDetailAdapter=new UpdateTableDetailAdapter(this,list);
-        update_mytable_detail_listview.setAdapter(updateTableDetailAdapter);
-    }
 
     private void findView() {
         Intent intent=getIntent();

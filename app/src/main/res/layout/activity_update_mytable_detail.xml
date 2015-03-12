@@ -5,9 +5,601 @@
     android:orientation="vertical" >
     <include layout="@layout/home_head"/>
 
-    <ListView
-        android:id="@+id/update_mytable_detail_listview"
-        style="@style/listview"
-        android:layout_width="fill_parent" />
+
+    <LinearLayout
+        android:id="@+id/num1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_num1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="第1节" />
+
+        <View
+            style="@style/viewlinestyle"
+            android:layout_width="fill_parent" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dp"
+            >
+            <EditText
+                android:id="@+id/update_course_name1"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:hint="课程名称"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_address1"
+                android:layout_width="76dp"
+                android:hint="课程地点"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="76dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_time1"
+                android:layout_width="76dp"
+                android:hint="课程时间"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_height="76dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/setbar_bag"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/num2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_num2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="第2节" />
+
+        <View
+            style="@style/viewlinestyle"
+            android:layout_width="fill_parent" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dp"
+            >
+            <EditText
+                android:id="@+id/update_course_name2"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:hint="课程名称"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_address2"
+                android:layout_width="76dp"
+                android:hint="课程地点"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="76dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_time2"
+                android:layout_width="76dp"
+                android:hint="课程时间"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_height="76dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/setbar_bag"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/num3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_num3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="第3节" />
+
+        <View
+            style="@style/viewlinestyle"
+            android:layout_width="fill_parent" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dp"
+            >
+            <EditText
+                android:id="@+id/update_course_name3"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:hint="课程名称"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_address3"
+                android:layout_width="76dp"
+                android:hint="课程地点"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="76dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_time3"
+                android:layout_width="76dp"
+                android:hint="课程时间"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_height="76dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/setbar_bag"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/num4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_num4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="第4节" />
+
+        <View
+            style="@style/viewlinestyle"
+            android:layout_width="fill_parent" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dp"
+            >
+            <EditText
+                android:id="@+id/update_course_name4"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:hint="课程名称"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_address4"
+                android:layout_width="76dp"
+                android:hint="课程地点"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="76dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_time4"
+                android:layout_width="76dp"
+                android:hint="课程时间"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_height="76dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/setbar_bag"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/num5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_num5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="第5节" />
+
+        <View
+            style="@style/viewlinestyle"
+            android:layout_width="fill_parent" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dp"
+            >
+            <EditText
+                android:id="@+id/update_course_name5"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:hint="课程名称"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_address5"
+                android:layout_width="76dp"
+                android:hint="课程地点"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="76dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_time5"
+                android:layout_width="76dp"
+                android:hint="课程时间"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_height="76dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/setbar_bag"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/num6"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_num6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="第6节" />
+
+        <View
+            style="@style/viewlinestyle"
+            android:layout_width="fill_parent" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dp"
+            >
+            <EditText
+                android:id="@+id/update_course_name6"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:hint="课程名称"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_address6"
+                android:layout_width="76dp"
+                android:hint="课程地点"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="76dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_time6"
+                android:layout_width="76dp"
+                android:hint="课程时间"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_height="76dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/setbar_bag"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/num7"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_num7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="第7节" />
+
+        <View
+            style="@style/viewlinestyle"
+            android:layout_width="fill_parent" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dp"
+            >
+            <EditText
+                android:id="@+id/update_course_name7"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:hint="课程名称"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_address7"
+                android:layout_width="76dp"
+                android:hint="课程地点"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="76dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_time7"
+                android:layout_width="76dp"
+                android:hint="课程时间"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_height="76dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/setbar_bag"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/num8"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_num8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="第8节" />
+
+        <View
+            style="@style/viewlinestyle"
+            android:layout_width="fill_parent" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dp"
+            >
+            <EditText
+                android:id="@+id/update_course_name8"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:hint="课程名称"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_address8"
+                android:layout_width="76dp"
+                android:hint="课程地点"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="76dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_time8"
+                android:layout_width="76dp"
+                android:hint="课程时间"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_height="76dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/setbar_bag"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/num9"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_num9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="第9节" />
+
+        <View
+            style="@style/viewlinestyle"
+            android:layout_width="fill_parent" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dp"
+            >
+            <EditText
+                android:id="@+id/update_course_name9"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:hint="课程名称"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_address9"
+                android:layout_width="76dp"
+                android:hint="课程地点"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="76dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_time9"
+                android:layout_width="76dp"
+                android:hint="课程时间"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_height="76dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/setbar_bag"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/num10"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_num10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="第10节" />
+
+        <View
+            style="@style/viewlinestyle"
+            android:layout_width="fill_parent" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dp"
+            >
+            <EditText
+                android:id="@+id/update_course_name10"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:hint="课程名称"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_address10"
+                android:layout_width="76dp"
+                android:hint="课程地点"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="76dp"
+                android:background="@drawable/setbar_bag"/>
+
+            <EditText
+                android:id="@+id/update_course_time10"
+                android:layout_width="76dp"
+                android:hint="课程时间"
+                android:textSize="13dp"
+                android:gravity="center_vertical"
+                android:layout_height="76dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/setbar_bag"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>
