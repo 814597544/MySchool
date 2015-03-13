@@ -74,9 +74,28 @@ public class TableDetailAdapter  extends BaseAdapter{
             }
 
             viewHolder.tv_num.setText("第"+(position+1)+"节");
-            viewHolder.book_name.setText("课程名称:"+"\n"+bookList.get(position).getCourseName());
-            viewHolder.book_address.setText("课程地点:"+"\n"+bookList.get(position).getCourseAddress());
-            viewHolder.book_time.setText("课程时间:"+"\n"+bookList.get(position).getCourseTime());
+
+            if (bookList.get(position).getCourseName()==null){
+                viewHolder.book_name.setText("课程名称:");
+            }
+            else{
+                viewHolder.book_name.setText("课程名称:"+"\n"+bookList.get(position).getCourseName());
+            }
+
+            if (bookList.get(position).getCourseAddress()==null){
+                viewHolder.book_address.setText("课程地点:");
+            }
+            else{
+                viewHolder.book_address.setText("课程地点:"+"\n"+bookList.get(position).getCourseAddress());
+            }
+
+            if (bookList.get(position).getCourseTime()==null){
+                viewHolder.book_time.setText("课程时间:");
+            }
+            else{
+                viewHolder.book_time.setText("课程时间:"+"\n"+bookList.get(position).getCourseTime());
+
+            }
 
 
             return convertView;

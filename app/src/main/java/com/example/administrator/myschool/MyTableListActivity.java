@@ -2,6 +2,7 @@ package com.example.administrator.myschool;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.circlemenu.CircleImageView;
 import com.circlemenu.CircleLayout;
+import com.rao.MySchool.been.DatabaseHelper;
 
 
 /**
@@ -21,6 +23,7 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
     private CircleLayout circleMenu;
     LinearLayout title_return;
     String fromId,titleName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,7 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
         Intent intent=getIntent();
         fromId=intent.getStringExtra("fromId");
         titleName=intent.getStringExtra("titleName");
+
         circleMenu = (CircleLayout)findViewById(R.id.main_circle_layout);
         title_return= (LinearLayout) findViewById(R.id.title_return);
         selectedTextView = (TextView)findViewById(R.id.main_selected_textView);

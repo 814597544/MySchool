@@ -46,12 +46,21 @@ public class MyTableDetailActivity extends Activity{
     private void loadData() {
         Cursor cursor = sqLiteDatabase.rawQuery("select coursename,courseaddress,coursetime " +
                 "from mytable where week=? and tablename=?;",new String[]{Week, titleName});
-        while (cursor.moveToNext()) {
-            mycourse=new MyCourse();
-            mycourse.setCourseName(cursor.getString(0));
-            mycourse.setCourseAddress(cursor.getString(1));
-            mycourse.setCourseTime(cursor.getString(2));
-            courseList.add(mycourse);
+
+        if (cursor.getCount()==0){
+            for (int i=0;i<10;i++){
+                mycourse=new MyCourse();
+                courseList.add(mycourse);
+            }
+        }else{
+            while (cursor.moveToNext()) {
+                mycourse=new MyCourse();
+                mycourse.setCourseName(cursor.getString(0));
+                mycourse.setCourseAddress(cursor.getString(1));
+                mycourse.setCourseTime(cursor.getString(2));
+                courseList.add(mycourse);
+            }
+
         }
 
         tableDetailAdapter=new TableDetailAdapter(this,courseList);
