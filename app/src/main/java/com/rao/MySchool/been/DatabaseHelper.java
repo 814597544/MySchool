@@ -23,11 +23,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
         db.execSQL("create table if not exists mytable(" +
-                "tablename varchar(20),week varchar(10),num varchar(10) primary key ,coursename varchar(50),courseaddress varchar(20),coursetime varchar(50))");
+                "tablename varchar(20),week varchar(20),num varchar(20)  ,coursename varchar(50),courseaddress varchar(20),coursetime varchar(50))");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
+        // 联合主键
+        db.execSQL(" ALTER TABLE mytable ADD PRIMARY KEY (tablename,week,num);");
         // 往表中增加一列
        // db.execSQL("alter table person add phone varchar(12) null");
         //drop table if exists person删除表

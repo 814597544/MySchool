@@ -44,7 +44,7 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
     TabaleAdapter tableAdapter;
     TabaleDeleteAdapter tabledeleteAdapter;
     MyTable myTable;
-    List<MyTable> tableNameList = new ArrayList<MyTable>();
+    List<MyTable> tableNameList = null;
     RelativeLayout my_table,update_my_table,add_my_table;
     ImageView my_table_image0,my_table_image1,update_my_table_image0,update_my_table_image1,add_my_table_image;
     TextView my_table_num,update_my_table_num;
@@ -53,6 +53,7 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
     private SwipeRefreshLayout swipeRefreshLayout;
     DatabaseHelper databaseHelper;
     SQLiteDatabase sqLiteDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +89,10 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
 
     }
 
+
     private void loadData() {
-        Cursor cursor = sqLiteDatabase.rawQuery("select  tablename from mytable where week='星期一' and num='1';", null);
+        Cursor   cursor = sqLiteDatabase.rawQuery("select  tablename from mytable where week='星期一' and num='1';", null);
+        tableNameList = new ArrayList<MyTable>();
         while (cursor.moveToNext()) {
             myTable=new MyTable();
             myTable.setTableName(cursor.getString(0));
@@ -225,6 +228,7 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
     public void onClick(int position) {
 
     }
+
 
 
     /*    适配器   */

@@ -23,7 +23,7 @@ import java.util.List;
 public class UpDateMyTableDetailActivity extends Activity{
     TextView title;
     LinearLayout title_return,finish;
-    String titleName,week;
+    String titleName,Week;
     EditText name1,name2,name3,name4,name5,name6,name7,name8,name9,name10;
     EditText address1,address2,address3,address4,address5,address6,address7,address8,address9,address10;
     EditText time1,time2,time3,time4,time5,time6,time7,time8,time9,time10;
@@ -42,54 +42,54 @@ public class UpDateMyTableDetailActivity extends Activity{
             public void onClick(View v) {
 
 
-                  sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                                   " values(?,?,?,?,?,?);",
-                          new Object[]{titleName,week,"1",name1.getText().toString(),address1.getText().toString(),
+                          new Object[]{titleName,Week,"1",name1.getText().toString(),address1.getText().toString(),
                                   time1.getText().toString()});
 
                 sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                                 " values(?,?,?,?,?,?);",
-                        new Object[]{titleName,week,"2",name2.getText().toString(),address2.getText().toString(),
+                        new Object[]{titleName,Week,"2",name2.getText().toString(),address2.getText().toString(),
                                 time2.getText().toString()});
 
                 sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                                 " values(?,?,?,?,?,?);",
-                        new Object[]{titleName,week,"3",name3.getText().toString(),address3.getText().toString(),
+                        new Object[]{titleName,Week,"3",name3.getText().toString(),address3.getText().toString(),
                                 time3.getText().toString()});
 
                 sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                                 " values(?,?,?,?,?,?);",
-                        new Object[]{titleName,week,"4",name4.getText().toString(),address4.getText().toString(),
+                        new Object[]{titleName,Week,"4",name4.getText().toString(),address4.getText().toString(),
                                 time4.getText().toString()});
 
                 sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                                 " values(?,?,?,?,?,?);",
-                        new Object[]{titleName,week,"5",name5.getText().toString(),address5.getText().toString(),
+                        new Object[]{titleName,Week,"5",name5.getText().toString(),address5.getText().toString(),
                                 time5.getText().toString()});
 
                 sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                                 " values(?,?,?,?,?,?);",
-                        new Object[]{titleName,week,"6",name6.getText().toString(),address6.getText().toString(),
+                        new Object[]{titleName,Week,"6",name6.getText().toString(),address6.getText().toString(),
                                 time6.getText().toString()});
 
                 sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                                 " values(?,?,?,?,?,?);",
-                        new Object[]{titleName,week,"7",name7.getText().toString(),address7.getText().toString(),
+                        new Object[]{titleName,Week,"7",name7.getText().toString(),address7.getText().toString(),
                                 time7.getText().toString()});
 
                 sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                                 " values(?,?,?,?,?,?);",
-                        new Object[]{titleName,week,"8",name8.getText().toString(),address8.getText().toString(),
+                        new Object[]{titleName,Week,"8",name8.getText().toString(),address8.getText().toString(),
                                 time8.getText().toString()});
 
                 sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                                 " values(?,?,?,?,?,?);",
-                        new Object[]{titleName,week,"9",name9.getText().toString(),address9.getText().toString(),
+                        new Object[]{titleName,Week,"9",name9.getText().toString(),address9.getText().toString(),
                                 time9.getText().toString()});
 
                 sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                                 " values(?,?,?,?,?,?);",
-                        new Object[]{titleName,week,"10",name10.getText().toString(),address10.getText().toString(),
+                        new Object[]{titleName,Week,"10",name10.getText().toString(),address10.getText().toString(),
                                 time10.getText().toString()});
 
 
@@ -108,7 +108,7 @@ public class UpDateMyTableDetailActivity extends Activity{
     private void findView() {
         Intent intent=getIntent();
         titleName=intent.getStringExtra("titleName");
-        week=intent.getStringExtra("week");
+        Week=intent.getStringExtra("week");
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
 
@@ -151,7 +151,7 @@ public class UpDateMyTableDetailActivity extends Activity{
         time10= (EditText) findViewById(R.id.update_course_time10);
 
 
-        title.setText(titleName+"-"+week);
+        title.setText(titleName+"-"+Week);
         title_return.setVisibility(View.VISIBLE);
         title_return.setOnClickListener(new View.OnClickListener() {
             @Override
