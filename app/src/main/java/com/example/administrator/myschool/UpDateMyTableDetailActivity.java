@@ -36,8 +36,40 @@ public class UpdateMyTableDetailActivity  extends Activity {
             @Override
             public void onClick(View v) {
 
-                sqLiteDatabase.execSQL("update mytable set coursename = name1.getText().toString(), courseaddress =address1.getText().toString()," +
-                        " coursetime= time1.getText().toString() where tablename=titleName and week=Week and num="+1+";");
+                sqLiteDatabase.execSQL("update mytable set coursename = ?, courseaddress =?, coursetime= ? where tablename=? and week=? and " +
+                        "num=?;",new String[]{name1.getText().toString(),address1.getText().toString(),time1.getText().toString(),titleName,Week,"1"});
+
+
+                sqLiteDatabase.execSQL("update mytable set coursename = ?, courseaddress =?, coursetime= ? where tablename=? and week=? and " +
+                        "num=?;",new String[]{name2.getText().toString(),address2.getText().toString(),time2.getText().toString(),titleName,Week,"2"});
+
+                        sqLiteDatabase.execSQL("update mytable set coursename = ?, courseaddress =?, coursetime= ? where tablename=? and week=? and " +
+                                "num=?;",new String[]{name3.getText().toString(),address3.getText().toString(),time3.getText().toString(),titleName,Week,"3"});
+
+
+                sqLiteDatabase.execSQL("update mytable set coursename = ?, courseaddress =?, coursetime= ? where tablename=? and week=? and " +
+                        "num=?;",new String[]{name4.getText().toString(),address4.getText().toString(),time4.getText().toString(),titleName,Week,"4"});
+
+                sqLiteDatabase.execSQL("update mytable set coursename = ?, courseaddress =?, coursetime= ? where tablename=? and week=? and " +
+                        "num=?;",new String[]{name5.getText().toString(),address5.getText().toString(),time5.getText().toString(),titleName,Week,"5"});
+
+                sqLiteDatabase.execSQL("update mytable set coursename = ?, courseaddress =?, coursetime= ? where tablename=? and week=? and " +
+                        "num=?;",new String[]{name6.getText().toString(),address6.getText().toString(),time6.getText().toString(),titleName,Week,"6"});
+
+
+                sqLiteDatabase.execSQL("update mytable set coursename = ?, courseaddress =?, coursetime= ? where tablename=? and week=? and " +
+                        "num=?;",new String[]{name7.getText().toString(),address7.getText().toString(),time7.getText().toString(),titleName,Week,"7"});
+
+                sqLiteDatabase.execSQL("update mytable set coursename = ?, courseaddress =?, coursetime= ? where tablename=? and week=? and " +
+                        "num=?;",new String[]{name8.getText().toString(),address8.getText().toString(),time8.getText().toString(),titleName,Week,"8"});
+
+
+                sqLiteDatabase.execSQL("update mytable set coursename = ?, courseaddress =?, coursetime= ? where tablename=? and week=? and " +
+                        "num=?;",new String[]{name9.getText().toString(),address9.getText().toString(),time9.getText().toString(),titleName,Week,"9"});
+
+
+                sqLiteDatabase.execSQL("update mytable set coursename = ?, courseaddress =?, coursetime= ? where tablename=? and week=? and " +
+                        "num=?;",new String[]{name10.getText().toString(),address10.getText().toString(),time10.getText().toString(),titleName,Week,"10"});
 
 
 
