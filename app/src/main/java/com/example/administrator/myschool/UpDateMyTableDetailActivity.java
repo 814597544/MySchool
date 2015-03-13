@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class UpDateMyTableDetailActivity extends Activity{
     TextView title;
-    ListView update_mytable_detail_listview;
     LinearLayout title_return,finish;
     String titleName;
     @Override
@@ -44,7 +43,6 @@ public class UpDateMyTableDetailActivity extends Activity{
         title_return= (LinearLayout) findViewById(R.id.title_return);
         finish= (LinearLayout) findViewById(R.id.finish);
         finish.setVisibility(View.VISIBLE);
-        update_mytable_detail_listview= (ListView) findViewById(R.id.update_mytable_detail_listview);
 
         title.setText(titleName);
         title_return.setVisibility(View.VISIBLE);
