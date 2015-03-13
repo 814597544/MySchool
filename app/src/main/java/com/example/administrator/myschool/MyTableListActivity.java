@@ -2,17 +2,14 @@ package com.example.administrator.myschool;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.circlemenu.CircleImageView;
 import com.circlemenu.CircleLayout;
-import com.rao.MySchool.been.DatabaseHelper;
 
 
 /**
@@ -71,10 +68,10 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
                intentTo(MyTableDetailActivity.class,name);
                 break;
             case "2":
-                intentTo(UpDateMyTableDetailActivity.class,name);
+                intentTo(UpdateMyTableDetailActivity.class,name);
                 break;
             case "3":
-                intentTo(UpDateMyTableDetailActivity.class,name);
+                intentTo(AddMyTableDetailActivity.class,name);
                 break;
             default:
                 break;

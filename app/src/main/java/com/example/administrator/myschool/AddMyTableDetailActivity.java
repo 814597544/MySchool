@@ -7,15 +7,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.rao.MySchool.been.DatabaseHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Created by Administrator on 2015/3/13.
+ * Created by Administrator on 2015/3/9.
  */
-public class UpdateMyTableDetailActivity  extends Activity {
+public class AddMyTableDetailActivity extends Activity{
     TextView title;
     LinearLayout title_return,finish;
     String titleName,Week;
@@ -36,17 +41,64 @@ public class UpdateMyTableDetailActivity  extends Activity {
             @Override
             public void onClick(View v) {
 
-                sqLiteDatabase.execSQL("update mytable set coursename = name1.getText().toString(), courseaddress =address1.getText().toString()," +
-                        " coursetime= time1.getText().toString() where tablename=titleName and week=Week and num="+1+";");
 
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                                  " values(?,?,?,?,?,?);",
+                          new Object[]{titleName,Week,"1",name1.getText().toString(),address1.getText().toString(),
+                                  time1.getText().toString()});
+
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                                " values(?,?,?,?,?,?);",
+                        new Object[]{titleName,Week,"2",name2.getText().toString(),address2.getText().toString(),
+                                time2.getText().toString()});
+
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                                " values(?,?,?,?,?,?);",
+                        new Object[]{titleName,Week,"3",name3.getText().toString(),address3.getText().toString(),
+                                time3.getText().toString()});
+
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                                " values(?,?,?,?,?,?);",
+                        new Object[]{titleName,Week,"4",name4.getText().toString(),address4.getText().toString(),
+                                time4.getText().toString()});
+
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                                " values(?,?,?,?,?,?);",
+                        new Object[]{titleName,Week,"5",name5.getText().toString(),address5.getText().toString(),
+                                time5.getText().toString()});
+
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                                " values(?,?,?,?,?,?);",
+                        new Object[]{titleName,Week,"6",name6.getText().toString(),address6.getText().toString(),
+                                time6.getText().toString()});
+
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                                " values(?,?,?,?,?,?);",
+                        new Object[]{titleName,Week,"7",name7.getText().toString(),address7.getText().toString(),
+                                time7.getText().toString()});
+
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                                " values(?,?,?,?,?,?);",
+                        new Object[]{titleName,Week,"8",name8.getText().toString(),address8.getText().toString(),
+                                time8.getText().toString()});
+
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                                " values(?,?,?,?,?,?);",
+                        new Object[]{titleName,Week,"9",name9.getText().toString(),address9.getText().toString(),
+                                time9.getText().toString()});
+
+                sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
+                                " values(?,?,?,?,?,?);",
+                        new Object[]{titleName,Week,"10",name10.getText().toString(),address10.getText().toString(),
+                                time10.getText().toString()});
 
 
 
                 Toast.makeText(getApplicationContext(),
-                        "保存成功", Toast.LENGTH_SHORT).show();
+                          "保存成功", Toast.LENGTH_SHORT).show();
 
                 finish();
-            }
+              }
 
         });
     }
