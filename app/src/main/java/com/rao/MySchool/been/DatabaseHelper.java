@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String name="mytable";//数据库名称
+    private static final String name="mytablebase";//数据库名称
     private static final int version=1;//数据库版本
     public DatabaseHelper(Context context){
         //第三个参数CursorFactory指定在执行查询时获得一个游标实例的
@@ -22,9 +22,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
-        db.execSQL("create table if not exists person(" +
-                "tablename varchar(20) primary key autoincrement,week varchar(10),num varchar(10)," +
-                "coursename varchar(50),courseaddress varchar(20),coursetime varchar(50))");
+        db.execSQL("create table if not exists mytable(" +
+                "tablename varchar(20),week varchar(10),num varchar(10) primary key ,coursename varchar(50),courseaddress varchar(20),coursetime varchar(50))");
     }
 
     @Override

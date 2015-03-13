@@ -53,7 +53,8 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
     }
     private void intentTo(Class class1,String name){
         Intent intent=new Intent(MyTableListActivity.this,class1);
-        intent.putExtra("titleName",titleName+"-"+name);
+        intent.putExtra("titleName",titleName);
+        intent.putExtra("week",name);
         startActivity(intent);
     }
 

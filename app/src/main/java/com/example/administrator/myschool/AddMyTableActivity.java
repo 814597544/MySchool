@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Administrator on 2015/3/9.
@@ -16,7 +17,7 @@ public class AddMyTableActivity extends Activity {
     TextView title,next;
     EditText add_table_name;
     LinearLayout title_return;
-    String addTableName;
+    String addTableName=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +46,18 @@ public class AddMyTableActivity extends Activity {
             @Override
             public void onClick(View v) {
                 addTableName=add_table_name.getText().toString();
+        if (addTableName.equals("")||null==addTableName){
 
-                Intent intent=new Intent(AddMyTableActivity.this,MyTableListActivity.class);
-                intent.putExtra("fromId","3");
-                intent.putExtra("titleName",addTableName);
-                startActivity(intent);
+            Toast.makeText(getApplicationContext(),
+                    "课程名称不能为空", Toast.LENGTH_SHORT).show();
+
+        }else{
+           Intent intent=new Intent(AddMyTableActivity.this,MyTableListActivity.class);
+           intent.putExtra("fromId","3");
+           intent.putExtra("titleName",addTableName);
+           startActivity(intent);
+}
+
             }
         });
     }

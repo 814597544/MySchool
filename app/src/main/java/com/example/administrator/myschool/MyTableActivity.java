@@ -6,12 +6,15 @@ import com.deleteItem.DelSlideListView;
 import com.deleteItem.ListViewonSingleTapUpListenner;
 import com.deleteItem.OnDeleteListioner;
 import com.rao.MySchool.adapter.TabaleAdapter;
+import com.rao.MySchool.been.DatabaseHelper;
 import com.rao.MySchool.been.MyTable;
 
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -37,6 +40,7 @@ import java.util.List;
 public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener,OnDeleteListioner, ListViewonSingleTapUpListenner, DialogInterface.OnCancelListener {
 
     TextView title;
+    String TableName;
     TabaleAdapter tableAdapter;
     TabaleDeleteAdapter tabledeleteAdapter;
     MyTable myTable;
@@ -47,6 +51,9 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
     ListView mytable_list;
     DelSlideListView update_mytable_list;
     private SwipeRefreshLayout swipeRefreshLayout;
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase sqLiteDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,12 +89,13 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
     }
 
     private void loadData() {
-        for (int i=0;i<4;i++){
+        Cursor cursor = sqLiteDatabase.rawQuery("select  tablename from mytable where week='星期一' and num='1';", null);
+        while (cursor.moveToNext()) {
             myTable=new MyTable();
-            myTable.setTableName("大"+(i+1)+"课表");
+            myTable.setTableName(cursor.getString(0));
             tableNameList.add(myTable);
-
         }
+
         my_table_num.setText(""+tableNameList.size());
         update_my_table_num.setText(""+tableNameList.size());
 
@@ -145,6 +153,10 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
     }
 
     private void findId() {
+
+        databaseHelper = new DatabaseHelper(this);
+        sqLiteDatabase = databaseHelper.getReadableDatabase();
+
         title= (TextView) findViewById(R.id.title);
         title.setText("课 表");
         my_table= (RelativeLayout) findViewById(R.id.my_table);
@@ -265,8 +277,8 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-
-            viewHolder.tableitem.setText(tableList.get(position).getTableName());
+            TableName=tableList.get(position).getTableName();
+            viewHolder.tableitem.setText(TableName);
 
             viewHolder.delete_item.setOnClickListener(new View.OnClickListener() {
 
@@ -274,7 +286,7 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
                 public void onClick(View v) {
                     tableList.remove(position);
                     tabledeleteAdapter.notifyDataSetChanged();
-
+                    sqLiteDatabase.execSQL("delete from mytable where tablename = TableName;");
                     update_my_table_num.setText(""+tableList.size());
 
                 }
