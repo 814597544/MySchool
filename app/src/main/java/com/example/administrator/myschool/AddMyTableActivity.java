@@ -38,7 +38,6 @@ public class AddMyTableActivity extends Activity {
 
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
-        cursor = sqLiteDatabase.rawQuery("select  tablename from mytable ;", null);
 
         title= (TextView) findViewById(R.id.title);
         next= (TextView) findViewById(R.id.next);
@@ -58,6 +57,8 @@ public class AddMyTableActivity extends Activity {
             @Override
             public void onClick(View v) {
                 addTableName=add_table_name.getText().toString();
+                cursor = sqLiteDatabase.rawQuery("select * from mytable where tablename=?;", new String[]{addTableName});
+
         if (addTableName.equals("")||null==addTableName){
 
             Toast.makeText(getApplicationContext(),
