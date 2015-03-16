@@ -12,12 +12,19 @@
     </string-array>
     <!--shake-->
     <string name="gain_nothing">摇动手机，看看会有什么收获！</string>
-    <string name="gain_1">摇动手机，看看</string>
-    <string name="gain_2">看看有什么收获吧！</string>
-    <string name="gain_3">摇动手机！</string>
-    <string name="gain_4">有什么收获吧！</string>
-    <string name="gain_5">看有什么！</string>
-    <string name="gain_6">摇动手机，看看有什么！</string>
+    <string name="gain_1">有多大的思想，才有多大的能量！</string>
+    <string name="gain_2">左右一个人成功的，不是能力，而是选择！</string>
+    <string name="gain_3">古之立大事者，不惟有超世之材，亦必有坚忍不拨之志！</string>
+    <string name="gain_4">生活就像一杯浓酒，不经三番五次的提炼，就不会这样可口！</string>
+    <string name="gain_5">有志者自有千计万计，无志者只感千难万难！</string>
+    <string name="gain_6">环境不会改变，解决之道在于改变自己！</string>
+    <string name="gain_7">与其临渊羡鱼，不如退而结网！</string>
+    <string name="gain_8">易穷则变，变则通，通则久！</string>
+    <string name="gain_9">只有走完平凡的路程，才能达到伟大的目标！</string>
+    <string name="gain_10">有信心的人，可以化渺小为伟大，化平庸为神奇！</string>
+    <string name="gain_11">见贤思齐焉，见不贤而内自省也！</string>
+    <string name="gain_12">不积跬步，无以至千里，不积小流，无以成江海！</string>
+
     <!--星期-->
     <string name="monday">星期一</string>
     <string name="tuesday">星期二</string>

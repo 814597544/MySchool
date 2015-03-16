@@ -81,7 +81,7 @@ public class YaoYiYaoActivity extends Activity{
             handler.sendEmptyMessageDelayed(1, 200);
             handler.sendEmptyMessageDelayed(2, 2000);
 
-            randomC=random.nextInt(7);
+            randomC=random.nextInt(13);
             Log.e("--", "---"+randomC);
 
         }
@@ -105,27 +105,51 @@ public class YaoYiYaoActivity extends Activity{
                 shakeListener.start();
                 if(randomC==1){
                     textgain.setText(R.string.gain_1);
-                    Log.e("@@@@@","11111");
+
                 }
                else if(randomC==2){
                     textgain.setText(R.string.gain_2);
-                    Log.e("@@@@@","222222");
+
                 }
                 else if(randomC==3){
                     textgain.setText(R.string.gain_3);
-                    Log.e("@@@@@","333333");
+
                 }
                 else if(randomC==4){
                     textgain.setText(R.string.gain_4);
-                    Log.e("@@@@@","44444");
+
                 }
                 else if(randomC==5){
                     textgain.setText(R.string.gain_5);
-                    Log.e("@@@@@","55555555");
+
                 }
                 else if(randomC==6){
                     textgain.setText(R.string.gain_6);
-                    Log.e("@@@@@","6666666666");
+
+                }
+                else if(randomC==7){
+                    textgain.setText(R.string.gain_7);
+
+                }
+                else if(randomC==8){
+                    textgain.setText(R.string.gain_8);
+
+                }
+                else if(randomC==9){
+                    textgain.setText(R.string.gain_9);
+
+                }
+                else if(randomC==10){
+                    textgain.setText(R.string.gain_10);
+
+                }
+                else if(randomC==11){
+                    textgain.setText(R.string.gain_11);
+
+                }
+                else if(randomC==12){
+                    textgain.setText(R.string.gain_12);
+
                 }else{
                     textgain.setText(R.string.gain_nothing);
 
