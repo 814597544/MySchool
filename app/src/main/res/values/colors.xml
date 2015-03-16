@@ -304,4 +304,8 @@
     <color name="gold">#b89766</color>
     <color name="texttitlecolor">#51d5d5</color>
 
+    <!-- 自定义Loding_Dialog_Start -->
+    <color name="bocop_dialog_bg">#77000000</color>
+
+
 </resources>

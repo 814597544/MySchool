@@ -6,13 +6,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lodingdialog.LoadingDialog;
 import com.rao.MySchool.been.DatabaseHelper;
 
 /**
@@ -27,6 +27,7 @@ public class UpdateMyTableDetailActivity  extends Activity {
     EditText time1,time2,time3,time4,time5,time6,time7,time8,time9,time10;
     DatabaseHelper databaseHelper;
     SQLiteDatabase sqLiteDatabase;
+    LoadingDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +39,15 @@ public class UpdateMyTableDetailActivity  extends Activity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.show();
                 new Thread(){
                     @Override
                     public void run() {
                         Message msg=new Message();
-                        msg.what=-1;
                         loadData();
                         msg.what=1;
-                        handler.sendMessage(msg);
+
+                        handler.sendMessageDelayed(msg, 3000);
                     }
                 }.start();
 
@@ -203,6 +205,7 @@ public class UpdateMyTableDetailActivity  extends Activity {
         Week=intent.getStringExtra("week");
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
+        dialog = new LoadingDialog(this);
 
         title= (TextView) findViewById(R.id.title);
         title_return= (LinearLayout) findViewById(R.id.title_return);
@@ -257,14 +260,15 @@ public class UpdateMyTableDetailActivity  extends Activity {
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what==-1){
 
-            }
             if (msg.what==1){
+                dialog.dismiss();
                 Toast.makeText(getApplicationContext(),
                         "保存成功", Toast.LENGTH_SHORT).show();
-                    finish();
+
+                   finish();
             }else{
+                dialog.dismiss();
                 Toast.makeText(getApplicationContext(),
                         "保存失败", Toast.LENGTH_SHORT).show();
             }

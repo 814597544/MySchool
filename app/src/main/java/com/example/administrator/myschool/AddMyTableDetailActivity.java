@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.lodingdialog.LoadingDialog;
 import com.rao.MySchool.been.DatabaseHelper;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class AddMyTableDetailActivity extends Activity{
     EditText time1,time2,time3,time4,time5,time6,time7,time8,time9,time10;
     DatabaseHelper databaseHelper;
     SQLiteDatabase sqLiteDatabase;
+    LoadingDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +44,14 @@ public class AddMyTableDetailActivity extends Activity{
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dialog.show();
                 new Thread(){
                     @Override
                     public void run() {
                         Message msg=new Message();
-                        msg.what=-1;
                         loadData();
                         msg.what=1;
-                        handler.sendMessage(msg);
+                        handler.sendMessageDelayed(msg, 3000);
                     }
                 }.start();
 
@@ -63,12 +64,12 @@ public class AddMyTableDetailActivity extends Activity{
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what==-1){
 
-            }
             if (msg.what==1){
                 Toast.makeText(getApplicationContext(),
                      "保存成功", Toast.LENGTH_SHORT).show();
+
+                dialog.dismiss();
 
                 finish();
             }else{
@@ -139,6 +140,7 @@ public class AddMyTableDetailActivity extends Activity{
         Week=intent.getStringExtra("week");
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
+        dialog = new LoadingDialog(this);
 
         title= (TextView) findViewById(R.id.title);
         title_return= (LinearLayout) findViewById(R.id.title_return);

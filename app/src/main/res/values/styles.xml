@@ -44,4 +44,13 @@
         <item name="android:layout_height">1dip</item>
         <item name="android:background">@color/texttitlecolor</item>
     </style>
+
+    <!-- Loding_dialog样式Start -->
+    <style name="Dialog_bocop">
+        <item name="android:windowBackground">@color/bocop_dialog_bg</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+
+    </style>
 </resources>

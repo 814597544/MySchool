@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.lodingdialog.LoadingDialog;
 import com.rao.MySchool.adapter.TableDetailAdapter;
 import com.rao.MySchool.been.DatabaseHelper;
 import com.rao.MySchool.been.MyCourse;
@@ -32,6 +36,7 @@ public class MyTableDetailActivity extends Activity{
     String titleName,Week;
     DatabaseHelper databaseHelper;
     SQLiteDatabase sqLiteDatabase;
+    LoadingDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,40 +44,72 @@ public class MyTableDetailActivity extends Activity{
         setContentView(R.layout.activity_my_table_detail);
 
         findView();
+        Log.e("2222","222222222");
         loadData();
 
     }
 
     private void loadData() {
-        Cursor cursor = sqLiteDatabase.rawQuery("select coursename,courseaddress,coursetime " +
-                "from mytable where week=? and tablename=?;",new String[]{Week, titleName});
 
-        if (cursor.getCount()==0){
-            for (int i=0;i<10;i++){
-                mycourse=new MyCourse();
-                courseList.add(mycourse);
+        dialog.show();
+
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg=new Message();
+
+                Cursor cursor = sqLiteDatabase.rawQuery("select coursename,courseaddress,coursetime " +
+                        "from mytable where week=? and tablename=?;",new String[]{Week, titleName});
+
+                if (cursor.getCount()==0){
+                    for (int i=0;i<10;i++){
+                        mycourse=new MyCourse();
+                        courseList.add(mycourse);
+                    }
+                }else{
+                    while (cursor.moveToNext()) {
+                        mycourse=new MyCourse();
+                        mycourse.setCourseName(cursor.getString(0));
+                        mycourse.setCourseAddress(cursor.getString(1));
+                        mycourse.setCourseTime(cursor.getString(2));
+                        courseList.add(mycourse);
+                    }
+
+                }
+
+                tableDetailAdapter=new TableDetailAdapter(MyTableDetailActivity.this,courseList);
+                table2_listview.setAdapter(tableDetailAdapter);
+
+                msg.what=1;
+                handler.sendMessageDelayed(msg, 3000);
             }
-        }else{
-            while (cursor.moveToNext()) {
-                mycourse=new MyCourse();
-                mycourse.setCourseName(cursor.getString(0));
-                mycourse.setCourseAddress(cursor.getString(1));
-                mycourse.setCourseTime(cursor.getString(2));
-                courseList.add(mycourse);
-            }
+        }.start();
 
-        }
-
-        tableDetailAdapter=new TableDetailAdapter(this,courseList);
-        table2_listview.setAdapter(tableDetailAdapter);
     }
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
 
+            if (msg.what==1){
+                dialog.dismiss();
+
+                Toast.makeText(getApplicationContext(),
+                        "加载完毕", Toast.LENGTH_SHORT).show();
+
+
+            }else{
+                Toast.makeText(getApplicationContext(),
+                        "加载失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
     private void findView() {
         Intent intent=getIntent();
         titleName=intent.getStringExtra("titleName");
         Week=intent.getStringExtra("week");
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
+        dialog = new LoadingDialog(this);
 
         title= (TextView) findViewById(R.id.title);
         title_return= (LinearLayout) findViewById(R.id.title_return);
