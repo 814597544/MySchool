@@ -77,7 +77,7 @@ public class MyTableDetailActivity extends Activity{
         title= (TextView) findViewById(R.id.title);
         title_return= (LinearLayout) findViewById(R.id.title_return);
         table2_listview= (ListView) findViewById(R.id.table2_listview);
-        Log.e("----","---"+titleName);
+
         title.setText(titleName+"-"+Week);
         title_return.setVisibility(View.VISIBLE);
         title_return.setOnClickListener(new View.OnClickListener() {

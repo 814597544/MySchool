@@ -2,14 +2,18 @@ package com.example.administrator.myschool;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.circlemenu.CircleImageView;
 import com.circlemenu.CircleLayout;
+import com.rao.MySchool.been.DatabaseHelper;
 
 
 /**
@@ -20,6 +24,9 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
     private CircleLayout circleMenu;
     LinearLayout title_return;
     String fromId,titleName;
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase sqLiteDatabase;
+    Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,9 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
         Intent intent=getIntent();
         fromId=intent.getStringExtra("fromId");
         titleName=intent.getStringExtra("titleName");
+
+        databaseHelper = new DatabaseHelper(this);
+        sqLiteDatabase = databaseHelper.getReadableDatabase();
 
         circleMenu = (CircleLayout)findViewById(R.id.main_circle_layout);
         title_return= (LinearLayout) findViewById(R.id.title_return);
@@ -68,10 +78,22 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
                intentTo(MyTableDetailActivity.class,name);
                 break;
             case "2":
+                cursor = sqLiteDatabase.rawQuery("select * from mytable where week=? and tablename=?;",new String[]{name, titleName});
+              if (cursor.getCount()!=0){
                 intentTo(UpdateMyTableDetailActivity.class,name);
+              }else{
+                  Toast.makeText(getApplicationContext(),
+                          titleName+"-"+name+"的课表未创建，无法修改"  , Toast.LENGTH_SHORT).show();
+              }
                 break;
             case "3":
+                cursor = sqLiteDatabase.rawQuery("select * from mytable where week=? and tablename=?;",new String[]{name, titleName});
+                if (cursor.getCount()==0){
                 intentTo(AddMyTableDetailActivity.class,name);
+                }else{
+                    Toast.makeText(getApplicationContext(),
+                            titleName+"-"+name+"的课表已创建，请在编辑课表中修改"  , Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:
                 break;
