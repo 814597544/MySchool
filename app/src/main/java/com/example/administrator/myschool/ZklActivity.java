@@ -36,7 +36,7 @@ public class ZklActivity extends Activity{
         setContentView(R.layout.activity_zkl);
         titleName=(TextView) findViewById(R.id.title);
         titleName.setText("自控力");
-        Toast.makeText(getApplicationContext(), "oncreat", Toast.LENGTH_SHORT).show();
+
         progressTwo = (RoundCornerProgressBar) findViewById(R.id.progress_two);
         progressTwo.setBackgroundColor(getResources().getColor(R.color.custom_progress_background));
 

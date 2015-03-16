@@ -92,7 +92,7 @@ public class MyTableDetailActivity extends Activity{
 
             if (msg.what==1){
                 dialog.dismiss();
-
+                table2_listview.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(),
                         "加载完毕", Toast.LENGTH_SHORT).show();
 
@@ -114,6 +114,7 @@ public class MyTableDetailActivity extends Activity{
         title= (TextView) findViewById(R.id.title);
         title_return= (LinearLayout) findViewById(R.id.title_return);
         table2_listview= (ListView) findViewById(R.id.table2_listview);
+        table2_listview.setVisibility(View.GONE);
 
         title.setText(titleName+"-"+Week);
         title_return.setVisibility(View.VISIBLE);
