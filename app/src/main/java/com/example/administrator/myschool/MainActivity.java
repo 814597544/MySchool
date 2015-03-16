@@ -6,6 +6,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TabHost;
@@ -27,12 +29,23 @@ public class MainActivity extends TabActivity {
     private ExpandableMenuOverlay menuOverlay;
     private PopupWindow popupWindow;
     TabHost tabHost;
+    TextView tv;
+
     /** Called when the activity is first created. */
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         menuOverlay = (ExpandableMenuOverlay) findViewById(R.id.button_menu);
+
+        //logo提示字体闪烁
+        tv= (TextView) findViewById(R.id.tv_hint);
+        Animation ani = new AlphaAnimation(0f, 1f);
+        ani.setDuration(1500);
+        ani.setRepeatMode(Animation.REVERSE);
+        ani.setRepeatCount(Animation.INFINITE);
+        tv. startAnimation(ani);
+
         tabHost = getTabHost();
         setTabs();
         menuOverlay.setOnMenuButtonClickListener(new ExpandableButtonMenu.OnMenuButtonClick() {

@@ -44,7 +44,6 @@ public class MyTableDetailActivity extends Activity{
         setContentView(R.layout.activity_my_table_detail);
 
         findView();
-        Log.e("2222","222222222");
         loadData();
 
     }
