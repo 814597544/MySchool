@@ -56,10 +56,10 @@ public class AddMyTableActivity extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTableName=add_table_name.getText().toString();
+                addTableName=add_table_name.getText().toString().trim();//trim()可以去掉输入字符串的前后空格
                 cursor = sqLiteDatabase.rawQuery("select * from mytable where tablename=?;", new String[]{addTableName});
 
-        if (addTableName.equals("")||null==addTableName){
+        if (addTableName.equals("")){
 
             Toast.makeText(getApplicationContext(),
                     "课程名称不能为空", Toast.LENGTH_SHORT).show();

@@ -51,7 +51,7 @@ public class AddMyTableDetailActivity extends Activity{
                         Message msg=new Message();
                         loadData();
                         msg.what=1;
-                        handler.sendMessageDelayed(msg, 3000);
+                        handler.sendMessageDelayed(msg, 2000);
                     }
                 }.start();
 

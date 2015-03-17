@@ -47,7 +47,7 @@ public class UpdateMyTableDetailActivity  extends Activity {
                         loadData();
                         msg.what=1;
 
-                        handler.sendMessageDelayed(msg, 3000);
+                        handler.sendMessageDelayed(msg, 2000);
                     }
                 }.start();
 

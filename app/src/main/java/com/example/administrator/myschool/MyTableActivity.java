@@ -17,12 +17,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -30,6 +33,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +115,41 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
 
         update_mytable_list.setDeleteListioner(this);
         update_mytable_list.setSingleTapUpListenner(this);
+
+          /*解决listview与下拉刷新的冲突*/
+        mytable_list.setOnScrollListener(new AbsListView.OnScrollListener()
+        {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i)
+            {
+            }
+            @Override
+            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+            {
+                if (firstVisibleItem == 0)
+                    swipeRefreshLayout.setEnabled(true);
+                else
+                    swipeRefreshLayout.setEnabled(false);
+            }
+        });
+
+
+        /*解决listview与下拉刷新的冲突*/
+        update_mytable_list.setOnScrollListener(new AbsListView.OnScrollListener()
+        {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i)
+            {
+            }
+            @Override
+            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+            {
+                if (firstVisibleItem == 0)
+                    swipeRefreshLayout.setEnabled(true);
+                else
+                    swipeRefreshLayout.setEnabled(false);
+            }
+        });
     }
 
     private void layoutClick() {
@@ -182,14 +222,25 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
+
+
+
+
     }
 
     @Override
     public void onRefresh() {
-       loadData();
-     /*  停止刷新 */
 
-        swipeRefreshLayout.setRefreshing(false);
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg=new Message();
+                loadData();
+                msg.what=1;
+                handler.sendMessageDelayed(msg, 2000);
+            }
+        }.start();
+
     }
 
 
@@ -290,7 +341,7 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
                 public void onClick(View v) {
                     tableList.remove(position);
                     tabledeleteAdapter.notifyDataSetChanged();
-                    sqLiteDatabase.execSQL("delete from mytable where tablename = TableName;");
+                    sqLiteDatabase.execSQL("delete from mytable where tablename = ?;",new String[]{TableName});
                     update_my_table_num.setText(""+tableList.size());
 
                 }
@@ -299,4 +350,21 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
             return convertView;
         }
     }
+
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+
+            if (msg.what==1){
+                loadData();
+
+            /*  停止刷新 */
+            swipeRefreshLayout.setRefreshing(false);
+
+            }else{
+                Toast.makeText(getApplicationContext(),
+                        "刷新失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 }

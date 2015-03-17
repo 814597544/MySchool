@@ -27,7 +27,7 @@ import lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay;
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity {
     private ExpandableMenuOverlay menuOverlay;
-    private PopupWindow popupWindow;
+
     TabHost tabHost;
     TextView tv;
 

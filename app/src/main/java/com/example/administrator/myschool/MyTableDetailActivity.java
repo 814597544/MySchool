@@ -80,7 +80,7 @@ public class MyTableDetailActivity extends Activity{
                 table2_listview.setAdapter(tableDetailAdapter);
 
                 msg.what=1;
-                handler.sendMessageDelayed(msg, 3000);
+                handler.sendMessageDelayed(msg, 2000);
             }
         }.start();
 
