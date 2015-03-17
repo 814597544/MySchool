@@ -84,53 +84,53 @@ public class AddMyTableDetailActivity extends Activity{
 
         sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                         " values(?,?,?,?,?,?);",
-                new Object[]{titleName,Week,"1",name1.getText().toString(),address1.getText().toString(),
-                        time1.getText().toString()});
+                new Object[]{titleName,Week,"1",name1.getText().toString().trim(),address1.getText().toString().trim(),
+                        time1.getText().toString().trim()});
 
         sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                         " values(?,?,?,?,?,?);",
-                new Object[]{titleName,Week,"2",name2.getText().toString(),address2.getText().toString(),
-                        time2.getText().toString()});
+                new Object[]{titleName,Week,"2",name2.getText().toString().trim(),address2.getText().toString().trim(),
+                        time2.getText().toString().trim()});
 
         sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                         " values(?,?,?,?,?,?);",
-                new Object[]{titleName,Week,"3",name3.getText().toString(),address3.getText().toString(),
-                        time3.getText().toString()});
+                new Object[]{titleName,Week,"3",name3.getText().toString().trim(),address3.getText().toString().trim(),
+                        time3.getText().toString().trim()});
 
         sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                         " values(?,?,?,?,?,?);",
-                new Object[]{titleName,Week,"4",name4.getText().toString(),address4.getText().toString(),
-                        time4.getText().toString()});
+                new Object[]{titleName,Week,"4",name4.getText().toString().trim(),address4.getText().toString().trim(),
+                        time4.getText().toString().trim()});
 
         sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                         " values(?,?,?,?,?,?);",
-                new Object[]{titleName,Week,"5",name5.getText().toString(),address5.getText().toString(),
-                        time5.getText().toString()});
+                new Object[]{titleName,Week,"5",name5.getText().toString().trim(),address5.getText().toString().trim(),
+                        time5.getText().toString().trim()});
 
         sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                         " values(?,?,?,?,?,?);",
-                new Object[]{titleName,Week,"6",name6.getText().toString(),address6.getText().toString(),
-                        time6.getText().toString()});
+                new Object[]{titleName,Week,"6",name6.getText().toString().trim(),address6.getText().toString().trim(),
+                        time6.getText().toString().trim()});
 
         sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                         " values(?,?,?,?,?,?);",
-                new Object[]{titleName,Week,"7",name7.getText().toString(),address7.getText().toString(),
-                        time7.getText().toString()});
+                new Object[]{titleName,Week,"7",name7.getText().toString().trim(),address7.getText().toString().trim(),
+                        time7.getText().toString().trim()});
 
         sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                         " values(?,?,?,?,?,?);",
-                new Object[]{titleName,Week,"8",name8.getText().toString(),address8.getText().toString(),
-                        time8.getText().toString()});
+                new Object[]{titleName,Week,"8",name8.getText().toString().trim(),address8.getText().toString().trim(),
+                        time8.getText().toString().trim()});
 
         sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                         " values(?,?,?,?,?,?);",
-                new Object[]{titleName,Week,"9",name9.getText().toString(),address9.getText().toString(),
-                        time9.getText().toString()});
+                new Object[]{titleName,Week,"9",name9.getText().toString().trim(),address9.getText().toString().trim(),
+                        time9.getText().toString().trim()});
 
         sqLiteDatabase.execSQL("insert into mytable(tablename,week,num,coursename,courseaddress,coursetime)" +
                         " values(?,?,?,?,?,?);",
-                new Object[]{titleName,Week,"10",name10.getText().toString(),address10.getText().toString(),
-                        time10.getText().toString()});
+                new Object[]{titleName,Week,"10",name10.getText().toString().trim(),address10.getText().toString().trim(),
+                        time10.getText().toString().trim()});
     }
 
 

@@ -58,143 +58,143 @@ public class UpdateMyTableDetailActivity  extends Activity {
 
     public  void loadData(){
 
-        if (name1.getText().toString().length()>0) {
+        if (name1.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                "num=?;", new String[]{name1.getText().toString(), titleName, Week, "1"});
+                "num=?;", new String[]{name1.getText().toString().trim(), titleName, Week, "1"});
         }
-        if (address1.getText().toString().length()>0) {
+        if (address1.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
-                    "num=?;", new String[]{address1.getText().toString(), titleName, Week, "1"});
+                    "num=?;", new String[]{address1.getText().toString().trim(), titleName, Week, "1"});
         }
-        if (time1.getText().toString().length()>0) {
+        if (time1.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursetime= ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{time1.getText().toString(), titleName, Week, "1"});
+                    "num=?;", new String[]{time1.getText().toString().trim(), titleName, Week, "1"});
         }
 
 
-        if (name2.getText().toString().length()>0) {
+        if (name2.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{name2.getText().toString(), titleName, Week, "2"});
+                    "num=?;", new String[]{name2.getText().toString().trim(), titleName, Week, "2"});
         }
-        if (address2.getText().toString().length()>0) {
+        if (address2.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
-                    "num=?;", new String[]{address2.getText().toString(), titleName, Week, "2"});
+                    "num=?;", new String[]{address2.getText().toString().trim(), titleName, Week, "2"});
         }
-        if (time2.getText().toString().length()>0) {
+        if (time2.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursetime= ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{time2.getText().toString(), titleName, Week, "2"});
+                    "num=?;", new String[]{time2.getText().toString().trim(), titleName, Week, "2"});
         }
 
 
-        if (name3.getText().toString().length()>0) {
+        if (name3.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{name3.getText().toString(), titleName, Week, "3"});
+                    "num=?;", new String[]{name3.getText().toString().trim(), titleName, Week, "3"});
         }
-        if (address3.getText().toString().length()>0) {
+        if (address3.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
-                    "num=?;", new String[]{address3.getText().toString(), titleName, Week, "3"});
+                    "num=?;", new String[]{address3.getText().toString().trim(), titleName, Week, "3"});
         }
-        if (time3.getText().toString().length()>0) {
+        if (time3.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursetime= ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{time3.getText().toString(), titleName, Week, "3"});
+                    "num=?;", new String[]{time3.getText().toString().trim(), titleName, Week, "3"});
         }
 
 
-        if (name4.getText().toString().length()>0) {
+        if (name4.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{name4.getText().toString(), titleName, Week, "4"});
+                    "num=?;", new String[]{name4.getText().toString().trim(), titleName, Week, "4"});
         }
-        if (address4.getText().toString().length()>0) {
+        if (address4.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
-                    "num=?;", new String[]{address4.getText().toString(), titleName, Week, "4"});
+                    "num=?;", new String[]{address4.getText().toString().trim(), titleName, Week, "4"});
         }
-        if (time4.getText().toString().length()>0) {
+        if (time4.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursetime= ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{time4.getText().toString(), titleName, Week, "4"});
+                    "num=?;", new String[]{time4.getText().toString().trim(), titleName, Week, "4"});
         }
 
 
-        if (name5.getText().toString().length()>0) {
+        if (name5.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{name5.getText().toString(), titleName, Week, "5"});
+                    "num=?;", new String[]{name5.getText().toString().trim(), titleName, Week, "5"});
         }
-        if (address5.getText().toString().length()>0) {
+        if (address5.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
-                    "num=?;", new String[]{address5.getText().toString(), titleName, Week, "5"});
+                    "num=?;", new String[]{address5.getText().toString().trim(), titleName, Week, "5"});
         }
-        if (time5.getText().toString().length()>0) {
+        if (time5.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursetime= ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{time5.getText().toString(), titleName, Week, "5"});
+                    "num=?;", new String[]{time5.getText().toString().trim(), titleName, Week, "5"});
         }
 
 
-        if (name6.getText().toString().length()>0) {
+        if (name6.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{name6.getText().toString(), titleName, Week, "6"});
+                    "num=?;", new String[]{name6.getText().toString().trim(), titleName, Week, "6"});
         }
-        if (address6.getText().toString().length()>0) {
+        if (address6.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
-                    "num=?;", new String[]{address6.getText().toString(), titleName, Week, "6"});
+                    "num=?;", new String[]{address6.getText().toString().trim(), titleName, Week, "6"});
         }
-        if (time6.getText().toString().length()>0) {
+        if (time6.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursetime= ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{time6.getText().toString(), titleName, Week, "6"});
+                    "num=?;", new String[]{time6.getText().toString().trim(), titleName, Week, "6"});
         }
 
 
-        if (name7.getText().toString().length()>0) {
+        if (name7.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{name7.getText().toString(), titleName, Week, "7"});
+                    "num=?;", new String[]{name7.getText().toString().trim(), titleName, Week, "7"});
         }
-        if (address7.getText().toString().length()>0) {
+        if (address7.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
-                    "num=?;", new String[]{address7.getText().toString(), titleName, Week, "7"});
+                    "num=?;", new String[]{address7.getText().toString().trim(), titleName, Week, "7"});
         }
-        if (time7.getText().toString().length()>0) {
+        if (time7.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursetime= ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{time7.getText().toString(), titleName, Week, "7"});
+                    "num=?;", new String[]{time7.getText().toString().trim(), titleName, Week, "7"});
         }
 
 
-        if (name8.getText().toString().length()>0) {
+        if (name8.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{name8.getText().toString(), titleName, Week, "8"});
+                    "num=?;", new String[]{name8.getText().toString().trim(), titleName, Week, "8"});
         }
-        if (address8.getText().toString().length()>0) {
+        if (address8.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
-                    "num=?;", new String[]{address8.getText().toString(), titleName, Week, "8"});
+                    "num=?;", new String[]{address8.getText().toString().trim(), titleName, Week, "8"});
         }
-        if (time8.getText().toString().length()>0) {
+        if (time8.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursetime= ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{time8.getText().toString(), titleName, Week, "8"});
+                    "num=?;", new String[]{time8.getText().toString().trim(), titleName, Week, "8"});
         }
 
 
-        if (name9.getText().toString().length()>0) {
+        if (name9.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{name9.getText().toString(), titleName, Week, "9"});
+                    "num=?;", new String[]{name9.getText().toString().trim(), titleName, Week, "9"});
         }
-        if (address9.getText().toString().length()>0) {
+        if (address9.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
-                    "num=?;", new String[]{address9.getText().toString(), titleName, Week, "9"});
+                    "num=?;", new String[]{address9.getText().toString().trim(), titleName, Week, "9"});
         }
-        if (time9.getText().toString().length()>0) {
+        if (time9.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursetime= ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{time9.getText().toString(), titleName, Week, "9"});
+                    "num=?;", new String[]{time9.getText().toString().trim(), titleName, Week, "9"});
         }
 
 
-        if (name10.getText().toString().length()>0) {
+        if (name10.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{name10.getText().toString(), titleName, Week, "10"});
+                    "num=?;", new String[]{name10.getText().toString().trim(), titleName, Week, "10"});
         }
-        if (address10.getText().toString().length()>0) {
+        if (address10.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
-                    "num=?;", new String[]{address10.getText().toString(), titleName, Week, "10"});
+                    "num=?;", new String[]{address10.getText().toString().trim(), titleName, Week, "10"});
         }
-        if (time10.getText().toString().length()>0) {
+        if (time10.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursetime= ? where tablename=? and week=? and " +
-                    "num=?;", new String[]{time10.getText().toString(), titleName, Week, "10"});
+                    "num=?;", new String[]{time10.getText().toString().trim(), titleName, Week, "10"});
         }
 
     }
