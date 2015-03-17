@@ -49,7 +49,6 @@
         ebm:bottomPad="0.001"
 
         ebm:closeButtonSrc="@drawable/circle_close"
-
         ebm:leftButtonSrc="@drawable/circle_1"
         ebm:midButtonSrc="@drawable/circle_2"
         ebm:rightButtonSrc="@drawable/circle_3"
@@ -57,6 +56,7 @@
         ebm:leftButtonText="@string/action_left"
         ebm:midButtonText="@string/action_mid"
         ebm:rightButtonText="@string/action_right"/>
+
 
 
     <com.mainphoto.PullDoorView

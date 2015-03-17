@@ -70,7 +70,7 @@ public class MainActivity extends TabActivity {
         addTab("自控力", R.drawable.tab_search, ZklActivity.class);
         addTab("课  表", R.drawable.tab_search, MyTableActivity.class);
     }
-    private void addTab(String labelId, int drawableId, Class<?> c)
+	private void addTab(String labelId, int drawableId, Class<?> c)
     {
         Intent intent = new Intent(this, c);
         TabHost.TabSpec spec = tabHost.newTabSpec("tab" + labelId);
@@ -84,19 +84,7 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(spec);
     }
 
-    private void initPopupWindows(View v){
 
-        View pop_view=getLayoutInflater().inflate(R.layout.edit_time,null,false);
-        popupWindow=new PopupWindow(pop_view,LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT,true );
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.update();
-        ColorDrawable dw = new ColorDrawable(0000000000);
-        popupWindow.setBackgroundDrawable(dw);
-        popupWindow.showAsDropDown(v);
-
-
-    }
   /*  private void startActivity1(){
         Intent intent=new Intent(HomeActivity.this,EditTimeActivity.class);
         startActivity(intent);

@@ -26,7 +26,7 @@ public class LoadingMainActivity extends Activity {
             public void run() {
                 Message msg=new Message();
                 msg.what=1;
-                handler.sendMessageDelayed(msg, 10000);
+                handler.sendMessageDelayed(msg, 8000);
             }
         }.start();
 

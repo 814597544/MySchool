@@ -5,13 +5,12 @@
         android:minSdkVersion="10"
         android:targetSdkVersion="21"/>
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/app_theme" >
         <activity
             android:name=".LoadingMainActivity"
-            android:label="@string/app_name" >
+        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
