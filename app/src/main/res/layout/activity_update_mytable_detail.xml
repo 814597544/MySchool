@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#ffffff">
     <include layout="@layout/home_head"/>
 
 <ScrollView
@@ -27,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
+            android:textColor="#383C45"
             android:text="第1节" />
 
         <View
@@ -88,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
+            android:textColor="#383C45"
             android:text="第2节" />
 
         <View
@@ -149,6 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
+            android:textColor="#383C45"
             android:text="第3节" />
 
         <View
@@ -211,6 +215,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
+            android:textColor="#383C45"
             android:text="第4节" />
 
         <View
@@ -272,6 +277,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
+            android:textColor="#383C45"
             android:text="第5节" />
 
         <View
@@ -334,6 +340,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
+            android:textColor="#383C45"
             android:text="第6节" />
 
         <View
@@ -396,6 +403,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
+            android:textColor="#383C45"
             android:text="第7节" />
 
         <View
@@ -457,6 +465,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
+            android:textColor="#383C45"
             android:text="第8节" />
 
         <View
@@ -519,6 +528,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
+            android:textColor="#383C45"
             android:text="第9节" />
 
         <View
@@ -581,6 +591,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
+            android:textColor="#383C45"
             android:text="第10节" />
 
         <View

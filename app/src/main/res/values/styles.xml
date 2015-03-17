@@ -34,6 +34,9 @@
         <item name="android:scrollbars">none</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:listSelector">#00000000</item>
+        <item name="android:divider">#51d5d5</item>
+        <item name="android:dividerHeight">1dp</item>
         <!-- listview拖动时，背景为白色 -->
         <item name="android:cacheColorHint">#00000000</item>
     </style>

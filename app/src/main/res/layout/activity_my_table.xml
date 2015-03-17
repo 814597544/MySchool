@@ -2,8 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#ffffff">
+
     <include layout="@layout/home_head"/>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/id_swipe_ly"
         android:layout_width="fill_parent"
@@ -62,7 +65,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:text="5"
+                android:textColor="#383C45"
                 android:textSize="10sp"
                 android:gravity="center_horizontal"
                 android:background="@drawable/settext_bag"
@@ -121,7 +124,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:text="5"
+                android:textColor="#383C45"
                 android:textSize="10sp"
                 android:gravity="center_horizontal"
                 android:contentDescription="#ff000000"

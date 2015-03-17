@@ -42,7 +42,7 @@
 
         ebm:dimAmount="0.8"
 
-        ebm:mainButtonSize="0.12"
+        ebm:mainButtonSize="0.13"
         ebm:otherButtonSize="0.12"
         ebm:distanceY="0.4"
         ebm:distanceX="0.28"

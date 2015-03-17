@@ -57,10 +57,10 @@ public class MainActivity extends TabActivity {
                         break;
                    /* case LEFT:
                         startActivity1();
-                        break;
+                        break;*/
                     case RIGHT:
                         startActivity3();
-                        break;*/
+                        break;
                 }
             }
         });
@@ -95,9 +95,9 @@ public class MainActivity extends TabActivity {
         startActivity(intent);
 
     }
-   /* private void startActivity3(){
-        Intent intent=new Intent(HomeActivity.this,LoginActivity.class);
+    private void startActivity3(){
+        Intent intent=new Intent(MainActivity.this,ChartToday.class);
         startActivity(intent);
 
-    }*/
+    }
 }

@@ -26,6 +26,8 @@
         <activity android:name=".AddMyTableDetailActivity" />
         <activity android:name=".UpdateMyTableDetailActivity" />
         <activity android:name=".MyTableDetailActivity" />
+        <activity android:name=".ChartToday" />
+
     </application>
 
 </manifest>

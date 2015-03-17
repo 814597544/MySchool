@@ -2,20 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#ffffff">
+
     <include layout="@layout/home_head"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="40dp"
         android:layout_marginBottom="50dp"
-        android:layout_centerInParent="true" >
+        android:layout_centerInParent="true"
+        >
 
         <TextView
             android:id="@+id/textgain"
             android:visibility="visible"
             android:text="@string/gain_nothing"
             android:textSize="20sp"
+            android:textColor="#383C45"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"

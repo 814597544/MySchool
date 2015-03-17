@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:text="最近更新" />
+        android:text="最近更新"
+        android:textColor="#383C45"/>
 
     <View
         style="@style/viewlinestyle"
@@ -28,6 +29,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
+           android:textColor="#383C45"
         android:background="@drawable/setbar_bag"/>
 
         <TextView
@@ -36,6 +38,7 @@
             android:gravity="center_vertical"
             android:layout_centerInParent="true"
             android:layout_height="76dp"
+            android:textColor="#383C45"
             android:background="@drawable/setbar_bag"/>
 
         <TextView
@@ -46,6 +49,7 @@
             android:layout_marginRight="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:textColor="#383C45"
             android:background="@drawable/setbar_bag"/>
         </RelativeLayout>
 
