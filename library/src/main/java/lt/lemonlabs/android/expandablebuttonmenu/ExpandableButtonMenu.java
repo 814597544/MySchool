@@ -36,6 +36,9 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @SuppressWarnings("ConstantConditions")
 public class ExpandableButtonMenu extends RelativeLayout implements View.OnClickListener {
 
@@ -78,6 +81,8 @@ public class ExpandableButtonMenu extends RelativeLayout implements View.OnClick
     private TextView mMidText;
     private TextView mRightText;
     private TextView mLeftText;
+
+    private TextView nowtime;
 
     /**
      * Flag indicating that the menu is expanded or collapsed
@@ -334,6 +339,13 @@ public class ExpandableButtonMenu extends RelativeLayout implements View.OnClick
         mRightBtn.setOnClickListener(this);
         mLeftBtn.setOnClickListener(this);
         mOverlay.setOnClickListener(this);
+
+
+        SimpleDateFormat formatter   =   new   SimpleDateFormat   ("MM月dd日/yyy");
+        Date curDate   =   new   Date(System.currentTimeMillis());//获取当前时间
+        String time   =   formatter.format(curDate);
+        nowtime= (TextView) findViewById(R.id.nowtime);
+        nowtime.setText(time);
     }
 
     /**

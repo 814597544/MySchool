@@ -8,17 +8,22 @@ import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Administrator on 2015/3/4.
  */
 public class ChartToday extends Activity{
     RoundCornerProgressBar progress_myDream,progress_myNecessary,progress_myWaste;
-
+    String  nowtime;
+    TextView today_date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zkl_chart);
 
+        getNowTime();
         findView();
 
 
@@ -27,6 +32,8 @@ public class ChartToday extends Activity{
 
     private void findView() {
 
+        today_date= (TextView) findViewById(R.id.today_date);
+        today_date.setText(nowtime);
 
         progress_myDream= (RoundCornerProgressBar) findViewById(R.id.progress_myDream);
         progress_myNecessary=(RoundCornerProgressBar) findViewById(R.id.progress_myNecessary);
@@ -43,5 +50,11 @@ public class ChartToday extends Activity{
         progress_myDream.setProgressColor(getResources().getColor(R.color.custom_progress_myDream));
         progress_myNecessary.setProgressColor(getResources().getColor(R.color.custom_progress_myNecessary));
         progress_myWaste.setProgressColor(getResources().getColor(R.color.custom_progress_myWaste));
+    }
+
+    public void getNowTime() {
+        SimpleDateFormat formatter   =   new   SimpleDateFormat   ("yyyy-MM-dd");
+        Date curDate   =   new   Date(System.currentTimeMillis());//获取当前时间
+        nowtime   =   formatter.format(curDate);
     }
 }
