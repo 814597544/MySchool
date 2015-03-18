@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MySchool</string>
+    <string name="app_name">MyProject</string>
     <string name="action_left">添加梦想</string>
     <string name="action_mid">摇一摇</string>
     <string name="action_settings">设置</string>

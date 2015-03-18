@@ -36,7 +36,7 @@ public class MainActivity extends TabActivity {
         //logo提示字体闪烁
         tv= (TextView) findViewById(R.id.tv_hint);
         Animation ani = new AlphaAnimation(0f, 1f);
-        ani.setDuration(1500);
+        ani.setDuration(2000);
         ani.setRepeatMode(Animation.REVERSE);
         ani.setRepeatCount(Animation.INFINITE);
         tv. startAnimation(ani);
