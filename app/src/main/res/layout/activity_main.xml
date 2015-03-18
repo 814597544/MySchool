@@ -39,7 +39,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="2dp"
         android:src="@drawable/circle_home"
-
+        android:background="@drawable/qqzonemenu"
         ebm:dimAmount="0.8"
 
         ebm:mainButtonSize="0.13"
@@ -47,6 +47,7 @@
         ebm:distanceY="0.4"
         ebm:distanceX="0.28"
         ebm:bottomPad="0.001"
+
 
         ebm:closeButtonSrc="@drawable/circle_close"
         ebm:leftButtonSrc="@drawable/circle_1"

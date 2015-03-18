@@ -23,7 +23,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:padding="3dp"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/jiazai" />
 
             <ImageView
                 android:id="@+id/iv_route"

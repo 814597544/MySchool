@@ -2,19 +2,14 @@ package com.example.administrator.myschool;
 
 import android.app.TabActivity;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.view.WindowManager.LayoutParams;
-
-import com.example.administrator.myschool.R;
 
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableButtonMenu;
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay;
@@ -67,8 +62,8 @@ public class MainActivity extends TabActivity {
     }
     private void setTabs()
     {
-        addTab("自控力", R.drawable.tab_search, ZklActivity.class);
-        addTab("课  表", R.drawable.tab_search, MyTableActivity.class);
+        addTab("自控力", R.drawable.zkl_search, ZklActivity.class);
+        addTab("课  表", R.drawable.schooltimetable_search, MyTableActivity.class);
     }
 	private void addTab(String labelId, int drawableId, Class<?> c)
     {
