@@ -235,7 +235,6 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
             @Override
             public void run() {
                 Message msg=new Message();
-                loadData();
                 msg.what=1;
                 handler.sendMessageDelayed(msg, 2000);
             }
