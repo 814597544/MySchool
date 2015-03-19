@@ -18,6 +18,8 @@ public class ChartToday extends Activity{
     RoundCornerProgressBar progress_myDream,progress_myNecessary,progress_myWaste;
     String  nowtime;
     TextView today_date;
+    LinearLayout back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,14 @@ public class ChartToday extends Activity{
 
         today_date= (TextView) findViewById(R.id.today_date);
         today_date.setText(nowtime);
+
+        back= (LinearLayout) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         progress_myDream= (RoundCornerProgressBar) findViewById(R.id.progress_myDream);
         progress_myNecessary=(RoundCornerProgressBar) findViewById(R.id.progress_myNecessary);
