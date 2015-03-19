@@ -9,7 +9,7 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
+
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,7 +24,7 @@ import com.umeng.socialize.controller.UMSsoHandler;
 import com.umeng.socialize.controller.UMWXHandler;
 import com.umeng.socialize.sso.QZoneSsoHandler;
 import com.umeng.socialize.sso.TencentWBSsoHandler;
-import com.umeng.update.UmengUpdateAgent;
+
 
 
 import java.util.Random;
@@ -200,7 +200,7 @@ public class YaoYiYaoActivity extends Activity{
      */
     private void shareData() {
 
-        SocializeConstants.APPKEY = "52c4c16956240bce2e08eeb0";
+        SocializeConstants.APPKEY = "550a2455fd98c5b388001b58";
         // 首先在您的Activity中添加如下成员变量
         final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share", RequestType.SOCIAL);
 
@@ -213,12 +213,14 @@ public class YaoYiYaoActivity extends Activity{
         // 微信图文分享必须设置一个url
         String contentUrl = "http://www.umeng.com/social";
         // 添加微信平台，参数1为当前Activity, 参数2为用户申请的AppID, 参数3为点击分享内容跳转到的目标url
-        UMWXHandler wxHandler = mController.getConfig().supportWXPlatform(this,appID, contentUrl);
+         UMWXHandler wxHandler = mController.getConfig().supportWXPlatform(this,appID, contentUrl);
+
         //设置分享标题
         wxHandler.setWXTitle("MyGraduateProject");
         // 支持微信朋友圈
         UMWXHandler circleHandler = mController.getConfig().supportWXCirclePlatform(this,appID, contentUrl) ;
         circleHandler.setCircleTitle("我在水月先生的毕业设计摇一摇中获得收获：有志者自有千计万计，无志者只感千难万难！");
+        circleHandler.setToCircle(true);
 
         //  参数1为当前Activity， 参数2为用户点击分享内容时跳转到的目标地址
         mController.getConfig().supportQQPlatform(this, "http://www.umeng.com/social");
@@ -227,8 +229,6 @@ public class YaoYiYaoActivity extends Activity{
 
         //设置腾讯微博SSO handler
         mController.getConfig().setSsoHandler(new TencentWBSsoHandler());
-
-
 
     }
 
