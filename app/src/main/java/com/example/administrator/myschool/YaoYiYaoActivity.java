@@ -216,7 +216,7 @@ public class YaoYiYaoActivity extends Activity{
          UMWXHandler wxHandler = mController.getConfig().supportWXPlatform(this,appID, contentUrl);
 
         //设置分享标题
-        wxHandler.setWXTitle("科比MyGraduateProject");
+        wxHandler.setWXTitle("MyGraduateProject");
         // 支持微信朋友圈
         UMWXHandler circleHandler = mController.getConfig().supportWXCirclePlatform(this,appID, contentUrl) ;
         circleHandler.setCircleTitle("我在水月先生的毕业设计摇一摇中获得收获：有志者自有千计万计，无志者只感千难万难！");
