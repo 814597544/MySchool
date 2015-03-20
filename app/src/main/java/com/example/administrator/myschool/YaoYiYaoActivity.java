@@ -199,24 +199,24 @@ public class YaoYiYaoActivity extends Activity{
      * 一键分享
      */
     private void shareData() {
-
+        //appkey在友盟上注册
         SocializeConstants.APPKEY = "550a2455fd98c5b388001b58";
         // 首先在您的Activity中添加如下成员变量
         final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share", RequestType.SOCIAL);
 
         // 设置分享内容
-        mController.setShareContent("我在水月先生的毕业设计摇一摇中获得收获：与其临渊羡鱼，不如退而结网！");
+        mController.setShareContent("~~~我在水月先生的毕业设计摇一摇中获得收获：与其临渊羡鱼，不如退而结网！~~~~");
 
 
-        // wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
-        String appID = "wx88818f8c48a95eb4";
+        // wx9c4bd02b3392e471是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
+        String appID = "wx9c4bd02b3392e471";
         // 微信图文分享必须设置一个url
         String contentUrl = "http://www.umeng.com/social";
         // 添加微信平台，参数1为当前Activity, 参数2为用户申请的AppID, 参数3为点击分享内容跳转到的目标url
          UMWXHandler wxHandler = mController.getConfig().supportWXPlatform(this,appID, contentUrl);
 
         //设置分享标题
-        wxHandler.setWXTitle("MyGraduateProject");
+        wxHandler.setWXTitle("科比MyGraduateProject");
         // 支持微信朋友圈
         UMWXHandler circleHandler = mController.getConfig().supportWXCirclePlatform(this,appID, contentUrl) ;
         circleHandler.setCircleTitle("我在水月先生的毕业设计摇一摇中获得收获：有志者自有千计万计，无志者只感千难万难！");
