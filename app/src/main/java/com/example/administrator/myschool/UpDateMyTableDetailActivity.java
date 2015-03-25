@@ -18,7 +18,8 @@ import com.rao.MySchool.been.DatabaseHelper;
 /**
  * Created by Administrator on 2015/3/13.
  */
-public class UpdateMyTableDetailActivity  extends Activity {
+public class UpdateMyTableDetailActivity extends Activity{
+
     TextView title;
     LinearLayout title_return,finish;
     String titleName,Week;
@@ -60,7 +61,7 @@ public class UpdateMyTableDetailActivity  extends Activity {
 
         if (name1.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set coursename = ? where tablename=? and week=? and " +
-                "num=?;", new String[]{name1.getText().toString().trim(), titleName, Week, "1"});
+                    "num=?;", new String[]{name1.getText().toString().trim(), titleName, Week, "1"});
         }
         if (address1.getText().toString().trim().length()>0) {
             sqLiteDatabase.execSQL("update mytable set  courseaddress =? where tablename=? and week=? and " +
@@ -266,7 +267,7 @@ public class UpdateMyTableDetailActivity  extends Activity {
                 Toast.makeText(getApplicationContext(),
                         "保存成功", Toast.LENGTH_SHORT).show();
 
-                   finish();
+                finish();
             }else{
                 dialog.dismiss();
                 Toast.makeText(getApplicationContext(),
