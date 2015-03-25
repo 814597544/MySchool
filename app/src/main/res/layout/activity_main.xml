@@ -38,7 +38,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="2dp"
-        android:src="@drawable/circle_2"
+        android:src="@drawable/menu_open"
         ebm:dimAmount="0.8"
 
         ebm:mainButtonSize="0.13"
@@ -48,7 +48,7 @@
         ebm:bottomPad="0.001"
 
 
-        ebm:closeButtonSrc="@drawable/circle_1"
+        ebm:closeButtonSrc="@drawable/menu_close"
         ebm:leftButtonSrc="@drawable/circle_1"
         ebm:midButtonSrc="@drawable/circle_2"
         ebm:rightButtonSrc="@drawable/circle_3"
