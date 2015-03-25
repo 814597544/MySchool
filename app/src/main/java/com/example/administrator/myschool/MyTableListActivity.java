@@ -80,7 +80,7 @@ public class MyTableListActivity extends Activity   implements CircleLayout.OnIt
             case "2":
                 cursor = sqLiteDatabase.rawQuery("select * from mytable where week=? and tablename=?;",new String[]{name, titleName});
               if (cursor.getCount()!=0){
-                intentTo(UpdateMyTableDetailActivity.class,name);
+                intentTo(UpDateMyTableDetailActivity.class,name);
               }else{
                   Toast.makeText(getApplicationContext(),
                           titleName+"-"+name+"的课表未创建，无法修改"  , Toast.LENGTH_SHORT).show();

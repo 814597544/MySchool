@@ -18,7 +18,7 @@ import com.rao.MySchool.been.DatabaseHelper;
 /**
  * Created by Administrator on 2015/3/13.
  */
-public class UpdateMyTableDetailActivity extends Activity{
+public class UpDateMyTableDetailActivity extends Activity{
 
     TextView title;
     LinearLayout title_return,finish;

@@ -53,7 +53,7 @@
         <activity android:name=".MyTableListActivity" />
         <activity android:name=".AddMyTableActivity" />
         <activity android:name=".AddMyTableDetailActivity" />
-        <activity android:name=".UpdateMyTableDetailActivity" />
+        <activity android:name=".UpDateMyTableDetailActivity" />
         <activity android:name=".MyTableDetailActivity" />
         <activity android:name=".ChartToday" />
 
