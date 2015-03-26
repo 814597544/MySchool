@@ -17,7 +17,7 @@
             android:layout_marginLeft="16dp"
             android:paddingLeft="15.0dip"
             android:text="大四课表"
-            android:textColor="#51d5d5"
+            android:textColor="#037083"
             android:textSize="15.0sp" />
 
         />

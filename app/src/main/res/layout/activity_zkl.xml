@@ -4,10 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/very_light_grey"
     >
     <include layout="@layout/home_head"/>
 
+    <RelativeLayout
+        android:id="@+id/dreame_progress"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
     <com.github.OrangeGangsters.circularbarpager.library.CircularBarPager
         android:id="@+id/circularBarPager"
@@ -17,14 +21,26 @@
         android:paddingRight="30dp"
         android:layout_marginTop="35dp"
         android:layout_centerHorizontal="true"
+        android:visibility="gone"
         style="@style/CircularBarPagerStyle"/>
+
+    <ImageView
+        android:id="@+id/add"
+        android:layout_height="240dp"
+        android:layout_width="240dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:layout_marginTop="35dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/add"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:layout_below="@+id/circularBarPager" >
+        android:layout_below="@+id/dreame_progress" >
 
 
         <include layout="@layout/progressbar_layout"/>
