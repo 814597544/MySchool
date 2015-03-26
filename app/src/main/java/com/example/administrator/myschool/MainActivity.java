@@ -43,6 +43,8 @@ public class MainActivity extends TabActivity {
 
         tabHost = getTabHost();
         setTabs();
+
+        /*menu中的点击事件*/
         menuOverlay.setOnMenuButtonClickListener(new ExpandableButtonMenu.OnMenuButtonClick() {
             @Override
             public void onClick(ExpandableButtonMenu.MenuButton action) {
@@ -50,9 +52,9 @@ public class MainActivity extends TabActivity {
                     case MID:
                         startActivity2();
                         break;
-                   /* case LEFT:
+                    case LEFT:
                         startActivity1();
-                        break;*/
+                        break;
                     case RIGHT:
                         startActivity3();
                         break;
@@ -80,11 +82,11 @@ public class MainActivity extends TabActivity {
     }
 
 
-  /*  private void startActivity1(){
-        Intent intent=new Intent(HomeActivity.this,EditTimeActivity.class);
+    private void startActivity1(){
+        Intent intent=new Intent(MainActivity.this,AddDreamActivity.class);
         startActivity(intent);
 
-    }*/
+    }
     private void startActivity2(){
         Intent intent=new Intent(MainActivity.this,YaoYiYaoActivity.class);
         startActivity(intent);
