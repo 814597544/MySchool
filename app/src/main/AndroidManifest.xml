@@ -58,7 +58,7 @@
         <activity android:name=".MyTableDetailActivity" />
         <activity android:name=".ChartToday" />
         <activity android:name=".AddDreamActivity" />
-
+        <activity android:name=".DreamingActivity" />
 
 
         <!-- ###################注册SDK使用的Activity###################### -->

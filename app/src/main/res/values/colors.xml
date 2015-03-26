@@ -53,6 +53,8 @@
     <color name="custom_progress_myNecessary">#F15287</color>
     <color name="custom_progress_myWaste">#FED337</color>
 
+    <color name="line_grid">#00a694</color>
+    <color name="line_bg">#00bba7</color>
     <!--第三方-->
     <color name="transparentBlack">#6D000000</color>
 

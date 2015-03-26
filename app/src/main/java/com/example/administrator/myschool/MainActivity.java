@@ -93,7 +93,7 @@ public class MainActivity extends TabActivity {
 
     }
     private void startActivity3(){
-        Intent intent=new Intent(MainActivity.this,ChartToday.class);
+        Intent intent=new Intent(MainActivity.this,DreamingActivity.class);
         startActivity(intent);
 
     }

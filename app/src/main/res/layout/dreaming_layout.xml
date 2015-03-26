@@ -1,0 +1,253 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/home_head"/>
+
+    <!--<ScrollView
+        android:layout_width="match_parent"
+        android:background="#f8ffffff"
+        android:layout_height="match_parent"
+        android:fillViewport="false"
+        >-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:id="@+id/userInfo"
+            android:layout_width="match_parent"
+            android:layout_height="130dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/navigation_my_bg" />
+
+            <View
+                android:layout_centerVertical="true"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:src="@drawable/navigation_user_sharow"
+                android:layout_marginLeft="30dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/circleIcon"
+                android:layout_centerVertical="true"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/myphoto"
+                android:layout_marginLeft="16dp" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/circleIcon"
+                android:text="李宁"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:layout_marginTop="6dp"
+                android:layout_toRightOf="@id/circleIcon"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="一切皆有可能一切皆有可能一"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                />
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ffffff"
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal"
+                    android:background="#E8E8E8"
+                    >
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:background="@drawable/cartoon"/>
+
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <com.circlechart.MagnificentChart
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_gravity="center"
+                        app:showTitle="false"
+                        app:animation="false"
+                        app:round="false"
+                        app:shadow="false"
+                        app:shadowColor="#F2F2F2"
+                        android:id="@+id/magnificentChart" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:gravity="bottom|center_horizontal"
+                            android:layout_weight="1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#19C5EB"
+                                android:text="梦想 30%"
+                                android:textSize="14sp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:layout_weight="1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#1FB88A"
+                                android:text="休息 30%"
+                                android:textSize="14sp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:gravity="top|center_horizontal"
+                            android:layout_weight="1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#F85737"
+                                android:text="虚度 40%"
+                                android:textSize="14sp"
+                                />
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+
+
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="20dp"
+
+                    android:gravity="center"
+                    android:text="过四级"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    android:background="@drawable/button_bg2"/>
+
+
+
+
+
+
+
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="#E8E8E8"
+                android:layout_weight="1"
+                >
+
+
+                <com.db.chart.view.LineChartView
+                    xmlns:chart="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/linechart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginBottom="2dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="#00BBA7"
+                    chart:chart_axisColor="#ffffff"
+                    chart:chart_typeface="Roboto-Regular.ttf"
+                    chart:chart_labelColor="#ffffff"
+                    chart:chart_axisBorderSpacing="0dp"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- </ScrollView>-->
+</LinearLayout>

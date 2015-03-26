@@ -32,4 +32,12 @@
     </declare-styleable>
 
 
+    <declare-styleable name="MagnificentChart">
+        <attr name="animation" format="boolean"/>
+        <attr name="round" format="boolean" />
+        <attr name="shadow" format="boolean" />
+        <attr name="showTitle" format="boolean" />
+        <attr name="shadowColor" format="color" />
+
+    </declare-styleable>
 </resources>
