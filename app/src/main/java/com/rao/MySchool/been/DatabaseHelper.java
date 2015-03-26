@@ -24,6 +24,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // TODO Auto-generated method stub
         db.execSQL("create table if not exists mytable(" +
                 "tablename varchar(20),week varchar(20),num varchar(20)  ,coursename varchar(50),courseaddress varchar(20),coursetime varchar(50))");
+
+        db.execSQL("create table if not exists mydream(" +
+                "dreamname varchar(20),needtime varchar(20),avgtime varchar(20)  ,begaintime varchar(20),endtime varchar(20),status varchar(10))");
+
+        db.execSQL("create table if not exists mystatus(" +
+                "date varchar(20),time varchar(20)");
     }
 
     @Override

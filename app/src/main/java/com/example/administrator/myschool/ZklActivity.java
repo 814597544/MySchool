@@ -1,16 +1,21 @@
 package com.example.administrator.myschool;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.github.OrangeGangsters.circularbarpager.library.CircularBarPager;
 import com.nineoldandroids.animation.Animator;
 import com.rao.MySchool.adapter.CircularPagerAdapter;
+import com.rao.MySchool.been.DatabaseHelper;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import static com.nineoldandroids.animation.Animator.*;
@@ -20,11 +25,15 @@ import static com.nineoldandroids.animation.Animator.*;
  */
 public class ZklActivity extends Activity{
     private RoundCornerProgressBar progressTwo;
-
+    private ImageView add;
 
     private int progress2 = 5;
     private CircularBarPager mCircularBarPager;
     TextView titleName;
+    String shownum;
+
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase sqLiteDatabase;
     /**
      * The animation time in milliseconds that we take to display the steps taken
      */
@@ -34,15 +43,49 @@ public class ZklActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zkl);
+
+        findView();
+
+        updateProgressTwo();
+        initViews();
+    }
+
+    private void findView() {
+        databaseHelper = new DatabaseHelper(this);
+        sqLiteDatabase = databaseHelper.getReadableDatabase();
+
         titleName=(TextView) findViewById(R.id.title);
         titleName.setText("自控力");
 
         progressTwo = (RoundCornerProgressBar) findViewById(R.id.progress_two);
         progressTwo.setBackgroundColor(getResources().getColor(R.color.custom_progress_background));
 
-        updateProgressTwo();
-        initViews();
+        add= (ImageView) findViewById(R.id.add);
+        mCircularBarPager = (CircularBarPager) findViewById(R.id.circularBarPager);
+
+        Cursor cursor = sqLiteDatabase.rawQuery("select  status from mydream ;",null);
+        shownum=cursor.getString(0);
+        if (shownum=="0"){
+            add.setVisibility(View.GONE);
+            mCircularBarPager.setVisibility(View.VISIBLE);
+
+        }if(shownum=="1"){
+            add.setVisibility(View.VISIBLE);
+            mCircularBarPager.setVisibility(View.GONE);
+        }if(shownum==null){
+            add.setVisibility(View.VISIBLE);
+            mCircularBarPager.setVisibility(View.GONE);
+        }
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
     private void updateProgressTwo() {
         progressTwo.setProgress(progress2);
         updateProgressTwoColor();
@@ -64,7 +107,6 @@ public class ZklActivity extends Activity{
     }
 
     private void initViews(){
-        mCircularBarPager = (CircularBarPager) findViewById(R.id.circularBarPager);
 
         View[] views = new View[2];
         views[0] = new CircularInnerViewActivity(this);
