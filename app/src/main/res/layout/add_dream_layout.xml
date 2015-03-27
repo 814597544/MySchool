@@ -6,16 +6,15 @@
     android:orientation="vertical">
 
     <include layout="@layout/home_head"/>
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:layout_margin="12dp">
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#ffffff"></LinearLayout>
+        android:layout_margin="12dp"
+        android:background="#ffffff">
+
 
         <RelativeLayout
+            android:id="@+id/deram_name_view"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -26,23 +25,27 @@
                 android:layout_height="wrap_content"
                 android:text="梦想名称"
                 android:textSize="15sp"
-
                 android:textColor="#ABABAB"
                 />
         </RelativeLayout>
-    </FrameLayout>
-
-
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_margin="12dp">
-        <LinearLayout
+        <EditText
+            android:id="@+id/add_dream_name"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#ffffff"></LinearLayout>
+            android:background="@null"
+            android:layout_toRightOf="@+id/deram_name_view" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_margin="12dp"
+        android:background="#ffffff">
 
         <RelativeLayout
+            android:id="@+id/need_time_view"
             android:layout_width="135dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -57,19 +60,24 @@
                 android:textColor="#ABABAB"
                 />
         </RelativeLayout>
-    </FrameLayout>
-
-
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_margin="12dp">
-        <LinearLayout
+        <EditText
+            android:id="@+id/add_dream_alltime"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#ffffff"></LinearLayout>
+            android:background="@null"
+            android:layout_toRightOf="@+id/need_time_view" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_margin="12dp"
+        android:background="#ffffff">
+
 
         <RelativeLayout
+            android:id="@+id/goal_view"
             android:layout_width="140dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -80,11 +88,16 @@
                 android:layout_height="wrap_content"
                 android:text="每天完成目标"
                 android:textSize="15sp"
-
                 android:textColor="#ABABAB"
                 />
         </RelativeLayout>
-    </FrameLayout>
+        <EditText
+            android:id="@+id/add_dream_avgtime"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:layout_toRightOf="@+id/goal_view" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -92,17 +105,14 @@
         android:layout_margin="12dp"
         android:orientation="horizontal">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            >
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"></LinearLayout>
+            android:background="#ffffff" >
 
             <RelativeLayout
+                android:id="@+id/end_time_view"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -116,7 +126,17 @@
                     android:textColor="#ABABAB"
                     />
             </RelativeLayout>
-        </FrameLayout>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/rili"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/end_time_view"  />
+
+
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -138,7 +158,16 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="#ffffff"
+            android:gravity="center_vertical"
             android:layout_weight="2">
+
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/rili"
+                />
+
 
         </LinearLayout>
 
@@ -149,10 +178,12 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="45dp"
-        android:layout_margin="12dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="96dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:gravity="center_vertical"
         >
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -160,32 +191,16 @@
             android:gravity="center"
             >
             <Button
+                android:id="@+id/add_finish"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@drawable/settext_bag"
-                android:text="确定"
-                android:textColor="#ffffff"
+                android:text="确        定"
+                android:textColor="@drawable/click_change_color"
                 android:gravity="center"
-                android:layout_marginRight="10dp"/>
+               />
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            >
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="取消"
-                android:textColor="@color/white"
-                android:background="@drawable/settext_bag"
-                android:gravity="center"
-                android:layout_marginLeft="10dp"/>
-
-        </LinearLayout>
-
     </LinearLayout>
 
 

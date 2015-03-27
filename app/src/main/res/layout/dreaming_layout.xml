@@ -192,12 +192,12 @@
                 </LinearLayout>
 
 
-                <Button
+                <TextView
+                    android:id="@+id/show_dreamName"
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="20dp"
-
                     android:gravity="center"
                     android:text="过四级"
                     android:textColor="#ffffff"

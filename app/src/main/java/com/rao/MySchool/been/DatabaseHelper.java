@@ -28,8 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table if not exists mydream(" +
                 "dreamname varchar(20),needtime varchar(20),avgtime varchar(20)  ,begaintime varchar(20),endtime varchar(20),status varchar(10))");
 
-        db.execSQL("create table if not exists mystatus(" +
-                "date varchar(20),time varchar(20)");
+        db.execSQL("create table if not exists mystatus( date varchar(20),time varchar(20))");
     }
 
     @Override

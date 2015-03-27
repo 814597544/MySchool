@@ -2,6 +2,7 @@ package com.example.administrator.myschool;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,10 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.rao.MySchool.been.DatabaseHelper;
+import com.rao.MySchool.been.MyApplication;
 
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableButtonMenu;
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay;
@@ -25,6 +30,9 @@ public class MainActivity extends TabActivity {
 
     TabHost tabHost;
     TextView tv;
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase sqLiteDatabase;
+    private MyApplication myApplication;
 
     /** Called when the activity is first created. */
 
@@ -32,6 +40,9 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         menuOverlay = (ExpandableMenuOverlay) findViewById(R.id.button_menu);
+        myApplication= (MyApplication) getApplication();
+        databaseHelper = new DatabaseHelper(this);
+        sqLiteDatabase = databaseHelper.getReadableDatabase();
 
         //logo提示字体闪烁
         tv= (TextView) findViewById(R.id.tv_hint);
@@ -83,9 +94,24 @@ public class MainActivity extends TabActivity {
 
 
     private void startActivity1(){
-        Intent intent=new Intent(MainActivity.this,AddDreamActivity.class);
-        startActivity(intent);
+        if (myApplication.getStatus().equals("0")){
+            Toast.makeText(getApplicationContext(),
+                    "梦想正在进行中，不能添加", Toast.LENGTH_SHORT).show();
+        }else if (myApplication.getStatus().equals("1")){
+            sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
+            myApplication.setStatus("-1");
+              /*------发送广播------*/
+            myApplication.setStatus("0");
+            Intent intent1 = new Intent();
+            intent1.setAction("com.rao.myproject.Status");
+            sendBroadcast(intent1);
 
+            Intent intent=new Intent(MainActivity.this,AddDreamActivity.class);
+            startActivity(intent);
+        }else {
+            Intent intent=new Intent(MainActivity.this,AddDreamActivity.class);
+            startActivity(intent);
+        }
     }
     private void startActivity2(){
         Intent intent=new Intent(MainActivity.this,YaoYiYaoActivity.class);

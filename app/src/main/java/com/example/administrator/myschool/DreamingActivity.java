@@ -3,6 +3,8 @@ package com.example.administrator.myschool;
 import android.animation.TimeInterpolator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
@@ -28,6 +30,8 @@ import com.db.chart.view.YController;
 import com.db.chart.view.animation.Animation;
 import com.db.chart.view.animation.easing.BaseEasingMethod;
 import com.db.chart.view.animation.easing.quint.QuintEaseOut;
+import com.rao.MySchool.been.DatabaseHelper;
+import com.rao.MySchool.been.MyApplication;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -37,9 +41,13 @@ import java.util.List;
  * Created by Administrator on 2015/3/26.
  */
 public class DreamingActivity  extends Activity {
-    TextView titleName;
+    TextView titleName,show_dreamName;
     LinearLayout title_return;
     MagnificentChart magnificentChart;
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase sqLiteDatabase;
+    private MyApplication myApplication;
+
     private final TimeInterpolator enterInterpolator = new DecelerateInterpolator(1.5f);
     private final TimeInterpolator exitInterpolator = new AccelerateInterpolator();
 
@@ -117,6 +125,10 @@ public class DreamingActivity  extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dreaming_layout);
 
+        databaseHelper = new DatabaseHelper(this);
+        sqLiteDatabase = databaseHelper.getReadableDatabase();
+        myApplication= (MyApplication) getApplication();
+
         titleName= (TextView) findViewById(R.id.title);
         titleName.setText("图 表");
         title_return= (LinearLayout) findViewById(R.id.title_return);
@@ -128,6 +140,17 @@ public class DreamingActivity  extends Activity {
             }
         });
 
+        show_dreamName= (TextView) findViewById(R.id.show_dreamName);
+        show_dreamName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sqLiteDatabase.execSQL("update mydream  set status=? where status=?;",new String[]{"1","0"});
+                myApplication.setStatus("1");
+                Intent intent1 = new Intent();
+                intent1.setAction("com.rao.myproject.Status");
+                sendBroadcast(intent1);
+            }
+        });
 
         mCurrOverlapFactor = 1;
         mCurrEasing = new QuintEaseOut();

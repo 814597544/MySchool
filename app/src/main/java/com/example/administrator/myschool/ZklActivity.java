@@ -1,11 +1,15 @@
 package com.example.administrator.myschool;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +20,7 @@ import com.github.OrangeGangsters.circularbarpager.library.CircularBarPager;
 import com.nineoldandroids.animation.Animator;
 import com.rao.MySchool.adapter.CircularPagerAdapter;
 import com.rao.MySchool.been.DatabaseHelper;
+import com.rao.MySchool.been.MyApplication;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import static com.nineoldandroids.animation.Animator.*;
@@ -30,10 +35,12 @@ public class ZklActivity extends Activity{
     private int progress2 = 5;
     private CircularBarPager mCircularBarPager;
     TextView titleName;
-    String shownum;
+    String shownum = null;
 
     DatabaseHelper databaseHelper;
     SQLiteDatabase sqLiteDatabase;
+    private MyApplication myApplication;
+    private MyReceiver myReceiver;
     /**
      * The animation time in milliseconds that we take to display the steps taken
      */
@@ -53,6 +60,12 @@ public class ZklActivity extends Activity{
     private void findView() {
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
+        myApplication= (MyApplication) getApplication();
+        /*--------广播更新----------*/
+        myReceiver = new MyReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.rao.myproject.Status");
+        registerReceiver(myReceiver, filter);
 
         titleName=(TextView) findViewById(R.id.title);
         titleName.setText("自控力");
@@ -63,28 +76,50 @@ public class ZklActivity extends Activity{
         add= (ImageView) findViewById(R.id.add);
         mCircularBarPager = (CircularBarPager) findViewById(R.id.circularBarPager);
 
-        Cursor cursor = sqLiteDatabase.rawQuery("select  status from mydream ;",null);
-        shownum=cursor.getString(0);
-        if (shownum=="0"){
-            add.setVisibility(View.GONE);
-            mCircularBarPager.setVisibility(View.VISIBLE);
+        Cursor cursor = sqLiteDatabase.rawQuery("select status from mydream ;",null);
+            while (cursor.moveToNext()) {
+            myApplication.setStatus(cursor.getString(0));
+            shownum=myApplication.getStatus();
+            }
+            Log.e("####################","shownum="+shownum);
+            if (shownum=="0"||"0".equals(shownum)){
+                add.setVisibility(View.GONE);
+                mCircularBarPager.setVisibility(View.VISIBLE);
 
-        }if(shownum=="1"){
+            }if(shownum=="1"||"1".equals(shownum)){
+                add.setVisibility(View.VISIBLE);
+                mCircularBarPager.setVisibility(View.GONE);
+
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    /*提醒要清除之前数据*/
+                        sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
+                        myApplication.setStatus("-1");
+              /*------发送广播------*/
+                        myApplication.setStatus("0");
+                        Intent intent1 = new Intent();
+                        intent1.setAction("com.rao.myproject.Status");
+                        sendBroadcast(intent1);
+
+                        Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }else {
             add.setVisibility(View.VISIBLE);
             mCircularBarPager.setVisibility(View.GONE);
-        }if(shownum==null){
-            add.setVisibility(View.VISIBLE);
-            mCircularBarPager.setVisibility(View.GONE);
+
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
+                    startActivity(intent);
+                }
+            });
+            }
         }
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 
     private void updateProgressTwo() {
         progressTwo.setProgress(progress2);
@@ -165,4 +200,29 @@ public class ZklActivity extends Activity{
             }
         });
     }
+    /*广播接受收器*/
+    public class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(final Context context, Intent intent) {
+            shownum=myApplication.getStatus();
+        Log.e("@@@@@@@@","shownum="+shownum);
+        if (shownum=="0"||"0".equals(shownum)){
+            add.setVisibility(View.GONE);
+            mCircularBarPager.setVisibility(View.VISIBLE);
+
+        }if(shownum=="1"||"1".equals(shownum)){
+            add.setVisibility(View.VISIBLE);
+            mCircularBarPager.setVisibility(View.GONE);
+
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*提醒要清除之前数据*/
+                    Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+    }
+}
 }
