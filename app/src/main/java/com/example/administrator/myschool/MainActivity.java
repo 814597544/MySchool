@@ -1,6 +1,8 @@
 package com.example.administrator.myschool;
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -96,26 +98,51 @@ public class MainActivity extends TabActivity {
     private void startActivity1(){
         if (myApplication.getStatus().equals("0")){
             Toast.makeText(getApplicationContext(),
-                    "梦想正在进行中，不能添加", Toast.LENGTH_SHORT).show();
+                    "梦想正在进行中，不能再次添加", Toast.LENGTH_SHORT).show();
         }else if (myApplication.getStatus().equals("1")){
-            sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
-            myApplication.setStatus("-1");
-              /*------发送广播------*/
-            myApplication.setStatus("0");
-            Intent intent1 = new Intent();
-            intent1.setAction("com.rao.myproject.Status");
-            sendBroadcast(intent1);
 
-            Intent intent=new Intent(MainActivity.this,AddDreamActivity.class);
-            startActivity(intent);
+            AlertDialog.Builder builder = new AlertDialog.Builder(
+                    MainActivity.this,AlertDialog.THEME_HOLO_LIGHT);
+
+            builder.setIcon(R.drawable.jiazai);
+            builder.setTitle("添加梦想");
+            builder.setMessage("添加新梦想会清除已完成梦想的数据！确定要添加吗？");
+            builder.setPositiveButton("确定",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int whichButton) {
+                            // 这里添加点击确定后的逻辑
+                            sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
+                            myApplication.setStatus("-1");
+                               /* ------发送广播------*/
+                            Intent intent1 = new Intent();
+                            intent1.setAction("com.rao.myproject.Status");
+                            sendBroadcast(intent1);
+
+                            Intent intent=new Intent(MainActivity.this,AddDreamActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+            builder.setNegativeButton("取消",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int whichButton) {
+                            // 这里添加点击确定后的逻辑
+
+                        }
+                    });
+            builder.create().show();
+
         }else {
             Intent intent=new Intent(MainActivity.this,AddDreamActivity.class);
             startActivity(intent);
         }
+
     }
     private void startActivity2(){
         Intent intent=new Intent(MainActivity.this,YaoYiYaoActivity.class);
         startActivity(intent);
+
 
     }
     private void startActivity3(){

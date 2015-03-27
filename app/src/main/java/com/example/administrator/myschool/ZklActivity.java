@@ -1,8 +1,10 @@
 package com.example.administrator.myschool;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
@@ -81,7 +83,6 @@ public class ZklActivity extends Activity{
             myApplication.setStatus(cursor.getString(0));
             shownum=myApplication.getStatus();
             }
-            Log.e("####################","shownum="+shownum);
             if (shownum=="0"||"0".equals(shownum)){
                 add.setVisibility(View.GONE);
                 mCircularBarPager.setVisibility(View.VISIBLE);
@@ -94,16 +95,37 @@ public class ZklActivity extends Activity{
                     @Override
                     public void onClick(View v) {
                     /*提醒要清除之前数据*/
-                        sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
-                        myApplication.setStatus("-1");
-              /*------发送广播------*/
-                        myApplication.setStatus("0");
-                        Intent intent1 = new Intent();
-                        intent1.setAction("com.rao.myproject.Status");
-                        sendBroadcast(intent1);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(
+                                ZklActivity.this,AlertDialog.THEME_HOLO_LIGHT);
 
-                        Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
-                        startActivity(intent);
+                        builder.setIcon(R.drawable.jiazai);
+                        builder.setTitle("添加梦想");
+                        builder.setMessage("添加新梦想会清除已完成梦想的数据！确定要添加吗？");
+                        builder.setPositiveButton("确定",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                                        int whichButton) {
+                                        // 这里添加点击确定后的逻辑
+                                        sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
+                                        myApplication.setStatus("-1");
+                               /* ------发送广播------*/
+                                        Intent intent1 = new Intent();
+                                        intent1.setAction("com.rao.myproject.Status");
+                                        sendBroadcast(intent1);
+
+                                        Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
+                        builder.setNegativeButton("取消",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                                        int whichButton) {
+                                        // 这里添加点击确定后的逻辑
+
+                                    }
+                                });
+                        builder.create().show();
                     }
                 });
             }else {
@@ -210,7 +232,7 @@ public class ZklActivity extends Activity{
             add.setVisibility(View.GONE);
             mCircularBarPager.setVisibility(View.VISIBLE);
 
-        }if(shownum=="1"||"1".equals(shownum)){
+        }else if(shownum=="1"||"1".equals(shownum)){
             add.setVisibility(View.VISIBLE);
             mCircularBarPager.setVisibility(View.GONE);
 
@@ -218,11 +240,51 @@ public class ZklActivity extends Activity{
                 @Override
                 public void onClick(View v) {
                     /*提醒要清除之前数据*/
-                    Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
-                    startActivity(intent);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(
+                            ZklActivity.this,AlertDialog.THEME_HOLO_LIGHT);
+
+                    builder.setIcon(R.drawable.jiazai);
+                    builder.setTitle("添加梦想");
+                    builder.setMessage("添加新梦想会清除已完成梦想的数据！确定要添加吗？");
+                    builder.setPositiveButton("确定",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int whichButton) {
+                                    // 这里添加点击确定后的逻辑
+                                    sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
+                                    myApplication.setStatus("-1");
+                               /* ------发送广播------*/
+                                    Intent intent1 = new Intent();
+                                    intent1.setAction("com.rao.myproject.Status");
+                                    sendBroadcast(intent1);
+
+                                    Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                    builder.setNegativeButton("取消",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int whichButton) {
+                                    // 这里添加点击确定后的逻辑
+
+                                }
+                            });
+                    builder.create().show();
                 }
             });
-        }
+        }else{
+                add.setVisibility(View.VISIBLE);
+                mCircularBarPager.setVisibility(View.GONE);
+
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
+                        startActivity(intent);
+                    }
+                });
+       }
     }
 }
 }
