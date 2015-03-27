@@ -64,24 +64,36 @@ public class AddDreamActivity extends Activity{
         add_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show();
-
                 dreamName=add_dream_name.getText().toString().trim();
                 allTime=add_dream_alltime.getText().toString().trim();
                 avgTime=add_dream_avgtime.getText().toString().trim();
+                int angt=8;
+                try {
+                    angt=Integer.parseInt(avgTime);
+                }catch (Exception e){}
 
-                sqLiteDatabase.execSQL("insert into mydream(dreamname,needtime,avgtime,begaintime,endtime,status)" +
-                                " values(?,?,?,?,?,?);",
-                        new Object[]{dreamName,allTime,avgTime,startDate,endDate, "0"});
+                if (dreamName.equals("")||allTime.equals("")||avgTime.equals("")){
+                    Toast.makeText(getApplicationContext(),
+                            "请补全信息", Toast.LENGTH_SHORT).show();
+                }else if(angt<=0||angt>12){
+                    Toast.makeText(getApplicationContext(),
+                            "每天奋斗的时间只能在0-12之间", Toast.LENGTH_SHORT).show();
+                }else{
+                    dialog.show();
+                    sqLiteDatabase.execSQL("insert into mydream(dreamname,needtime,avgtime,begaintime,endtime,status)" +
+                                    " values(?,?,?,?,?,?);",
+                            new Object[]{dreamName,allTime,avgTime,startDate,endDate, "0"});
 
-                new Thread(){
-                    @Override
-                    public void run() {
-                        Message msg=new Message();
-                        msg.what=1;
-                        handler.sendMessageDelayed(msg, 2000);
-                    }
-                }.start();
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            Message msg=new Message();
+                            msg.what=1;
+                            handler.sendMessageDelayed(msg, 2000);
+                        }
+                    }.start();
+                }
+
             }
         });
     }
@@ -91,10 +103,9 @@ public class AddDreamActivity extends Activity{
         public void handleMessage(Message msg) {
 
             if (msg.what==1){
+                dialog.dismiss();
                 Toast.makeText(getApplicationContext(),
                         "添加成功", Toast.LENGTH_SHORT).show();
-
-                dialog.dismiss();
 
        /*------发送广播------*/
                 myApplication.setStatus("0");
