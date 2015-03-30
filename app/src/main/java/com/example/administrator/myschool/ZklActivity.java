@@ -36,7 +36,7 @@ public class ZklActivity extends Activity{
 
     private int progress2 = 5;
     private CircularBarPager mCircularBarPager;
-    TextView titleName;
+    TextView titleName,zkl_show_dream,zkl_show_wast,zkl_show_break;
     String shownum = null;
 
     DatabaseHelper databaseHelper;
@@ -68,9 +68,26 @@ public class ZklActivity extends Activity{
         IntentFilter filter = new IntentFilter();
         filter.addAction("com.rao.myproject.Status");
         registerReceiver(myReceiver, filter);
-
+        /*---------显示--------*/
         titleName=(TextView) findViewById(R.id.title);
         titleName.setText("自控力");
+        zkl_show_dream=(TextView) findViewById(R.id.zkl_show_dream);
+        zkl_show_break=(TextView) findViewById(R.id.zkl_show_break);
+        zkl_show_wast=(TextView) findViewById(R.id.zkl_show_wast);
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from mydream ;",null);
+        if (cursor.getCount()!=0) {
+            while (cursor.moveToNext()) {
+                try {
+                    myApplication.setDreamTime(cursor.getString(2));
+                    myApplication.setBreakTime("11");
+                    myApplication.setWastTime(13 - Integer.parseInt(cursor.getString(2))+"");
+                    zkl_show_dream.setText(myApplication.getDreamTime()+"小时");
+                    zkl_show_break.setText(myApplication.getBreakTime()+"小时");
+                    zkl_show_wast.setText(myApplication.getWastTime() + "小时");
+                } catch (Exception e) {
+                }
+            }
+        }
 
         progressTwo = (RoundCornerProgressBar) findViewById(R.id.progress_two);
         progressTwo.setBackgroundColor(getResources().getColor(R.color.custom_progress_background));
@@ -78,9 +95,10 @@ public class ZklActivity extends Activity{
         add= (ImageView) findViewById(R.id.add);
         mCircularBarPager = (CircularBarPager) findViewById(R.id.circularBarPager);
 
-        Cursor cursor = sqLiteDatabase.rawQuery("select status from mydream ;",null);
-            while (cursor.moveToNext()) {
-            myApplication.setStatus(cursor.getString(0));
+        /*----查找数据库，判断梦想状态*/
+        Cursor cursor1 = sqLiteDatabase.rawQuery("select status from mydream ;",null);
+            while (cursor1.moveToNext()) {
+            myApplication.setStatus(cursor1.getString(0));
             shownum=myApplication.getStatus();
             }
           Log.e("@@@@@@@@","shownum="+shownum);
@@ -228,6 +246,9 @@ public class ZklActivity extends Activity{
         @Override
         public void onReceive(final Context context, Intent intent) {
             shownum=myApplication.getStatus();
+            zkl_show_dream.setText(myApplication.getDreamTime()+"小时");
+            zkl_show_break.setText(myApplication.getBreakTime()+"小时");
+            zkl_show_wast.setText(myApplication.getWastTime() + "小时");
         if (shownum=="0"||"0".equals(shownum)){
             add.setVisibility(View.GONE);
             mCircularBarPager.setVisibility(View.VISIBLE);

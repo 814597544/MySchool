@@ -7,6 +7,9 @@ import android.app.Application;
  */
 public class MyApplication extends Application{
     String Status;
+    String DreamTime;
+    String BreakTime;
+    String WastTime;
 
     @Override
     public void onCreate() {
@@ -20,5 +23,30 @@ public class MyApplication extends Application{
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public String getDreamTime() {
+        return DreamTime;
+    }
+
+    public void setDreamTime(String dreamTime) {
+        DreamTime = dreamTime;
+
+    }
+
+    public String getBreakTime() {
+        return BreakTime;
+    }
+
+    public void setBreakTime(String breakTime) {
+        BreakTime = breakTime;
+    }
+
+    public String getWastTime() {
+        return WastTime;
+    }
+
+    public void setWastTime(String wastTime) {
+        WastTime = wastTime;
     }
 }

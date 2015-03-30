@@ -66,11 +66,12 @@
                     android:layout_weight="6"
                     android:gravity="center">
                     <TextView
+                        android:id="@+id/zkl_show_dream"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="#037083"
-                        android:text="8小时"
+                        android:text="0小时"
                         />
                 </LinearLayout>
 
@@ -115,11 +116,12 @@
 
 
                     <TextView
+                        android:id="@+id/zkl_show_break"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="#037083"
-                        android:text="8小时"
+                        android:text="0小时"
                         />
                 </LinearLayout>
 
@@ -153,11 +155,12 @@
 
 
                     <TextView
+                        android:id="@+id/zkl_show_wast"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="#037083"
-                        android:text="8小时"
+                        android:text="0小时"
                         />
                 </LinearLayout>
 

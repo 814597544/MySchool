@@ -109,6 +109,9 @@ public class AddDreamActivity extends Activity{
 
        /*------发送广播------*/
                 myApplication.setStatus("0");
+                myApplication.setDreamTime(avgTime);
+                myApplication.setBreakTime("11");
+                myApplication.setWastTime(13 - Integer.parseInt(avgTime)+"");
                 Intent intent = new Intent();
                 intent.setAction("com.rao.myproject.Status");
                 sendBroadcast(intent);
