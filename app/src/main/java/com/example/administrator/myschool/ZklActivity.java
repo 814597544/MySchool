@@ -83,11 +83,12 @@ public class ZklActivity extends Activity{
             myApplication.setStatus(cursor.getString(0));
             shownum=myApplication.getStatus();
             }
+          Log.e("@@@@@@@@","shownum="+shownum);
             if (shownum=="0"||"0".equals(shownum)){
                 add.setVisibility(View.GONE);
                 mCircularBarPager.setVisibility(View.VISIBLE);
 
-            }if(shownum=="1"||"1".equals(shownum)){
+            }else if(shownum=="1"||"1".equals(shownum)){
                 add.setVisibility(View.VISIBLE);
                 mCircularBarPager.setVisibility(View.GONE);
 
@@ -227,7 +228,6 @@ public class ZklActivity extends Activity{
         @Override
         public void onReceive(final Context context, Intent intent) {
             shownum=myApplication.getStatus();
-        Log.e("@@@@@@@@","shownum="+shownum);
         if (shownum=="0"||"0".equals(shownum)){
             add.setVisibility(View.GONE);
             mCircularBarPager.setVisibility(View.VISIBLE);

@@ -49,12 +49,14 @@ import java.util.List;
  */
 public class DreamingActivity  extends Activity {
     TextView titleName,show_dreamName,title_right;
+    TextView tv_dream,tv_break,tv_wast;
     LinearLayout title_return,finish;
     MagnificentChart magnificentChart;
     DatabaseHelper databaseHelper;
     SQLiteDatabase sqLiteDatabase;
     private MyApplication myApplication;
     LoadingDialog dialog1;
+    int Dream=0,Break=0,Wast=0;
 
     private final TimeInterpolator enterInterpolator = new DecelerateInterpolator(1.5f);
     private final TimeInterpolator exitInterpolator = new AccelerateInterpolator();
@@ -151,7 +153,7 @@ public class DreamingActivity  extends Activity {
 
         finish.setVisibility(View.VISIBLE);
         title_right= (TextView) findViewById(R.id.title_right);
-        title_right.setText("删除梦想");
+        title_right.setText("删除");
         dialog1 = new LoadingDialog(this);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,12 +199,24 @@ public class DreamingActivity  extends Activity {
         });
 
 
-
+    /*--------显示图表------*/
         show_dreamName= (TextView) findViewById(R.id.show_dreamName);
-        Cursor cursor = sqLiteDatabase.rawQuery("select dreamname from mydream ;",null);
+        tv_dream= (TextView) findViewById(R.id.tv_dream);
+        tv_break= (TextView) findViewById(R.id.tv_break);
+        tv_wast= (TextView) findViewById(R.id.tv_wast);
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from mydream ;",null);
         while (cursor.moveToNext()) {
             show_dreamName.setText(cursor.getString(0));
+            try {
+                Dream=Integer.parseInt(cursor.getString(2))*100/24;
+                Break=11*100/24;
+                Wast=(100-Dream-Break)/1;
+                tv_dream.setText("梦想"+Dream+"%");
+                tv_wast.setText("虚度"+Wast+"%");
+                tv_break.setText("休息"+Break+"%");
+            }catch (Exception e){}
         }
+
         show_dreamName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,6 +227,9 @@ public class DreamingActivity  extends Activity {
                 sendBroadcast(intent1);
             }
         });
+
+
+
 
         mCurrOverlapFactor = 1;
         mCurrEasing = new QuintEaseOut();
@@ -225,9 +242,9 @@ public class DreamingActivity  extends Activity {
         mOldStartX = -1;
         mOldStartY = 0;
         mOldAlpha = -1;
-        MagnificentChartItem firstItem = new MagnificentChartItem("first", 30, Color.parseColor("#19C5EB"));
-        MagnificentChartItem secondItem = new  MagnificentChartItem("second", 40, Color.parseColor("#1FB88A"));
-        MagnificentChartItem thirdItem = new  MagnificentChartItem("third", 30, Color.parseColor("#F85737"));
+        MagnificentChartItem firstItem = new MagnificentChartItem("first", Dream, Color.parseColor("#19C5EB"));
+        MagnificentChartItem secondItem = new  MagnificentChartItem("second", Break, Color.parseColor("#1FB88A"));
+        MagnificentChartItem thirdItem = new  MagnificentChartItem("third", Wast, Color.parseColor("#F85737"));
         List<MagnificentChartItem> chartItemsList = new ArrayList<MagnificentChartItem>();
         chartItemsList.add(firstItem);
         chartItemsList.add(secondItem);
