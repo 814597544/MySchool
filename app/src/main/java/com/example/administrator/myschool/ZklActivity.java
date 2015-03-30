@@ -78,12 +78,15 @@ public class ZklActivity extends Activity{
         if (cursor.getCount()!=0) {
             while (cursor.moveToNext()) {
                 try {
-                    myApplication.setDreamTime(cursor.getString(2));
-                    myApplication.setBreakTime("11");
-                    myApplication.setWastTime(13 - Integer.parseInt(cursor.getString(2))+"");
-                    zkl_show_dream.setText(myApplication.getDreamTime()+"小时");
-                    zkl_show_break.setText(myApplication.getBreakTime()+"小时");
-                    zkl_show_wast.setText(myApplication.getWastTime() + "小时");
+                    if (!cursor.getString(5).equals("1")) {
+                        myApplication.setDreamTime(cursor.getString(2));
+                        myApplication.setBreakTime("11");
+                        myApplication.setWastTime(13 - Integer.parseInt(cursor.getString(2)) + "");
+                        zkl_show_dream.setText(myApplication.getDreamTime() + "小时");
+                        zkl_show_break.setText(myApplication.getBreakTime() + "小时");
+                        zkl_show_wast.setText(myApplication.getWastTime() + "小时");
+
+                    }
                 } catch (Exception e) {
                 }
             }
@@ -127,6 +130,10 @@ public class ZklActivity extends Activity{
                                         // 这里添加点击确定后的逻辑
                                         sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
                                         myApplication.setStatus("-1");
+
+                                        myApplication.setDreamTime("0");
+                                        myApplication.setBreakTime("0");
+                                        myApplication.setWastTime("0");
                                /* ------发送广播------*/
                                         Intent intent1 = new Intent();
                                         intent1.setAction("com.rao.myproject.Status");

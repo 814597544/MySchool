@@ -116,6 +116,10 @@ public class MainActivity extends TabActivity {
                             // 这里添加点击确定后的逻辑
                             sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
                             myApplication.setStatus("-1");
+
+                            myApplication.setDreamTime("0");
+                            myApplication.setBreakTime("0");
+                            myApplication.setWastTime("0");
                                /* ------发送广播------*/
                             Intent intent1 = new Intent();
                             intent1.setAction("com.rao.myproject.Status");

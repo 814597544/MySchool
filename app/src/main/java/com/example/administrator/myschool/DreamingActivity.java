@@ -173,6 +173,9 @@ public class DreamingActivity  extends Activity {
                                 dialog1.show();
                                 sqLiteDatabase.execSQL("delete from mydream where status = ? or status=?;",new String[]{"0","1"});
                                 myApplication.setStatus("-1");
+                                myApplication.setDreamTime("0");
+                                myApplication.setBreakTime("0");
+                                myApplication.setWastTime("0");
                                 new Thread(){
                                     @Override
                                     public void run() {
@@ -222,6 +225,10 @@ public class DreamingActivity  extends Activity {
             public void onClick(View v) {
                 sqLiteDatabase.execSQL("update mydream  set status=? where status=?;",new String[]{"1","0"});
                 myApplication.setStatus("1");
+                myApplication.setDreamTime("0");
+                myApplication.setBreakTime("0");
+                myApplication.setWastTime("0");
+
                 Intent intent1 = new Intent();
                 intent1.setAction("com.rao.myproject.Status");
                 sendBroadcast(intent1);
