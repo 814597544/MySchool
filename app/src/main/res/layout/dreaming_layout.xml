@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/very_light_grey"
+
     >
     <include layout="@layout/home_head"/>
 
@@ -13,8 +15,31 @@
         android:layout_height="match_parent"
         android:fillViewport="false"
         >-->
+<LinearLayout
+    android:id="@+id/no_dream"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:visibility="visible"
+    android:gravity="center"
+    android:orientation="vertical">
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:src="@drawable/myphoto"/>
+  <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:textColor="@color/white"
+     android:layout_marginTop="10dp"
+     android:layout_gravity="center_horizontal"
+     android:textSize="16sp"
+     android:text="对不起，您还未添加任何梦想！"/>
+    </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/have_dream"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -144,7 +169,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#19C5EB"
-                                android:text="梦想 30%"
+                                android:text="梦想 0%"
                                 android:textSize="14sp"
                                 />
 
@@ -161,7 +186,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#1FB88A"
-                                android:text="休息 30%"
+                                android:text="休息 0%"
                                 android:textSize="14sp"
                                 />
 
@@ -178,7 +203,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#F85737"
-                                android:text="虚度 40%"
+                                android:text="虚度 0%"
                                 android:textSize="14sp"
                                 />
 

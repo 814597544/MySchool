@@ -50,7 +50,7 @@ import java.util.List;
 public class DreamingActivity  extends Activity {
     TextView titleName,show_dreamName,title_right;
     TextView tv_dream,tv_break,tv_wast;
-    LinearLayout title_return,finish;
+    LinearLayout title_return,finish,have_dream,no_dream;
     MagnificentChart magnificentChart;
     DatabaseHelper databaseHelper;
     SQLiteDatabase sqLiteDatabase;
@@ -143,6 +143,8 @@ public class DreamingActivity  extends Activity {
         titleName.setText("梦想图表");
         title_return= (LinearLayout) findViewById(R.id.title_return);
         finish= (LinearLayout) findViewById(R.id.finish);
+        have_dream= (LinearLayout) findViewById(R.id.have_dream);
+        no_dream= (LinearLayout) findViewById(R.id.no_dream);
         title_return.setVisibility(View.VISIBLE);
         title_return.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,7 +153,51 @@ public class DreamingActivity  extends Activity {
             }
         });
 
-        finish.setVisibility(View.VISIBLE);
+    /*--------显示数据------*/
+        show_dreamName= (TextView) findViewById(R.id.show_dreamName);
+        tv_dream= (TextView) findViewById(R.id.tv_dream);
+        tv_break= (TextView) findViewById(R.id.tv_break);
+        tv_wast= (TextView) findViewById(R.id.tv_wast);
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from mydream ;",null);
+        if (cursor.getCount()==0){
+            finish.setVisibility(View.GONE);
+            have_dream.setVisibility(View.GONE);
+            no_dream.setVisibility(View.VISIBLE);
+        }else {
+            finish.setVisibility(View.VISIBLE);
+            have_dream.setVisibility(View.VISIBLE);
+            no_dream.setVisibility(View.GONE);
+
+            while (cursor.moveToNext()) {
+                show_dreamName.setText(cursor.getString(0));
+                try {
+                    Dream=Integer.parseInt(cursor.getString(2))*100/24;
+                    Break=11*100/24;
+                    Wast=(100-Dream-Break)/1;
+                    tv_dream.setText("梦想"+Dream+"%");
+                    tv_wast.setText("虚度"+Wast+"%");
+                    tv_break.setText("休息"+Break+"%");
+                }catch (Exception e){}
+            }
+        }
+
+
+        show_dreamName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sqLiteDatabase.execSQL("update mydream  set status=? where status=?;",new String[]{"1","0"});
+                myApplication.setStatus("1");
+                myApplication.setDreamTime("0");
+                myApplication.setBreakTime("0");
+                myApplication.setWastTime("0");
+
+                Intent intent1 = new Intent();
+                intent1.setAction("com.rao.myproject.Status");
+                sendBroadcast(intent1);
+            }
+        });
+
+/*-------删除梦想--------*/
         title_right= (TextView) findViewById(R.id.title_right);
         title_right.setText("删除");
         dialog1 = new LoadingDialog(this);
@@ -201,39 +247,6 @@ public class DreamingActivity  extends Activity {
             }
         });
 
-
-    /*--------显示图表------*/
-        show_dreamName= (TextView) findViewById(R.id.show_dreamName);
-        tv_dream= (TextView) findViewById(R.id.tv_dream);
-        tv_break= (TextView) findViewById(R.id.tv_break);
-        tv_wast= (TextView) findViewById(R.id.tv_wast);
-        Cursor cursor = sqLiteDatabase.rawQuery("select * from mydream ;",null);
-        while (cursor.moveToNext()) {
-            show_dreamName.setText(cursor.getString(0));
-            try {
-                Dream=Integer.parseInt(cursor.getString(2))*100/24;
-                Break=11*100/24;
-                Wast=(100-Dream-Break)/1;
-                tv_dream.setText("梦想"+Dream+"%");
-                tv_wast.setText("虚度"+Wast+"%");
-                tv_break.setText("休息"+Break+"%");
-            }catch (Exception e){}
-        }
-
-        show_dreamName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sqLiteDatabase.execSQL("update mydream  set status=? where status=?;",new String[]{"1","0"});
-                myApplication.setStatus("1");
-                myApplication.setDreamTime("0");
-                myApplication.setBreakTime("0");
-                myApplication.setWastTime("0");
-
-                Intent intent1 = new Intent();
-                intent1.setAction("com.rao.myproject.Status");
-                sendBroadcast(intent1);
-            }
-        });
 
 
 
@@ -418,6 +431,8 @@ public class DreamingActivity  extends Activity {
         public void handleMessage(Message msg) {
 
             if (msg.what==1){
+                have_dream.setVisibility(View.GONE);
+                no_dream.setVisibility(View.VISIBLE);
                 dialog1.dismiss();
                 Toast.makeText(getApplicationContext(),
                         "删除成功", Toast.LENGTH_SHORT).show();
