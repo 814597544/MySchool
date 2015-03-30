@@ -199,7 +199,7 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="20dp"
                     android:gravity="center"
-                    android:text="过四级"
+                    android:text="梦想名称"
                     android:textColor="#ffffff"
                     android:textSize="14sp"
                     android:background="@drawable/button_bg2"/>

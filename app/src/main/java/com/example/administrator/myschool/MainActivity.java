@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -96,6 +97,7 @@ public class MainActivity extends TabActivity {
 
 
     private void startActivity1(){
+        Log.e("mmmmmm",myApplication.getStatus());
         if (myApplication.getStatus().equals("0")){
             Toast.makeText(getApplicationContext(),
                     "梦想正在进行中，不能再次添加", Toast.LENGTH_SHORT).show();

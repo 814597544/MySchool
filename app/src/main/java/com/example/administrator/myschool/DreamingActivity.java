@@ -3,7 +3,10 @@ package com.example.administrator.myschool;
 import android.animation.TimeInterpolator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -11,6 +14,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -18,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.circlechart.MagnificentChart;
 import com.circlechart.MagnificentChartItem;
@@ -30,6 +36,7 @@ import com.db.chart.view.YController;
 import com.db.chart.view.animation.Animation;
 import com.db.chart.view.animation.easing.BaseEasingMethod;
 import com.db.chart.view.animation.easing.quint.QuintEaseOut;
+import com.lodingdialog.LoadingDialog;
 import com.rao.MySchool.been.DatabaseHelper;
 import com.rao.MySchool.been.MyApplication;
 
@@ -41,12 +48,13 @@ import java.util.List;
  * Created by Administrator on 2015/3/26.
  */
 public class DreamingActivity  extends Activity {
-    TextView titleName,show_dreamName;
-    LinearLayout title_return;
+    TextView titleName,show_dreamName,title_right;
+    LinearLayout title_return,finish;
     MagnificentChart magnificentChart;
     DatabaseHelper databaseHelper;
     SQLiteDatabase sqLiteDatabase;
     private MyApplication myApplication;
+    LoadingDialog dialog1;
 
     private final TimeInterpolator enterInterpolator = new DecelerateInterpolator(1.5f);
     private final TimeInterpolator exitInterpolator = new AccelerateInterpolator();
@@ -130,8 +138,9 @@ public class DreamingActivity  extends Activity {
         myApplication= (MyApplication) getApplication();
 
         titleName= (TextView) findViewById(R.id.title);
-        titleName.setText("图 表");
+        titleName.setText("梦想图表");
         title_return= (LinearLayout) findViewById(R.id.title_return);
+        finish= (LinearLayout) findViewById(R.id.finish);
         title_return.setVisibility(View.VISIBLE);
         title_return.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +149,60 @@ public class DreamingActivity  extends Activity {
             }
         });
 
+        finish.setVisibility(View.VISIBLE);
+        title_right= (TextView) findViewById(R.id.title_right);
+        title_right.setText("删除梦想");
+        dialog1 = new LoadingDialog(this);
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        DreamingActivity.this,AlertDialog.THEME_HOLO_LIGHT);
+
+                builder.setIcon(R.drawable.jiazai);
+                builder.setTitle("删除梦想");
+                builder.setMessage("确定要删除这个梦想吗？");
+                builder.setPositiveButton("确定",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int whichButton) {
+                                // 这里添加点击确定后的逻辑
+                                dialog.dismiss();
+                                dialog1.show();
+                                sqLiteDatabase.execSQL("delete from mydream where status = ? or status=?;",new String[]{"0","1"});
+                                myApplication.setStatus("-1");
+                                new Thread(){
+                                    @Override
+                                    public void run() {
+                                        Message msg=new Message();
+                                        msg.what=1;
+                                        handler.sendMessageDelayed(msg, 2000);
+                                    }
+                                }.start();
+
+
+                            }
+                        });
+                builder.setNegativeButton("取消",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int whichButton) {
+                                // 这里添加点击确定后的逻辑
+
+                            }
+                        });
+                builder.create().show();
+
+            }
+        });
+
+
+
         show_dreamName= (TextView) findViewById(R.id.show_dreamName);
+        Cursor cursor = sqLiteDatabase.rawQuery("select dreamname from mydream ;",null);
+        while (cursor.moveToNext()) {
+            show_dreamName.setText(cursor.getString(0));
+        }
         show_dreamName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -327,7 +389,25 @@ public class DreamingActivity  extends Activity {
 
 
 
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
 
+            if (msg.what==1){
+                dialog1.dismiss();
+                Toast.makeText(getApplicationContext(),
+                        "删除成功", Toast.LENGTH_SHORT).show();
+
+      /* ------发送广播------*/
+                Intent intent1 = new Intent();
+                intent1.setAction("com.rao.myproject.Status");
+                sendBroadcast(intent1);
+            }else{
+                Toast.makeText(getApplicationContext(),
+                        "删除失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
 
 
