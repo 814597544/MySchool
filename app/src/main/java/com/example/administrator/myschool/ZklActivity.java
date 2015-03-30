@@ -172,6 +172,7 @@ public class ZklActivity extends Activity{
     private void updateProgressTwo() {
         progressTwo.setProgress(progress2);
         updateProgressTwoColor();
+
     }
 
     private void updateProgressTwoColor() {
@@ -186,7 +187,7 @@ public class ZklActivity extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
-        mCircularBarPager.getCircularBar().animateProgress(0, 75, 1000);
+        mCircularBarPager.getCircularBar().animateProgress(0, 50, 1000);
     }
 
     private void initViews(){
