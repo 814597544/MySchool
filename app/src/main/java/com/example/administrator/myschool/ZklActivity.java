@@ -33,6 +33,8 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.nineoldandroids.animation.Animator.*;
 
@@ -53,6 +55,11 @@ public class ZklActivity extends Activity{
     SQLiteDatabase sqLiteDatabase;
     private MyApplication myApplication;
     private MyReceiver myReceiver;
+
+    private TimerTask task = null;																			//定时器任务（用于首页Gallery切换）
+    private Timer time = null	;
+    int TodayFinishTime=0;
+    Intent intentg;
     /**
      * The animation time in milliseconds that we take to display the steps taken
      */
@@ -62,12 +69,14 @@ public class ZklActivity extends Activity{
     private ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.i("zkl", "--Service Disconnected--");
+            Log.e("zkl", "--Service Disconnected--");
         }
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             // 取得Service对象中的Binder对象
             binder = (BindService.MyBinder) service;
+            Log.e("zkl", "--Service onServiceConnected--");
+
         }
     };
 
@@ -86,6 +95,9 @@ public class ZklActivity extends Activity{
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
         myApplication= (MyApplication) getApplication();
+        intentg = new Intent();
+        // 指定开启服务的action
+        intentg.setAction("com.furao.BindService");
         /*--------广播更新----------*/
         myReceiver = new MyReceiver();
         IntentFilter filter = new IntentFilter();
@@ -197,24 +209,14 @@ public class ZklActivity extends Activity{
         getNowTime();
         Cursor cursor3 = sqLiteDatabase.rawQuery("select time from mystatus where date=?;",new String[]{nowtime});
 
-        if (cursor3.getCount()==0){
-            try{
-                Log.e("111111","========"+Integer.parseInt(MyDreamTime));
-                progress2=binder.getCount()/(3600*Integer.parseInt(MyDreamTime));
-                Log.e("22222","2222222222222"+progress2);
-            }catch (Exception e){}
-
-        }else{
+        if (cursor3.getCount()!=0){
             while (cursor3.moveToNext()){
                 try {
-                    progress2=(Integer.parseInt(cursor3.getString(0))+binder.getCount())/(3600*Integer.parseInt(myApplication.getDreamTime()));
-                             /* ------发送广播------*/
-                    Log.e("$$$$$$$","progress2="+progress2);
-                    Intent intent2 = new Intent();
-                    intent2.setAction("com.rao.myproject.Status");
-                    sendBroadcast(intent2);
+                    TodayFinishTime=Integer.parseInt(cursor3.getString(0));
+                    progress2=TodayFinishTime/(3600*Integer.parseInt(myApplication.getDreamTime()));
                 }catch (Exception e){}
             }
+
         }
 
         progressTwo.setProgress(progress2);
@@ -234,7 +236,7 @@ public class ZklActivity extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
-        mCircularBarPager.getCircularBar().animateProgress(0, 0, 1000);
+        mCircularBarPager.getCircularBar().animateProgress(0, 60, 1000);
 
     }
 
@@ -264,31 +266,30 @@ public class ZklActivity extends Activity{
                 getNowTime();
 
                 if (MyBoolean==false){
-                    final Intent intentg = new Intent();
-                    // 指定开启服务的action
-                    intentg.setAction("com.bgxt.BindServiceDemo");
                     // 绑定服务到当前activity中
                     bindService(intentg, conn, Service.BIND_AUTO_CREATE);
+                    Log.e("22222","222222222");
                     MyBoolean=true;
-
+                     startTimer();
                 }else{
+
+                    stopTimer();
                     Cursor cursor2 = sqLiteDatabase.rawQuery("select date from mystatus ;",null);
                     while (cursor2.moveToNext()) {
                         if ( cursor2.getString(0).equals(nowtime)){
-                            binder=null;
-                            unbindService(conn);
 
                  sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+binder.getCount(),nowtime});
                             MyBoolean=false;
-                            break;
-                        }else{
-                            // 解除绑定
                             binder=null;
                             unbindService(conn);
+                            break;
+                        }else{
 
                             sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
                                     new Object[]{nowtime,""+binder.getCount()});
-
+                            // 解除绑定
+                            binder=null;
+                            unbindService(conn);
                             MyBoolean=false;
                             break;
                         }
@@ -420,4 +421,39 @@ public class ZklActivity extends Activity{
         nowtime   =   formatter.format(curDate);
     }
 
+    //启动定时器
+    private void startTimer() {
+		/* 启动定时器，每5秒自动切换展示图 */
+        if (task == null) {
+            task = new TimerTask() {
+                @Override
+                public void run() {
+            //Log.e("******",binder.getCount()+"");
+
+            progress2=(TodayFinishTime+binder.getCount())/(3600*Integer.parseInt(myApplication.getDreamTime()));
+                /* ------发送广播------*/
+                    Log.e("$$$$$$$","progress2="+progress2);
+                    Intent intent2 = new Intent();
+                    intent2.setAction("com.rao.myproject.Status");
+                    sendBroadcast(intent2);
+                }
+            };
+        }
+        if (time == null) {
+            time = new Timer();
+        }
+        time.schedule(task, 1000, 1000);
+    }
+    //关闭定时器
+    private void stopTimer() {
+		/* 暂停定时器 */
+        if (task != null) {
+            task.cancel();
+            task = null;
+        }
+        if (time != null) {
+            time.cancel();
+            time = null;
+        }
+    }
 }
