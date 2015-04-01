@@ -190,7 +190,7 @@ public class DreamingActivity  extends Activity {
                 myApplication.setDreamTime("0");
                 myApplication.setBreakTime("0");
                 myApplication.setWastTime("0");
-                myApplication.setZklWhter("dreamS");
+                myApplication.setZklWhter("df");
 
                 Intent intent1 = new Intent();
                 intent1.setAction("com.rao.myproject.Status");
@@ -218,7 +218,9 @@ public class DreamingActivity  extends Activity {
                                 // 这里添加点击确定后的逻辑
                                 dialog.dismiss();
                                 dialog1.show();
-                                sqLiteDatabase.execSQL("delete from mydream where status = ? or status=?;",new String[]{"0","1"});
+
+                                sqLiteDatabase.execSQL("delete from mydream ;");
+                                sqLiteDatabase.execSQL("delete from mystatus ;");
                                 myApplication.setStatus("-1");
                                 myApplication.setDreamTime("0");
                                 myApplication.setBreakTime("0");
@@ -439,7 +441,7 @@ public class DreamingActivity  extends Activity {
                         "删除成功", Toast.LENGTH_SHORT).show();
 
       /* ------发送广播------*/
-                myApplication.setZklWhter("dreamS");
+                myApplication.setZklWhter("delete");
                 Intent intent1 = new Intent();
                 intent1.setAction("com.rao.myproject.Status");
                 sendBroadcast(intent1);

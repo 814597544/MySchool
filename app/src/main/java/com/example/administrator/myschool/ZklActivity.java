@@ -165,7 +165,8 @@ public class ZklActivity extends Activity{
                                     public void onClick(DialogInterface dialog,
                                                         int whichButton) {
                                         // 这里添加点击确定后的逻辑
-                                        sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
+                                        sqLiteDatabase.execSQL("delete from mydream ;");
+                                        sqLiteDatabase.execSQL("delete from mystatus ;");
                                         myApplication.setStatus("-1");
 
                                         myApplication.setDreamTime("0");
@@ -214,9 +215,6 @@ public class ZklActivity extends Activity{
                 start_dream.setVisibility(View.GONE);
                 stop_dream.setVisibility(View.VISIBLE);
 
-                Toast.makeText(getApplicationContext(),
-                        "start", Toast.LENGTH_SHORT).show();
-
                // 绑定服务到当前activity中
                 final Intent intent = new Intent();
                 // 指定开启服务的action
@@ -235,35 +233,42 @@ public class ZklActivity extends Activity{
                 stop_dream.setVisibility(View.GONE);
                 getNowTime();
 
-                Toast.makeText(getApplicationContext(),
-                        "stop", Toast.LENGTH_SHORT).show();
-
                 stopTimer();
 
                 Cursor cursor2 = sqLiteDatabase.rawQuery("select * from mystatus ;",null);
-                Log.e("stop------","stop");
-                while (cursor2.moveToNext()) {
-                    if ( cursor2.getString(0).equals(nowtime)){
-                        TodayFinishTime=Integer.parseInt(cursor2.getString(1));
-                        sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+TodayFinishTime+binder.getCount(),nowtime});
+                if (cursor2.getCount()==0){
+                    sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
+                            new Object[]{nowtime,""+binder.getCount()});
+                    TodayFinishTime=0;
+                    Log.e("stop------","stopn");
 
-                        // 解除绑定
-                        binder=null;
-                        getApplicationContext().unbindService(connection);
+                    // 解除绑定
+                    binder=null;
+                    getApplicationContext().unbindService(connection);
+                }else{
+                    while (cursor2.moveToNext()) {
+                        if ( cursor2.getString(0).equals(nowtime)){
+                            TodayFinishTime=Integer.parseInt(cursor2.getString(1));
+                            sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+(TodayFinishTime+binder.getCount()),nowtime});
 
-                        break;
-                    }else{
+                            // 解除绑定
+                            binder=null;
+                            getApplicationContext().unbindService(connection);
+                            Log.e("stop------","stopu");
+                            break;
+                        }else{
+                            sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
+                                    new Object[]{nowtime,""+binder.getCount()});
+                            TodayFinishTime=0;
+                            Log.e("stop------","stopi");
 
-                        sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
-                                new Object[]{nowtime,""+binder.getCount()});
-                        Log.e("stop------","stop");
+                            // 解除绑定
+                            binder=null;
+                            getApplicationContext().unbindService(connection);
+                            break;
+                        }
 
-                        // 解除绑定
-                        binder=null;
-                        getApplicationContext().unbindService(connection);
-                        break;
                     }
-
                 }
             }
         });
@@ -279,7 +284,7 @@ public class ZklActivity extends Activity{
                 try {
                     TodayFinishTime=Integer.parseInt(cursor3.getString(0));
                     Log.e("zkl",TodayFinishTime+"");
-                    progress2=(TodayFinishTime*10)/(3600*Integer.parseInt(myApplication.getDreamTime()));
+                    progress2=(TodayFinishTime*10)/(36*Integer.parseInt(myApplication.getDreamTime()));
                 }catch (Exception e){}
             }
 
@@ -375,7 +380,7 @@ public class ZklActivity extends Activity{
             if (myApplication.getZklWhter().equals("time")) {
                 progressTwo.setProgress(progress2);
             }
-            if (myApplication.getZklWhter().equals("dreamS")) {
+            else if (myApplication.getZklWhter().equals("dreamS")) {
                 shownum = myApplication.getStatus();
                 zkl_show_dream.setText(myApplication.getDreamTime() + "小时");
                 zkl_show_break.setText(myApplication.getBreakTime() + "小时");
@@ -407,7 +412,79 @@ public class ZklActivity extends Activity{
                                         public void onClick(DialogInterface dialog,
                                                             int whichButton) {
                                             // 这里添加点击确定后的逻辑
-                                            sqLiteDatabase.execSQL("delete from mydream where status=?;", new String[]{"1"});
+                                            sqLiteDatabase.execSQL("delete from mydream ;");
+                                            sqLiteDatabase.execSQL("delete from mystatus ;");
+                                            myApplication.setStatus("-1");
+                                            myApplication.setZklWhter("dreamS");
+                               /* ------发送广播------*/
+                                            Intent intent1 = new Intent();
+                                            intent1.setAction("com.rao.myproject.Status");
+                                            sendBroadcast(intent1);
+
+                                            Intent intent = new Intent(ZklActivity.this, AddDreamActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                            builder.setNegativeButton("取消",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,
+                                                            int whichButton) {
+                                            // 这里添加点击确定后的逻辑
+
+                                        }
+                                    });
+                            builder.create().show();
+                        }
+                    });
+                } else {
+                    add.setVisibility(View.VISIBLE);
+                    start_dream.setVisibility(View.GONE);
+                    stop_dream.setVisibility(View.GONE);
+                    mCircularBarPager.setVisibility(View.GONE);
+
+                    add.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(ZklActivity.this, AddDreamActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }else{
+                progressTwo.setProgress(0);
+                shownum = myApplication.getStatus();
+                zkl_show_dream.setText(myApplication.getDreamTime() + "小时");
+                zkl_show_break.setText(myApplication.getBreakTime() + "小时");
+                zkl_show_wast.setText(myApplication.getWastTime() + "小时");
+                if (shownum == "0" || "0".equals(shownum)) {
+                    add.setVisibility(View.GONE);
+                    start_dream.setVisibility(View.VISIBLE);
+                    stop_dream.setVisibility(View.GONE);
+                    mCircularBarPager.setVisibility(View.VISIBLE);
+
+                } else if (shownum == "1" || "1".equals(shownum)) {
+                    add.setVisibility(View.VISIBLE);
+                    start_dream.setVisibility(View.GONE);
+                    stop_dream.setVisibility(View.GONE);
+                    mCircularBarPager.setVisibility(View.GONE);
+
+                    add.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                    /*提醒要清除之前数据*/
+                            AlertDialog.Builder builder = new AlertDialog.Builder(
+                                    ZklActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+
+                            builder.setIcon(R.drawable.jiazai);
+                            builder.setTitle("添加梦想");
+                            builder.setMessage("添加新梦想会清除已完成梦想的数据！确定要添加吗？");
+                            builder.setPositiveButton("确定",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,
+                                                            int whichButton) {
+                                            // 这里添加点击确定后的逻辑
+                                            sqLiteDatabase.execSQL("delete from mydream ;");
+                                            sqLiteDatabase.execSQL("delete from mystatus ;");
                                             myApplication.setStatus("-1");
                                             myApplication.setZklWhter("dreamS");
                                /* ------发送广播------*/

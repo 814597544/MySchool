@@ -114,7 +114,8 @@ public class MainActivity extends TabActivity {
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
                             // 这里添加点击确定后的逻辑
-                            sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
+                            sqLiteDatabase.execSQL("delete from mydream ;");
+                            sqLiteDatabase.execSQL("delete from mystatus ;");
                             myApplication.setStatus("-1");
 
                             myApplication.setDreamTime("0");
