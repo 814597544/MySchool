@@ -49,7 +49,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ZklActivity" />
+        <activity android:name=".ZklActivity"/>
+        <service android:name=".MyBindService">
+            <intent-filter >
+                <action android:name="furao"/>
+            </intent-filter>
+        </service>
+
         <activity android:name=".MyTableActivity" />
         <activity android:name=".YaoYiYaoActivity" />
         <activity android:name=".MyTableListActivity" />
@@ -75,11 +81,7 @@
         <!-- ############ QQ空间和QQ SSO授权的Activity注册 ############ -->
         <activity android:name="com.tencent.tauth.AuthActivity" />
 
-        <service android:name="com.rao.MySchool.service.BindService">
-            <intent-filter >
-                <action android:name="com.furao.BindService"/>
-            </intent-filter>
-        </service>
+
     </application>
 
 </manifest>

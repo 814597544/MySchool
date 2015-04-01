@@ -7,6 +7,7 @@ import android.app.Application;
  */
 public class MyApplication extends Application{
     String Status;
+    String ZklWhter;
     String DreamTime;
     String BreakTime;
     String WastTime;
@@ -48,5 +49,13 @@ public class MyApplication extends Application{
 
     public void setWastTime(String wastTime) {
         WastTime = wastTime;
+    }
+
+    public String getZklWhter() {
+        return ZklWhter;
+    }
+
+    public void setZklWhter(String zklWhter) {
+        ZklWhter = zklWhter;
     }
 }

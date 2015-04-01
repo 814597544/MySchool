@@ -56,7 +56,7 @@
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
                         android:gravity="center_vertical"
-                        app:rcMax="10"
+                        app:rcMax="1000"
                         app:rcProgress="0"
                         app:rcSecondaryProgress="0" />
                 </LinearLayout>

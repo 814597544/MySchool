@@ -1,4 +1,4 @@
-package com.rao.MySchool.service;
+package com.example.administrator.myschool;
 
 import android.app.Service;
 import android.content.Intent;
@@ -6,17 +6,18 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-public class BindService extends Service {
+public class MyBindService extends Service {
     private final static String TAG = "main";
-    private int count=0;
+    private int count;
     private boolean quit;
 
     private Thread thread;
     private MyBinder binder=new MyBinder();
-    // 声明一个Binder类
+
+    // ����һ��Binder��
     public class MyBinder extends Binder
     {
-        // 声明一个方法，把count暴露给外部程序。
+        // ����һ����������count��¶���ⲿ����
         public int getCount(){
             return count;
         }
@@ -29,7 +30,7 @@ public class BindService extends Service {
         thread=new Thread(new Runnable() {
             @Override
             public void run() {
-                // 每间隔一秒count加1 ，直到quit为true。
+                // ÿ���һ��count��1 ��ֱ��quitΪtrue��
                 while(!quit){
                     try{
                         Thread.sleep(1000);

@@ -111,6 +111,7 @@ public class AddDreamActivity extends Activity{
                 myApplication.setStatus("0");
                 myApplication.setDreamTime(avgTime);
                 myApplication.setBreakTime("11");
+                myApplication.setZklWhter("dreamS");
                 myApplication.setWastTime(13 - Integer.parseInt(avgTime)+"");
                 Intent intent = new Intent();
                 intent.setAction("com.rao.myproject.Status");

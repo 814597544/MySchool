@@ -8,8 +8,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -28,7 +28,6 @@ import com.nineoldandroids.animation.Animator;
 import com.rao.MySchool.adapter.CircularPagerAdapter;
 import com.rao.MySchool.been.DatabaseHelper;
 import com.rao.MySchool.been.MyApplication;
-import com.rao.MySchool.service.BindService;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.text.SimpleDateFormat;
@@ -61,14 +60,11 @@ public class ZklActivity extends Activity{
     private TimerTask task = null;																			//定时器任务（用于首页Gallery切换）
     private Timer time = null	;
     int TodayFinishTime=0;
-    Intent intentg;
-    /**
-     * The animation time in milliseconds that we take to display the steps taken
-     */
     private static final int BAR_ANIMATION_TIME = 1000;
+    MyBindService.MyBinder binder;
 
-    BindService.MyBinder binder;
-    private ServiceConnection conn = new ServiceConnection() {
+
+    private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
             Log.e("zkl", "--Service Disconnected--");
@@ -77,7 +73,7 @@ public class ZklActivity extends Activity{
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.e("zkl", "--Service Connected--");
             // 取得Service对象中的Binder对象
-            binder = (BindService.MyBinder) service;
+            binder = (MyBindService.MyBinder) service;
         }
     };
 
@@ -95,9 +91,7 @@ public class ZklActivity extends Activity{
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
         myApplication= (MyApplication) getApplication();
-        intentg = new Intent();
-        // 指定开启服务的action
-        intentg.setAction("com.furao.BindService");
+
         /*--------广播更新----------*/
         myReceiver = new MyReceiver();
         IntentFilter filter = new IntentFilter();
@@ -198,6 +192,7 @@ public class ZklActivity extends Activity{
                     }
                 });
             }else {
+
             add.setVisibility(View.VISIBLE);
             start_dream.setVisibility(View.GONE);
             stop_dream.setVisibility(View.GONE);
@@ -221,11 +216,16 @@ public class ZklActivity extends Activity{
 
                 Toast.makeText(getApplicationContext(),
                         "start", Toast.LENGTH_SHORT).show();
-                // 绑定服务到当前activity中
-                bindService(intentg, conn, Service.BIND_AUTO_CREATE);
+
+               // 绑定服务到当前activity中
+                final Intent intent = new Intent();
+                // 指定开启服务的action
+                intent.setAction("furao");
+
+                /*@@@@@@@在普通的activity中绑定和解绑bindservice时用bindservice，但在Tab的activity中要用getApplicationContext().bindService@@@@@@@*/
+                getApplicationContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
                 Log.e("start------","start");
-                Log.e("******",conn+"");
-                // startTimer();
+                 startTimer();
             }
         });
         stop_dream.setOnClickListener(new View.OnClickListener() {
@@ -237,24 +237,30 @@ public class ZklActivity extends Activity{
 
                 Toast.makeText(getApplicationContext(),
                         "stop", Toast.LENGTH_SHORT).show();
-                Log.e("$$$$$$$",""+binder.getCount());
-                // stopTimer();
+
+                stopTimer();
+
                 Cursor cursor2 = sqLiteDatabase.rawQuery("select * from mystatus ;",null);
+                Log.e("stop------","stop");
                 while (cursor2.moveToNext()) {
                     if ( cursor2.getString(0).equals(nowtime)){
                         TodayFinishTime=Integer.parseInt(cursor2.getString(1));
                         sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+TodayFinishTime+binder.getCount(),nowtime});
+
                         // 解除绑定
                         binder=null;
-                        unbindService(conn);
+                        getApplicationContext().unbindService(connection);
+
                         break;
                     }else{
 
                         sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
                                 new Object[]{nowtime,""+binder.getCount()});
+                        Log.e("stop------","stop");
+
                         // 解除绑定
                         binder=null;
-                        unbindService(conn);
+                        getApplicationContext().unbindService(connection);
                         break;
                     }
 
@@ -272,7 +278,8 @@ public class ZklActivity extends Activity{
             while (cursor3.moveToNext()){
                 try {
                     TodayFinishTime=Integer.parseInt(cursor3.getString(0));
-                    progress2=TodayFinishTime/(3600*Integer.parseInt(myApplication.getDreamTime()));
+                    Log.e("zkl",TodayFinishTime+"");
+                    progress2=(TodayFinishTime*10)/(3600*Integer.parseInt(myApplication.getDreamTime()));
                 }catch (Exception e){}
             }
 
@@ -295,7 +302,8 @@ public class ZklActivity extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
-        mCircularBarPager.getCircularBar().animateProgress(0, 60, 1000);
+
+       mCircularBarPager.getCircularBar().animateProgress(0, 60, 1000);
 
     }
 
@@ -364,75 +372,80 @@ public class ZklActivity extends Activity{
     public class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(final Context context, Intent intent) {
-            progressTwo.setProgress(progress2);
-            shownum=myApplication.getStatus();
-            zkl_show_dream.setText(myApplication.getDreamTime()+"小时");
-            zkl_show_break.setText(myApplication.getBreakTime()+"小时");
-            zkl_show_wast.setText(myApplication.getWastTime() + "小时");
-        if (shownum=="0"||"0".equals(shownum)){
-            add.setVisibility(View.GONE);
-            start_dream.setVisibility(View.VISIBLE);
-            stop_dream.setVisibility(View.GONE);
-            mCircularBarPager.setVisibility(View.VISIBLE);
+            if (myApplication.getZklWhter().equals("time")) {
+                progressTwo.setProgress(progress2);
+            }
+            if (myApplication.getZklWhter().equals("dreamS")) {
+                shownum = myApplication.getStatus();
+                zkl_show_dream.setText(myApplication.getDreamTime() + "小时");
+                zkl_show_break.setText(myApplication.getBreakTime() + "小时");
+                zkl_show_wast.setText(myApplication.getWastTime() + "小时");
+                if (shownum == "0" || "0".equals(shownum)) {
+                    add.setVisibility(View.GONE);
+                    start_dream.setVisibility(View.VISIBLE);
+                    stop_dream.setVisibility(View.GONE);
+                    mCircularBarPager.setVisibility(View.VISIBLE);
 
-        }else if(shownum=="1"||"1".equals(shownum)){
-            add.setVisibility(View.VISIBLE);
-            start_dream.setVisibility(View.GONE);
-            stop_dream.setVisibility(View.GONE);
-            mCircularBarPager.setVisibility(View.GONE);
+                } else if (shownum == "1" || "1".equals(shownum)) {
+                    add.setVisibility(View.VISIBLE);
+                    start_dream.setVisibility(View.GONE);
+                    stop_dream.setVisibility(View.GONE);
+                    mCircularBarPager.setVisibility(View.GONE);
 
-            add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                    add.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
                     /*提醒要清除之前数据*/
-                    AlertDialog.Builder builder = new AlertDialog.Builder(
-                            ZklActivity.this,AlertDialog.THEME_HOLO_LIGHT);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(
+                                    ZklActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 
-                    builder.setIcon(R.drawable.jiazai);
-                    builder.setTitle("添加梦想");
-                    builder.setMessage("添加新梦想会清除已完成梦想的数据！确定要添加吗？");
-                    builder.setPositiveButton("确定",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                                    int whichButton) {
-                                    // 这里添加点击确定后的逻辑
-                                    sqLiteDatabase.execSQL("delete from mydream where status=?;",new String[]{"1"});
-                                    myApplication.setStatus("-1");
+                            builder.setIcon(R.drawable.jiazai);
+                            builder.setTitle("添加梦想");
+                            builder.setMessage("添加新梦想会清除已完成梦想的数据！确定要添加吗？");
+                            builder.setPositiveButton("确定",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,
+                                                            int whichButton) {
+                                            // 这里添加点击确定后的逻辑
+                                            sqLiteDatabase.execSQL("delete from mydream where status=?;", new String[]{"1"});
+                                            myApplication.setStatus("-1");
+                                            myApplication.setZklWhter("dreamS");
                                /* ------发送广播------*/
-                                    Intent intent1 = new Intent();
-                                    intent1.setAction("com.rao.myproject.Status");
-                                    sendBroadcast(intent1);
+                                            Intent intent1 = new Intent();
+                                            intent1.setAction("com.rao.myproject.Status");
+                                            sendBroadcast(intent1);
 
-                                    Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
-                                    startActivity(intent);
-                                }
-                            });
-                    builder.setNegativeButton("取消",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                                    int whichButton) {
-                                    // 这里添加点击确定后的逻辑
+                                            Intent intent = new Intent(ZklActivity.this, AddDreamActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                            builder.setNegativeButton("取消",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,
+                                                            int whichButton) {
+                                            // 这里添加点击确定后的逻辑
 
-                                }
-                            });
-                    builder.create().show();
+                                        }
+                                    });
+                            builder.create().show();
+                        }
+                    });
+                } else {
+                    add.setVisibility(View.VISIBLE);
+                    start_dream.setVisibility(View.GONE);
+                    stop_dream.setVisibility(View.GONE);
+                    mCircularBarPager.setVisibility(View.GONE);
+
+                    add.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(ZklActivity.this, AddDreamActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                 }
-            });
-        }else{
-                add.setVisibility(View.VISIBLE);
-            start_dream.setVisibility(View.GONE);
-            stop_dream.setVisibility(View.GONE);
-                mCircularBarPager.setVisibility(View.GONE);
-
-                add.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(ZklActivity.this,AddDreamActivity.class);
-                        startActivity(intent);
-                    }
-                });
-       }
-    }
+            }
+        }
 }
 
     public void getNowTime() {
@@ -450,8 +463,9 @@ public class ZklActivity extends Activity{
                 public void run() {
             Log.e("******",binder.getCount()+"");
 
-            progress2=(TodayFinishTime+binder.getCount())/(3600*Integer.parseInt(myApplication.getDreamTime()));
+            progress2=10*(TodayFinishTime+binder.getCount())/(36*Integer.parseInt(myApplication.getDreamTime()));
                 /* ------发送广播------*/
+                    myApplication.setZklWhter("time");
                     Log.e("$$$$$$$","progress2="+progress2);
                     Intent intent2 = new Intent();
                     intent2.setAction("com.rao.myproject.Status");
@@ -459,6 +473,7 @@ public class ZklActivity extends Activity{
                 }
             };
         }
+
         if (time == null) {
             time = new Timer();
         }

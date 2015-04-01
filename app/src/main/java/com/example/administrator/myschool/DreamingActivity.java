@@ -190,6 +190,7 @@ public class DreamingActivity  extends Activity {
                 myApplication.setDreamTime("0");
                 myApplication.setBreakTime("0");
                 myApplication.setWastTime("0");
+                myApplication.setZklWhter("dreamS");
 
                 Intent intent1 = new Intent();
                 intent1.setAction("com.rao.myproject.Status");
@@ -438,6 +439,7 @@ public class DreamingActivity  extends Activity {
                         "删除成功", Toast.LENGTH_SHORT).show();
 
       /* ------发送广播------*/
+                myApplication.setZklWhter("dreamS");
                 Intent intent1 = new Intent();
                 intent1.setAction("com.rao.myproject.Status");
                 sendBroadcast(intent1);

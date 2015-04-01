@@ -120,6 +120,7 @@ public class MainActivity extends TabActivity {
                             myApplication.setDreamTime("0");
                             myApplication.setBreakTime("0");
                             myApplication.setWastTime("0");
+                            myApplication.setZklWhter("dreamS");
                                /* ------发送广播------*/
                             Intent intent1 = new Intent();
                             intent1.setAction("com.rao.myproject.Status");
