@@ -60,11 +60,6 @@
         <activity android:name=".ChartToday" />
         <activity android:name=".AddDreamActivity" />
         <activity android:name=".DreamingActivity" />
-        <service android:name="com.rao.MySchool.service.BindService">
-            <intent-filter >
-                <action android:name="com.furao.BindService"/>
-            </intent-filter>
-        </service>
 
         <!-- ###################注册SDK使用的Activity###################### -->
         <!-- 分享编辑页 -->
@@ -80,7 +75,11 @@
         <!-- ############ QQ空间和QQ SSO授权的Activity注册 ############ -->
         <activity android:name="com.tencent.tauth.AuthActivity" />
 
-
+        <service android:name="com.rao.MySchool.service.BindService">
+            <intent-filter >
+                <action android:name="com.furao.BindService"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

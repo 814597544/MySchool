@@ -43,18 +43,20 @@ import static com.nineoldandroids.animation.Animator.*;
  */
 public class ZklActivity extends Activity{
     private RoundCornerProgressBar progressTwo;
-    private ImageView add;
+    private ImageView add,start_dream,stop_dream;
 
     private int progress2 = 0;
     private CircularBarPager mCircularBarPager;
     TextView titleName,zkl_show_dream,zkl_show_wast,zkl_show_break;
     String shownum = null,nowtime,MyDreamTime=null;
-    boolean MyBoolean=false;
+
 
     DatabaseHelper databaseHelper;
     SQLiteDatabase sqLiteDatabase;
     private MyApplication myApplication;
     private MyReceiver myReceiver;
+
+
 
     private TimerTask task = null;																			//定时器任务（用于首页Gallery切换）
     private Timer time = null	;
@@ -73,10 +75,9 @@ public class ZklActivity extends Activity{
         }
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.e("zkl", "--Service Connected--");
             // 取得Service对象中的Binder对象
             binder = (BindService.MyBinder) service;
-            Log.e("zkl", "--Service onServiceConnected--");
-
         }
     };
 
@@ -86,7 +87,6 @@ public class ZklActivity extends Activity{
         setContentView(R.layout.activity_zkl);
 
         findView();
-
         updateProgressTwo();
         initViews();
     }
@@ -132,6 +132,9 @@ public class ZklActivity extends Activity{
         progressTwo.setBackgroundColor(getResources().getColor(R.color.custom_progress_background));
 
         add= (ImageView) findViewById(R.id.add);
+        start_dream= (ImageView) findViewById(R.id.start_dream);
+        stop_dream= (ImageView) findViewById(R.id.stop_dream);
+
         mCircularBarPager = (CircularBarPager) findViewById(R.id.circularBarPager);
 
         /*----查找数据库，判断梦想状态*/
@@ -143,10 +146,14 @@ public class ZklActivity extends Activity{
           Log.e("@@@@@@@@","shownum="+shownum);
             if (shownum=="0"||"0".equals(shownum)){
                 add.setVisibility(View.GONE);
+                start_dream.setVisibility(View.VISIBLE);
+                stop_dream.setVisibility(View.GONE);
                 mCircularBarPager.setVisibility(View.VISIBLE);
 
             }else if(shownum=="1"||"1".equals(shownum)){
                 add.setVisibility(View.VISIBLE);
+                start_dream.setVisibility(View.GONE);
+                stop_dream.setVisibility(View.GONE);
                 mCircularBarPager.setVisibility(View.GONE);
 
                 add.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +199,8 @@ public class ZklActivity extends Activity{
                 });
             }else {
             add.setVisibility(View.VISIBLE);
+            start_dream.setVisibility(View.GONE);
+            stop_dream.setVisibility(View.GONE);
             mCircularBarPager.setVisibility(View.GONE);
 
             add.setOnClickListener(new View.OnClickListener() {
@@ -202,6 +211,56 @@ public class ZklActivity extends Activity{
                 }
             });
             }
+
+        /*----------开始和停止梦想--------*/
+        start_dream.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start_dream.setVisibility(View.GONE);
+                stop_dream.setVisibility(View.VISIBLE);
+
+                Toast.makeText(getApplicationContext(),
+                        "start", Toast.LENGTH_SHORT).show();
+                // 绑定服务到当前activity中
+                bindService(intentg, conn, Service.BIND_AUTO_CREATE);
+                Log.e("start------","start");
+                Log.e("******",conn+"");
+                // startTimer();
+            }
+        });
+        stop_dream.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start_dream.setVisibility(View.VISIBLE);
+                stop_dream.setVisibility(View.GONE);
+                getNowTime();
+
+                Toast.makeText(getApplicationContext(),
+                        "stop", Toast.LENGTH_SHORT).show();
+                Log.e("$$$$$$$",""+binder.getCount());
+                // stopTimer();
+                Cursor cursor2 = sqLiteDatabase.rawQuery("select * from mystatus ;",null);
+                while (cursor2.moveToNext()) {
+                    if ( cursor2.getString(0).equals(nowtime)){
+                        TodayFinishTime=Integer.parseInt(cursor2.getString(1));
+                        sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+TodayFinishTime+binder.getCount(),nowtime});
+                        // 解除绑定
+                        binder=null;
+                        unbindService(conn);
+                        break;
+                    }else{
+
+                        sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
+                                new Object[]{nowtime,""+binder.getCount()});
+                        // 解除绑定
+                        binder=null;
+                        unbindService(conn);
+                        break;
+                    }
+
+                }
+            }
+        });
         }
 
 
@@ -257,51 +316,6 @@ public class ZklActivity extends Activity{
         circlePageIndicator.setStrokeColor(getResources().getColor(R.color.transparent));
 
         //Do stuff based on animation
-       /*----------开始和停止梦想--------*/
-        mCircularBarPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),
-                        "zkl", Toast.LENGTH_SHORT).show();
-                getNowTime();
-
-                if (MyBoolean==false){
-                    // 绑定服务到当前activity中
-                    bindService(intentg, conn, Service.BIND_AUTO_CREATE);
-                    Log.e("22222","222222222");
-                    MyBoolean=true;
-                     startTimer();
-                }else{
-
-                    stopTimer();
-                    Cursor cursor2 = sqLiteDatabase.rawQuery("select date from mystatus ;",null);
-                    while (cursor2.moveToNext()) {
-                        if ( cursor2.getString(0).equals(nowtime)){
-
-                 sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+binder.getCount(),nowtime});
-                            MyBoolean=false;
-                            binder=null;
-                            unbindService(conn);
-                            break;
-                        }else{
-
-                            sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
-                                    new Object[]{nowtime,""+binder.getCount()});
-                            // 解除绑定
-                            binder=null;
-                            unbindService(conn);
-                            MyBoolean=false;
-                            break;
-                        }
-
-                    }
-                }
-
-
-            }
-        });
-
-
 
         mCircularBarPager.addListener(new AnimatorListener() {
             @Override
@@ -357,10 +371,14 @@ public class ZklActivity extends Activity{
             zkl_show_wast.setText(myApplication.getWastTime() + "小时");
         if (shownum=="0"||"0".equals(shownum)){
             add.setVisibility(View.GONE);
+            start_dream.setVisibility(View.VISIBLE);
+            stop_dream.setVisibility(View.GONE);
             mCircularBarPager.setVisibility(View.VISIBLE);
 
         }else if(shownum=="1"||"1".equals(shownum)){
             add.setVisibility(View.VISIBLE);
+            start_dream.setVisibility(View.GONE);
+            stop_dream.setVisibility(View.GONE);
             mCircularBarPager.setVisibility(View.GONE);
 
             add.setOnClickListener(new View.OnClickListener() {
@@ -402,6 +420,8 @@ public class ZklActivity extends Activity{
             });
         }else{
                 add.setVisibility(View.VISIBLE);
+            start_dream.setVisibility(View.GONE);
+            stop_dream.setVisibility(View.GONE);
                 mCircularBarPager.setVisibility(View.GONE);
 
                 add.setOnClickListener(new View.OnClickListener() {
@@ -428,7 +448,7 @@ public class ZklActivity extends Activity{
             task = new TimerTask() {
                 @Override
                 public void run() {
-            //Log.e("******",binder.getCount()+"");
+            Log.e("******",binder.getCount()+"");
 
             progress2=(TodayFinishTime+binder.getCount())/(3600*Integer.parseInt(myApplication.getDreamTime()));
                 /* ------发送广播------*/
