@@ -18,7 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -60,6 +60,8 @@ public class ZklActivity extends Activity{
     private Timer time = null	;
     int TodayFinishTime=0;
     private static final int BAR_ANIMATION_TIME = 1000;
+
+    Cursor cursor3;
     MyBindService.MyBinder binder;
 
 
@@ -85,6 +87,7 @@ public class ZklActivity extends Activity{
         updateProgressTwo();
         initViews();
     }
+
 
     private void findView() {
         databaseHelper = new DatabaseHelper(this);
@@ -164,6 +167,7 @@ public class ZklActivity extends Activity{
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,
                                                         int whichButton) {
+
                                         // 这里添加点击确定后的逻辑
                                         sqLiteDatabase.execSQL("delete from mydream ;");
                                         sqLiteDatabase.execSQL("delete from mystatus ;");
@@ -212,74 +216,81 @@ public class ZklActivity extends Activity{
         start_dream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                start_dream.setVisibility(View.GONE);
-                stop_dream.setVisibility(View.VISIBLE);
-
-               // 绑定服务到当前activity中
-                final Intent intent = new Intent();
-                // 指定开启服务的action
-                intent.setAction("furao");
-
-                /*@@@@@@@在普通的activity中绑定和解绑bindservice时用bindservice，但在Tab的activity中要用getApplicationContext().bindService@@@@@@@*/
-                getApplicationContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
-                Log.e("start------","start");
-                 startTimer();
+             startMyDream();
             }
         });
         stop_dream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                start_dream.setVisibility(View.VISIBLE);
-                stop_dream.setVisibility(View.GONE);
-                getNowTime();
-
-                Cursor cursor2 = sqLiteDatabase.rawQuery("select * from mystatus ;",null);
-                if (cursor2.getCount()==0){
-                    sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
-                            new Object[]{nowtime,""+binder.getCount()});
-                    myApplication.setTodayTime(binder.getCount());
-                    Log.e("stop------","stopn");
-
-                    // 解除绑定
-                    binder=null;
-                    getApplicationContext().unbindService(connection);
-                }else{
-
-                    while (cursor2.moveToNext()) {
-                        if ( cursor2.getString(0).equals(nowtime)){
-                            TodayFinishTime=Integer.parseInt(cursor2.getString(1));
-                            sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+(TodayFinishTime+binder.getCount()),nowtime});
-                            myApplication.setTodayTime(TodayFinishTime+binder.getCount());
-                            // 解除绑定
-                            binder=null;
-                            getApplicationContext().unbindService(connection);
-                            Log.e("stop------","stopu");
-                            break;
-                        }
-
-                    }
-                    if ( !cursor2.getString(0).equals(nowtime)){
-                    sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
-                            new Object[]{nowtime,""+binder.getCount()});
-
-                    myApplication.setTodayTime(binder.getCount());
-                    Log.e("stop------","stopi");
-
-                    // 解除绑定
-                    binder=null;
-                    getApplicationContext().unbindService(connection);
-                    }
-                }
-                stopTimer();
+              stopMyDream();
             }
         });
         }
 
 
+  public void startMyDream(){
+    start_dream.setVisibility(View.GONE);
+    stop_dream.setVisibility(View.VISIBLE);
+
+    // 绑定服务到当前activity中
+    final Intent intent = new Intent();
+    // 指定开启服务的action
+    intent.setAction("furao");
+
+                /*@@@@@@@在普通的activity中绑定和解绑bindservice时用bindservice，但在Tab的activity中要用getApplicationContext().bindService@@@@@@@*/
+    getApplicationContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
+    Log.e("start------","start");
+    startTimer();
+    }
+
+    public  void stopMyDream(){
+        start_dream.setVisibility(View.VISIBLE);
+        stop_dream.setVisibility(View.GONE);
+        getNowTime();
+
+        Cursor cursor2 = sqLiteDatabase.rawQuery("select * from mystatus ;",null);
+        if (cursor2.getCount()==0){
+            sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
+                    new Object[]{nowtime,""+binder.getCount()});
+            myApplication.setTodayTime(binder.getCount());
+            Log.e("stop------","stopn");
+
+            // 解除绑定
+            binder=null;
+            getApplicationContext().unbindService(connection);
+        }else{
+
+            while (cursor2.moveToNext()) {
+                if ( cursor2.getString(0).equals(nowtime)){
+                    TodayFinishTime=Integer.parseInt(cursor2.getString(1));
+                    sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+(TodayFinishTime+binder.getCount()),nowtime});
+                    myApplication.setTodayTime(TodayFinishTime + binder.getCount());
+                    // 解除绑定
+                    binder=null;
+                    getApplicationContext().unbindService(connection);
+                    Log.e("stop------", "stopu");
+                    break;
+                }
+
+            }
+            if ( !cursor2.getString(0).equals(nowtime)){
+                sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
+                        new Object[]{nowtime,""+binder.getCount()});
+
+                myApplication.setTodayTime(binder.getCount());
+                Log.e("stop------","stopi");
+
+                // 解除绑定
+                binder=null;
+                getApplicationContext().unbindService(connection);
+            }
+        }
+        stopTimer();
+    }
+
     private void updateProgressTwo() {
         getNowTime();
-        Cursor cursor3 = sqLiteDatabase.rawQuery("select time from mystatus where date=?;",new String[]{nowtime});
-
+        cursor3 = sqLiteDatabase.rawQuery("select time from mystatus where date=?;",new String[]{nowtime});
         if (cursor3.getCount()!=0){
             while (cursor3.moveToNext()){
                 try {
@@ -311,6 +322,9 @@ public class ZklActivity extends Activity{
         super.onResume();
 
        mCircularBarPager.getCircularBar().animateProgress(0, 60, 1000);
+        findView();
+        updateProgressTwo();
+        initViews();
 
     }
 
@@ -551,17 +565,24 @@ public class ZklActivity extends Activity{
                 /* ------发送广播------*/
                     myApplication.setZklWhter("time");
                     myApplication.setTodayFinishTime(myApplication.getTodayTime()+binder.getCount());
+
                     Log.e("$$$$$$$","progress2="+progress2);
                     Intent intent2 = new Intent();
                     intent2.setAction("com.rao.myproject.Status");
                     sendBroadcast(intent2);
 
-                    if (myApplication.getTodayFinishTime()==3600*Integer.parseInt(myApplication.getDreamTime())){
+                    if (myApplication.getTodayFinishTime()>=3600*Integer.parseInt(myApplication.getDreamTime())){
+
                         // 解除绑定
                         binder=null;
                         getApplicationContext().unbindService(connection);
                         stopTimer();
 
+                        myApplication.setStatus("0");
+                        myApplication.setZklWhter("dreamS");
+
+                        myApplication.setTodayTime(Integer.parseInt(myApplication.getDreamTime()));
+                        sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+Integer.parseInt(myApplication.getDreamTime()),nowtime});
                     }
                 }
             };

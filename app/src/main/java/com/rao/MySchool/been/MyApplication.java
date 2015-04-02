@@ -12,6 +12,15 @@ public class MyApplication extends Application{
     String BreakTime;
     String WastTime;
     int TodayFinishTime=0,todayTime=0;
+    boolean GoPain=false;
+
+    public boolean getGoPain() {
+        return GoPain;
+    }
+
+    public void setGoPain(boolean goPain) {
+        GoPain = goPain;
+    }
 
     public int getTodayTime() {
         return todayTime;
@@ -33,6 +42,9 @@ public class MyApplication extends Application{
     public void onCreate() {
         super.onCreate();
         setStatus("-1");
+        setGoPain(false);
+        setTodayTime(0);
+        setTodayFinishTime(0);
     }
 
     public String getStatus() {
