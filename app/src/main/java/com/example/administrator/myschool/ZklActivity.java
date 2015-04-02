@@ -141,10 +141,18 @@ public class ZklActivity extends Activity{
             }
           Log.e("@@@@@@@@","shownum="+shownum);
             if (shownum=="0"||"0".equals(shownum)){
-                add.setVisibility(View.GONE);
-                start_dream.setVisibility(View.VISIBLE);
-                stop_dream.setVisibility(View.GONE);
-                mCircularBarPager.setVisibility(View.VISIBLE);
+                if (myApplication.getGoPain()==true){
+                    add.setVisibility(View.GONE);
+                    start_dream.setVisibility(View.GONE);
+                    stop_dream.setVisibility(View.VISIBLE);
+                    mCircularBarPager.setVisibility(View.VISIBLE);
+                }else{
+                    add.setVisibility(View.GONE);
+                    start_dream.setVisibility(View.VISIBLE);
+                    stop_dream.setVisibility(View.GONE);
+                    mCircularBarPager.setVisibility(View.VISIBLE);
+                }
+
 
             }else if(shownum=="1"||"1".equals(shownum)){
                 add.setVisibility(View.VISIBLE);
@@ -239,6 +247,7 @@ public class ZklActivity extends Activity{
                 /*@@@@@@@在普通的activity中绑定和解绑bindservice时用bindservice，但在Tab的activity中要用getApplicationContext().bindService@@@@@@@*/
     getApplicationContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
     Log.e("start------","start");
+     myApplication.setGoPain(true);
     startTimer();
     }
 
@@ -284,6 +293,7 @@ public class ZklActivity extends Activity{
                 getApplicationContext().unbindService(connection);
             }
         }
+        myApplication.setGoPain(false);
         stopTimer();
     }
 
@@ -404,10 +414,19 @@ public class ZklActivity extends Activity{
                 zkl_show_break.setText(myApplication.getBreakTime() + "小时");
                 zkl_show_wast.setText(myApplication.getWastTime() + "小时");
                 if (shownum == "0" || "0".equals(shownum)) {
-                    add.setVisibility(View.GONE);
-                    start_dream.setVisibility(View.VISIBLE);
-                    stop_dream.setVisibility(View.GONE);
-                    mCircularBarPager.setVisibility(View.VISIBLE);
+
+                    if (myApplication.getGoPain()==true){
+                        add.setVisibility(View.GONE);
+                        start_dream.setVisibility(View.GONE);
+                        stop_dream.setVisibility(View.VISIBLE);
+                        mCircularBarPager.setVisibility(View.VISIBLE);
+                    }else{
+
+                        add.setVisibility(View.GONE);
+                        start_dream.setVisibility(View.VISIBLE);
+                        stop_dream.setVisibility(View.GONE);
+                        mCircularBarPager.setVisibility(View.VISIBLE);
+                    }
 
                 } else if (shownum == "1" || "1".equals(shownum)) {
                     add.setVisibility(View.VISIBLE);
