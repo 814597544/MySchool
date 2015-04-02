@@ -2,7 +2,6 @@ package com.example.administrator.myschool;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -19,7 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -46,7 +45,7 @@ public class ZklActivity extends Activity{
 
     private int progress2 = 0;
     private CircularBarPager mCircularBarPager;
-    TextView titleName,zkl_show_dream,zkl_show_wast,zkl_show_break;
+    TextView titleName,zkl_show_dream,zkl_show_wast,zkl_show_break,today_finishtime;
     String shownum = null,nowtime,MyDreamTime=null;
 
 
@@ -91,6 +90,7 @@ public class ZklActivity extends Activity{
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
         myApplication= (MyApplication) getApplication();
+        today_finishtime= (TextView) findViewById(R.id.today_finishtime);
 
         /*--------广播更新----------*/
         myReceiver = new MyReceiver();
@@ -233,43 +233,44 @@ public class ZklActivity extends Activity{
                 stop_dream.setVisibility(View.GONE);
                 getNowTime();
 
-                stopTimer();
-
                 Cursor cursor2 = sqLiteDatabase.rawQuery("select * from mystatus ;",null);
                 if (cursor2.getCount()==0){
                     sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
                             new Object[]{nowtime,""+binder.getCount()});
-                    TodayFinishTime=0;
+                    myApplication.setTodayTime(binder.getCount());
                     Log.e("stop------","stopn");
 
                     // 解除绑定
                     binder=null;
                     getApplicationContext().unbindService(connection);
                 }else{
+
                     while (cursor2.moveToNext()) {
                         if ( cursor2.getString(0).equals(nowtime)){
                             TodayFinishTime=Integer.parseInt(cursor2.getString(1));
                             sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+(TodayFinishTime+binder.getCount()),nowtime});
-
+                            myApplication.setTodayTime(TodayFinishTime+binder.getCount());
                             // 解除绑定
                             binder=null;
                             getApplicationContext().unbindService(connection);
                             Log.e("stop------","stopu");
                             break;
-                        }else{
-                            sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
-                                    new Object[]{nowtime,""+binder.getCount()});
-                            TodayFinishTime=0;
-                            Log.e("stop------","stopi");
-
-                            // 解除绑定
-                            binder=null;
-                            getApplicationContext().unbindService(connection);
-                            break;
                         }
 
                     }
+                    if ( !cursor2.getString(0).equals(nowtime)){
+                    sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
+                            new Object[]{nowtime,""+binder.getCount()});
+
+                    myApplication.setTodayTime(binder.getCount());
+                    Log.e("stop------","stopi");
+
+                    // 解除绑定
+                    binder=null;
+                    getApplicationContext().unbindService(connection);
+                    }
                 }
+                stopTimer();
             }
         });
         }
@@ -289,8 +290,9 @@ public class ZklActivity extends Activity{
             }
 
         }
-
+        todayFinish(TodayFinishTime);
         progressTwo.setProgress(progress2);
+        myApplication.setTodayTime(TodayFinishTime);
         updateProgressTwoColor();
 
     }
@@ -379,6 +381,7 @@ public class ZklActivity extends Activity{
         public void onReceive(final Context context, Intent intent) {
             if (myApplication.getZklWhter().equals("time")) {
                 progressTwo.setProgress(progress2);
+                todayFinish(myApplication.getTodayFinishTime());
             }
             else if (myApplication.getZklWhter().equals("dreamS")) {
                 shownum = myApplication.getStatus();
@@ -400,6 +403,7 @@ public class ZklActivity extends Activity{
                     add.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
                     /*提醒要清除之前数据*/
                             AlertDialog.Builder builder = new AlertDialog.Builder(
                                     ZklActivity.this, AlertDialog.THEME_HOLO_LIGHT);
@@ -452,6 +456,7 @@ public class ZklActivity extends Activity{
                 }
             }else{
                 progressTwo.setProgress(0);
+                todayFinish(0);
                 shownum = myApplication.getStatus();
                 zkl_show_dream.setText(myApplication.getDreamTime() + "小时");
                 zkl_show_break.setText(myApplication.getBreakTime() + "小时");
@@ -487,6 +492,7 @@ public class ZklActivity extends Activity{
                                             sqLiteDatabase.execSQL("delete from mystatus ;");
                                             myApplication.setStatus("-1");
                                             myApplication.setZklWhter("dreamS");
+                                            myApplication.setTodayTime(0);
                                /* ------发送广播------*/
                                             Intent intent1 = new Intent();
                                             intent1.setAction("com.rao.myproject.Status");
@@ -539,14 +545,22 @@ public class ZklActivity extends Activity{
                 @Override
                 public void run() {
             Log.e("******",binder.getCount()+"");
-
-            progress2=10*(TodayFinishTime+binder.getCount())/(36*Integer.parseInt(myApplication.getDreamTime()));
+            progress2=10*(myApplication.getTodayTime()+binder.getCount())/(36*Integer.parseInt(myApplication.getDreamTime()));
                 /* ------发送广播------*/
                     myApplication.setZklWhter("time");
+                    myApplication.setTodayFinishTime(myApplication.getTodayTime()+binder.getCount());
                     Log.e("$$$$$$$","progress2="+progress2);
                     Intent intent2 = new Intent();
                     intent2.setAction("com.rao.myproject.Status");
                     sendBroadcast(intent2);
+
+                    if (myApplication.getTodayFinishTime()==3600*Integer.parseInt(myApplication.getDreamTime())){
+                        // 解除绑定
+                        binder=null;
+                        getApplicationContext().unbindService(connection);
+                        stopTimer();
+
+                    }
                 }
             };
         }
@@ -567,5 +581,17 @@ public class ZklActivity extends Activity{
             time.cancel();
             time = null;
         }
+    }
+
+
+    private void todayFinish(int time){
+        int H=time/3600;
+        int M=(time%3600)/60;
+        int S=(time%3600)%60;
+        String HH,MM, SS;
+        if (H<10){HH="0"+H;}else{HH=""+H;}
+        if (M<10){MM="0"+M;}else{MM=""+M;}
+        if (S<10){SS="0"+S;}else{SS=""+S;}
+        today_finishtime.setText(HH+":"+MM+":"+SS);
     }
 }

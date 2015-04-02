@@ -11,6 +11,23 @@ public class MyApplication extends Application{
     String DreamTime;
     String BreakTime;
     String WastTime;
+    int TodayFinishTime=0,todayTime=0;
+
+    public int getTodayTime() {
+        return todayTime;
+    }
+
+    public void setTodayTime(int todayTime) {
+        this.todayTime = todayTime;
+    }
+
+    public int getTodayFinishTime() {
+        return TodayFinishTime;
+    }
+
+    public void setTodayFinishTime(int todayFinishTime) {
+        TodayFinishTime = todayFinishTime;
+    }
 
     @Override
     public void onCreate() {

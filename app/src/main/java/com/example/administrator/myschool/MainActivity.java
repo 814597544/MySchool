@@ -113,6 +113,7 @@ public class MainActivity extends TabActivity {
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
+
                             // 这里添加点击确定后的逻辑
                             sqLiteDatabase.execSQL("delete from mydream ;");
                             sqLiteDatabase.execSQL("delete from mystatus ;");
@@ -121,6 +122,7 @@ public class MainActivity extends TabActivity {
                             myApplication.setDreamTime("0");
                             myApplication.setBreakTime("0");
                             myApplication.setWastTime("0");
+                            myApplication.setTodayTime(0);
                             myApplication.setZklWhter("dreamS");
                                /* ------发送广播------*/
                             Intent intent1 = new Intent();

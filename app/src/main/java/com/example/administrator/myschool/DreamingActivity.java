@@ -190,6 +190,7 @@ public class DreamingActivity  extends Activity {
                 myApplication.setDreamTime("0");
                 myApplication.setBreakTime("0");
                 myApplication.setWastTime("0");
+                myApplication.setTodayTime(0);
                 myApplication.setZklWhter("df");
 
                 Intent intent1 = new Intent();
@@ -225,6 +226,7 @@ public class DreamingActivity  extends Activity {
                                 myApplication.setDreamTime("0");
                                 myApplication.setBreakTime("0");
                                 myApplication.setWastTime("0");
+                                myApplication.setTodayTime(0);
                                 new Thread(){
                                     @Override
                                     public void run() {
