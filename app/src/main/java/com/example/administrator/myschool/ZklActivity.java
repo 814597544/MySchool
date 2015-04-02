@@ -298,11 +298,11 @@ public class ZklActivity extends Activity{
     }
 
     private void updateProgressTwoColor() {
-        if(progress2 <= 3) {
+        if(progress2 <= 300) {
             progressTwo.setProgressColor(getResources().getColor(R.color.custom_progress_red_progress));
-        } else if(progress2 > 3 && progress2 <= 6) {
+        } else if(progress2 > 300 && progress2 <= 600) {
             progressTwo.setProgressColor(getResources().getColor(R.color.custom_progress_orange_progress));
-        } else if(progress2 > 6) {
+        } else if(progress2 > 600) {
             progressTwo.setProgressColor(getResources().getColor(R.color.custom_progress_green_progress));
         }
     }
@@ -381,7 +381,9 @@ public class ZklActivity extends Activity{
         public void onReceive(final Context context, Intent intent) {
             if (myApplication.getZklWhter().equals("time")) {
                 progressTwo.setProgress(progress2);
+                updateProgressTwoColor();
                 todayFinish(myApplication.getTodayFinishTime());
+
             }
             else if (myApplication.getZklWhter().equals("dreamS")) {
                 shownum = myApplication.getStatus();
