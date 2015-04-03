@@ -491,8 +491,9 @@ public class ZklActivity extends Activity{
                     });
                 }
             }else{
-                today_finishtime.setText(00+":"+00+":"+00);
+                today_finishtime.setText("00:00:00");
                 progressTwo.setProgress(0);
+
                 shownum = myApplication.getStatus();
                 zkl_show_dream.setText(myApplication.getDreamTime() + "小时");
                 zkl_show_break.setText(myApplication.getBreakTime() + "小时");
