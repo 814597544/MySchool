@@ -7,14 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lodingdialog.LoadingDialog;
+import com.mydialog.LoadingDialog;
 import com.rao.MySchool.adapter.TableDetailAdapter;
 import com.rao.MySchool.been.DatabaseHelper;
 import com.rao.MySchool.been.MyCourse;

@@ -85,10 +85,12 @@ public class ZklActivity extends Activity{
         findView();
         updateProgressTwo();
         initViews();
+
     }
 
 
     private void findView() {
+
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
         myApplication= (MyApplication) getApplication();
@@ -112,7 +114,7 @@ public class ZklActivity extends Activity{
                     if (!cursor.getString(5).equals("1")) {
                         myApplication.setDreamTime(cursor.getString(2));
                         myApplication.setBreakTime("11");
-                        myApplication.setWastTime(13 - Integer.parseInt(cursor.getString(2)) + "");
+                        myApplication.setWastTime(13 - Double.parseDouble(cursor.getString(2)) + "");
                         MyDreamTime=myApplication.getDreamTime();
                         zkl_show_dream.setText(myApplication.getDreamTime() + "小时");
                         zkl_show_break.setText(myApplication.getBreakTime() + "小时");
@@ -303,9 +305,9 @@ public class ZklActivity extends Activity{
         if (cursor3.getCount()!=0){
             while (cursor3.moveToNext()){
                 try {
-                    TodayFinishTime=Integer.parseInt(cursor3.getString(0));
+                    TodayFinishTime=(int)(Double.parseDouble(cursor3.getString(0)));
                     Log.e("zkl",TodayFinishTime+"");
-                    progress2=(TodayFinishTime*10)/(36*Integer.parseInt(myApplication.getDreamTime()));
+                    progress2=(int)((TodayFinishTime*10)/(36*Double.parseDouble(myApplication.getDreamTime())));
                 }catch (Exception e){}
             }
 
@@ -331,9 +333,9 @@ public class ZklActivity extends Activity{
         super.onResume();
 
        mCircularBarPager.getCircularBar().animateProgress(0, 60, 1000);
-        findView();
+     /*   findView();
         updateProgressTwo();
-        initViews();
+        initViews();*/
 
     }
 
@@ -489,8 +491,8 @@ public class ZklActivity extends Activity{
                     });
                 }
             }else{
+                today_finishtime.setText(00+":"+00+":"+00);
                 progressTwo.setProgress(0);
-                todayFinish(0);
                 shownum = myApplication.getStatus();
                 zkl_show_dream.setText(myApplication.getDreamTime() + "小时");
                 zkl_show_break.setText(myApplication.getBreakTime() + "小时");
@@ -578,8 +580,9 @@ public class ZklActivity extends Activity{
             task = new TimerTask() {
                 @Override
                 public void run() {
+
             Log.e("******",binder.getCount()+"");
-            progress2=10*(myApplication.getTodayTime()+binder.getCount())/(36*Integer.parseInt(myApplication.getDreamTime()));
+            progress2=(int)(10*(myApplication.getTodayTime()+binder.getCount())/(36*Double.parseDouble(myApplication.getDreamTime())));
                 /* ------发送广播------*/
                     myApplication.setZklWhter("time");
                     myApplication.setTodayFinishTime(myApplication.getTodayTime()+binder.getCount());
@@ -589,8 +592,7 @@ public class ZklActivity extends Activity{
                     intent2.setAction("com.rao.myproject.Status");
                     sendBroadcast(intent2);
 
-                    if (myApplication.getTodayFinishTime()>=3600*Integer.parseInt(myApplication.getDreamTime())){
-
+                    if (myApplication.getTodayFinishTime()>=3600*Double.parseDouble(myApplication.getDreamTime())){
                         // 解除绑定
                         binder=null;
                         getApplicationContext().unbindService(connection);
@@ -598,9 +600,9 @@ public class ZklActivity extends Activity{
 
                         myApplication.setStatus("0");
                         myApplication.setZklWhter("dreamS");
-
-                        myApplication.setTodayTime(Integer.parseInt(myApplication.getDreamTime()));
-                        sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+Integer.parseInt(myApplication.getDreamTime()),nowtime});
+                        myApplication.setGoPain(false);
+                        myApplication.setTodayTime(myApplication.getTodayFinishTime());
+                        sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+myApplication.getTodayFinishTime(),nowtime});
                     }
                 }
             };
@@ -634,5 +636,15 @@ public class ZklActivity extends Activity{
         if (M<10){MM="0"+M;}else{MM=""+M;}
         if (S<10){SS="0"+S;}else{SS=""+S;}
         today_finishtime.setText(HH+":"+MM+":"+SS);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myApplication.setGoPain(false);
+        // 解除绑定
+        binder=null;
+        getApplicationContext().unbindService(connection);
+        stopTimer();
     }
 }

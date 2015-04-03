@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lodingdialog.LoadingDialog;
+import com.mydialog.LoadingDialog;
 import com.rao.MySchool.been.DatabaseHelper;
 
 /**

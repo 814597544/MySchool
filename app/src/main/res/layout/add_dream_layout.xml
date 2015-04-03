@@ -15,7 +15,7 @@
 
         <RelativeLayout
             android:id="@+id/deram_name_view"
-            android:layout_width="120dp"
+            android:layout_width="99dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="梦想名称"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textColor="#ABABAB"
                 />
         </RelativeLayout>
@@ -33,6 +33,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
+            android:textColor="@color/main_color"
+            android:textSize="13sp"
             android:layout_toRightOf="@+id/deram_name_view" />
 
     </RelativeLayout>
@@ -46,7 +48,7 @@
 
         <RelativeLayout
             android:id="@+id/need_time_view"
-            android:layout_width="135dp"
+            android:layout_width="99dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
@@ -54,8 +56,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="预计所需时间"
-                android:textSize="15sp"
+                android:text="所需时间"
+                android:textSize="13sp"
 
                 android:textColor="#ABABAB"
                 />
@@ -65,40 +67,20 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
+            android:numeric="integer"
             android:inputType="number"
+            android:textColor="@color/main_color"
+            android:textSize="13sp"
             android:layout_toRightOf="@+id/need_time_view" />
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_margin="12dp"
-        android:background="#ffffff">
-
-
-        <RelativeLayout
-            android:id="@+id/goal_view"
-            android:layout_width="140dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingLeft="15dp"
-            android:background="@drawable/xj">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="每天完成目标"
-                android:textSize="15sp"
-                android:textColor="#ABABAB"
-                />
-        </RelativeLayout>
-        <EditText
-            android:id="@+id/add_dream_avgtime"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@null"
-            android:inputType="number"
-            android:layout_toRightOf="@+id/goal_view" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小时"
+            android:textSize="13sp"
+            android:textColor="#ABABAB"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -111,11 +93,12 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:gravity="center_vertical"
             android:background="#ffffff" >
 
             <RelativeLayout
-                android:id="@+id/end_time_view"
-                android:layout_width="125dp"
+                android:id="@+id/time_view"
+                android:layout_width="99dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingLeft="12dp"
@@ -123,20 +106,38 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="预计实现时间"
-                    android:textSize="15sp"
+                    android:text="实现时间"
+                    android:textSize="13sp"
                     android:textColor="#ABABAB"
                     />
             </RelativeLayout>
-
+           <RelativeLayout
+                 android:id="@+id/dream_starttime"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:layout_toRightOf="@+id/time_view"
+                 android:layout_centerVertical="true"
+                 android:gravity="center_vertical">
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:id="@+id/start_rili"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:src="@drawable/rili"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/end_time_view"  />
+                android:layout_alignParentLeft="true"/>
 
+            <TextView
+                android:id="@+id/start_rili_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/main_color"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/start_rili"
+                android:layout_marginLeft="5dp"
+                />
 
+       </RelativeLayout>
 
         </RelativeLayout>
 
@@ -150,13 +151,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="至"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textColor="#ABABAB"
                 />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/dream_endtime"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="#ffffff"
@@ -165,17 +167,117 @@
 
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:id="@+id/end_rili"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:src="@drawable/rili"
+                />
+            <TextView
+                android:id="@+id/end_rili_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/main_color"
+                android:layout_marginLeft="5dp"
                 />
 
 
+
         </LinearLayout>
-
-
-
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="#ffffff">
+
+
+        <RelativeLayout
+            android:id="@+id/goal_view"
+            android:layout_width="99dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:background="@drawable/xj">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每天完成目标"
+                android:textSize="13sp"
+                android:textColor="#ABABAB"
+                />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/add_dream_avgtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/main_color"
+            android:textSize="13sp"
+            android:layout_centerInParent="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小时"
+            android:textSize="13sp"
+            android:textColor="#ABABAB"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="#ffffff">
+
+
+        <RelativeLayout
+            android:id="@+id/rest_view"
+            android:layout_width="99dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:background="@drawable/xj">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每天休息时间"
+                android:textSize="13sp"
+                android:textColor="#ABABAB"
+                />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/mest_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:background="@null"
+            android:textSize="13sp"
+            android:textColor="@color/main_color"
+            android:text="11"
+            android:numeric="integer"
+            android:inputType="number"
+            android:layout_toRightOf="@+id/rest_view" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小时"
+            android:textSize="13sp"
+            android:textColor="#ABABAB"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"

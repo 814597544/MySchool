@@ -1,4 +1,4 @@
-package com.lodingdialog;
+package com.mydialog;
 
 import android.app.Dialog;
 import android.content.Context;

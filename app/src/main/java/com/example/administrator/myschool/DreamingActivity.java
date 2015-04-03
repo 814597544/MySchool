@@ -36,7 +36,7 @@ import com.db.chart.view.YController;
 import com.db.chart.view.animation.Animation;
 import com.db.chart.view.animation.easing.BaseEasingMethod;
 import com.db.chart.view.animation.easing.quint.QuintEaseOut;
-import com.lodingdialog.LoadingDialog;
+import com.mydialog.LoadingDialog;
 import com.rao.MySchool.been.DatabaseHelper;
 import com.rao.MySchool.been.MyApplication;
 
@@ -171,7 +171,7 @@ public class DreamingActivity  extends Activity {
             while (cursor.moveToNext()) {
                 show_dreamName.setText(cursor.getString(0));
                 try {
-                    Dream=Integer.parseInt(cursor.getString(2))*100/24;
+                    Dream=(int)(Double.parseDouble(cursor.getString(2))*100/24);
                     Break=11*100/24;
                     Wast=(100-Dream-Break)/1;
                     tv_dream.setText("梦想"+Dream+"%");
@@ -185,6 +185,7 @@ public class DreamingActivity  extends Activity {
         show_dreamName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 sqLiteDatabase.execSQL("update mydream  set status=? where status=?;",new String[]{"1","0"});
                 myApplication.setStatus("1");
                 myApplication.setDreamTime("0");
@@ -220,16 +221,11 @@ public class DreamingActivity  extends Activity {
                                 dialog.dismiss();
                                 dialog1.show();
 
-                                sqLiteDatabase.execSQL("delete from mydream ;");
-                                sqLiteDatabase.execSQL("delete from mystatus ;");
-                                myApplication.setStatus("-1");
-                                myApplication.setDreamTime("0");
-                                myApplication.setBreakTime("0");
-                                myApplication.setWastTime("0");
-                                myApplication.setTodayTime(0);
                                 new Thread(){
                                     @Override
                                     public void run() {
+                                        sqLiteDatabase.execSQL("delete from mydream ;");
+                                        sqLiteDatabase.execSQL("delete from mystatus ;");
                                         Message msg=new Message();
                                         msg.what=1;
                                         handler.sendMessageDelayed(msg, 2000);
@@ -443,6 +439,11 @@ public class DreamingActivity  extends Activity {
                         "删除成功", Toast.LENGTH_SHORT).show();
 
       /* ------发送广播------*/
+                myApplication.setStatus("-1");
+                myApplication.setDreamTime("0");
+                myApplication.setBreakTime("0");
+                myApplication.setWastTime("0");
+                myApplication.setTodayTime(0);
                 myApplication.setZklWhter("delete");
                 Intent intent1 = new Intent();
                 intent1.setAction("com.rao.myproject.Status");

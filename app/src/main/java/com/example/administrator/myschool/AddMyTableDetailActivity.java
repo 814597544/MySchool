@@ -9,16 +9,12 @@ import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.lodingdialog.LoadingDialog;
+import com.mydialog.LoadingDialog;
 import com.rao.MySchool.been.DatabaseHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/3/9.
