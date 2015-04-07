@@ -11,8 +11,17 @@ public class MyApplication extends Application{
     String DreamTime;
     String BreakTime;
     String WastTime;
+    String TodayDate;
     int TodayFinishTime=0,todayTime=0,allTime=0,proGress;
     boolean GoPain=false;
+
+    public String getTodayDate() {
+        return TodayDate;
+    }
+
+    public void setTodayDate(String todayDate) {
+        TodayDate = todayDate;
+    }
 
     public int getProGress() {
         return proGress;

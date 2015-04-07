@@ -45,7 +45,7 @@ public class ZklActivity extends Activity{
     private int progress2 = 0,progress1=0;
     private CircularBarPager mCircularBarPager;
     TextView titleName,zkl_show_dream,zkl_show_wast,zkl_show_break,today_finishtime;
-    String shownum = null,nowtime,MyDreamTime=null;
+    String shownum = null,MyDreamTime=null;
 
 
     DatabaseHelper databaseHelper;
@@ -94,6 +94,7 @@ public class ZklActivity extends Activity{
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
         myApplication= (MyApplication) getApplication();
+        getNowTime();
         today_finishtime= (TextView) findViewById(R.id.today_finishtime);
 
         /*--------广播更新----------*/
@@ -269,12 +270,11 @@ public class ZklActivity extends Activity{
     public  void stopMyDream(){
         start_dream.setVisibility(View.VISIBLE);
         stop_dream.setVisibility(View.GONE);
-        getNowTime();
 
         Cursor cursor2 = sqLiteDatabase.rawQuery("select * from mystatus ;",null);
         if (cursor2.getCount()==0){
             sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
-                    new Object[]{nowtime,""+binder.getCount()});
+                    new Object[]{myApplication.getTodayDate(),""+binder.getCount()});
             myApplication.setTodayTime(binder.getCount());
             Log.e("stop------","stopn");
 
@@ -284,9 +284,9 @@ public class ZklActivity extends Activity{
         }else{
 
             while (cursor2.moveToNext()) {
-                if ( cursor2.getString(0).equals(nowtime)){
+                if ( cursor2.getString(0).equals(myApplication.getTodayDate())){
                     TodayFinishTime=Integer.parseInt(cursor2.getString(1));
-                    sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+(TodayFinishTime+binder.getCount()),nowtime});
+                    sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+(TodayFinishTime+binder.getCount()),myApplication.getTodayDate()});
                     myApplication.setTodayTime(TodayFinishTime + binder.getCount());
                     // 解除绑定
                     binder=null;
@@ -296,9 +296,9 @@ public class ZklActivity extends Activity{
                 }
 
             }
-            if ( !cursor2.getString(0).equals(nowtime)){
+            if ( !cursor2.getString(0).equals(myApplication.getTodayDate())){
                 sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
-                        new Object[]{nowtime,""+binder.getCount()});
+                        new Object[]{myApplication.getTodayDate(),""+binder.getCount()});
 
                 myApplication.setTodayTime(binder.getCount());
                 Log.e("stop------","stopi");
@@ -341,8 +341,7 @@ public class ZklActivity extends Activity{
 
     /*-----计算每天的进度条与时间---------*/
     private void showAvg() {
-        getNowTime();
-        cursor3 = sqLiteDatabase.rawQuery("select time from mystatus where date=?;",new String[]{nowtime});
+        cursor3 = sqLiteDatabase.rawQuery("select time from mystatus where date=?;",new String[]{myApplication.getTodayDate()});
         if (cursor3.getCount()!=0){
 
             Cursor c = sqLiteDatabase.rawQuery("select status from mydream ;",null);
@@ -385,10 +384,8 @@ public class ZklActivity extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
-      /*  findView();
-        updateProgressTwo();
-        initViews();*/
-
+      /*  getNowTime();
+        Log.e("time--",myApplication.getTodayDate());*/
     }
 
     private void initViews(){
@@ -474,11 +471,13 @@ public class ZklActivity extends Activity{
                         start_dream.setVisibility(View.GONE);
                         stop_dream.setVisibility(View.VISIBLE);
                         mCircularBarPager.setVisibility(View.VISIBLE);
+                        mCircularBarPager.getCircularBar().animateProgress(0, 0, 1000);
                     }else{
                         add.setVisibility(View.GONE);
                         start_dream.setVisibility(View.VISIBLE);
                         stop_dream.setVisibility(View.GONE);
                         mCircularBarPager.setVisibility(View.VISIBLE);
+                        mCircularBarPager.getCircularBar().animateProgress(0, 0, 1000);
                     }
 
                 } else if (shownum == "1" || "1".equals(shownum)) {
@@ -550,6 +549,7 @@ public class ZklActivity extends Activity{
                     stopTimer();
                 }
                 myApplication.setProGress(0);
+                AllFinish=0;
                 mCircularBarPager.getCircularBar().animateProgress(0, 0, 1000);
                 run1.setVisibility(View.VISIBLE);
                 run2.setVisibility(View.GONE);
@@ -632,10 +632,12 @@ public class ZklActivity extends Activity{
             }
 }
 
-    public void getNowTime() {
+
+  public void getNowTime() {
         SimpleDateFormat formatter   =   new   SimpleDateFormat   ("yyyy-MM-dd");
         Date curDate   =   new   Date(System.currentTimeMillis());//获取当前时间
-        nowtime   =   formatter.format(curDate);
+        String nowtime   =   formatter.format(curDate);
+        myApplication.setTodayDate(nowtime);
     }
 
     //启动定时器
@@ -664,12 +666,12 @@ public class ZklActivity extends Activity{
                         myApplication.setZklWhter("dreamS");
                         myApplication.setGoPain(false);
                         myApplication.setTodayTime(myApplication.getTodayFinishTime());
-                        Cursor cursorm = sqLiteDatabase.rawQuery("select * from mystatus ;",null);
+                        Cursor cursorm = sqLiteDatabase.rawQuery("select time from mystatus where date=?;",new String[]{myApplication.getTodayDate()});
                         if (cursorm.getCount()==0){
                             sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
-                                    new Object[]{nowtime,""+myApplication.getTodayFinishTime()});
+                                    new Object[]{myApplication.getTodayDate(),""+myApplication.getTodayFinishTime()});
                         }else{
-                            sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+myApplication.getTodayFinishTime(),nowtime});
+                            sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+myApplication.getTodayFinishTime(),myApplication.getTodayDate()});
                         }
 
                     }
