@@ -11,8 +11,24 @@ public class MyApplication extends Application{
     String DreamTime;
     String BreakTime;
     String WastTime;
-    int TodayFinishTime=0,todayTime=0;
+    int TodayFinishTime=0,todayTime=0,allTime=0,proGress;
     boolean GoPain=false;
+
+    public int getProGress() {
+        return proGress;
+    }
+
+    public void setProGress(int proGress) {
+        this.proGress = proGress;
+    }
+
+    public int getAllTime() {
+        return allTime;
+    }
+
+    public void setAllTime(int allTime) {
+        this.allTime = allTime;
+    }
 
     public boolean getGoPain() {
         return GoPain;

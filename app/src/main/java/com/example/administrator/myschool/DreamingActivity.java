@@ -192,7 +192,7 @@ public class DreamingActivity  extends Activity {
                 myApplication.setBreakTime("0");
                 myApplication.setWastTime("0");
                 myApplication.setTodayTime(0);
-                myApplication.setZklWhter("df");
+                myApplication.setZklWhter("delete");
 
                 Intent intent1 = new Intent();
                 intent1.setAction("com.rao.myproject.Status");

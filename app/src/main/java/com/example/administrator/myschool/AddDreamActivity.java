@@ -44,7 +44,7 @@ public class AddDreamActivity extends Activity{
     private MyApplication myApplication;
     private static final int START_RILI=1;
     private static final int END_RILI=2;
-    private String startData,endData;
+    private String startData=null,endData=null;
     private int betweenDays;
     double angt=8;
 
@@ -68,7 +68,7 @@ public class AddDreamActivity extends Activity{
                     angt=Double.parseDouble(add_dream_alltime.getText().toString())/betweenDays;
                 }catch (Exception e){}
 
-                if (dreamName.equals("")||allTime.equals("")){
+                if (dreamName.equals("")||allTime.equals("")||startData==null||endData==null){
                     Toast.makeText(getApplicationContext(),
                             "请补全信息", Toast.LENGTH_SHORT).show();
                 }else if(angt<=0||angt>12){
@@ -109,7 +109,7 @@ public class AddDreamActivity extends Activity{
                     show(END_RILI);
                 }else
                 {
-                    Toast.makeText(getApplicationContext(),"先编辑所需时间",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"请先编辑所需时间",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -157,6 +157,7 @@ public class AddDreamActivity extends Activity{
                 myApplication.setBreakTime("11");
                 myApplication.setZklWhter("dreamS");
                 myApplication.setWastTime(13 - format(angt)+"");
+                myApplication.setAllTime(Integer.parseInt(allTime));
                 Intent intent = new Intent();
                 intent.setAction("com.rao.myproject.Status");
                 sendBroadcast(intent);
