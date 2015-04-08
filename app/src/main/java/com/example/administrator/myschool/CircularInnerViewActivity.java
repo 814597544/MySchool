@@ -26,11 +26,16 @@ package com.example.administrator.myschool;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.rao.MySchool.inteface.UpdateZKL;
 
 /**
  * Created by oliviergoutay on 2015/3/5.
  */
-public class CircularInnerViewActivity extends LinearLayout {
+public class CircularInnerViewActivity extends LinearLayout implements UpdateZKL {
+
+    TextView value_info_textview,user_bottom_textview;
     /**
      * TAG for logging
      */
@@ -46,7 +51,19 @@ public class CircularInnerViewActivity extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final LinearLayout mainV = (LinearLayout) inflater.inflate(R.layout.view_user_info, this);
 
+        value_info_textview= (TextView) findViewById(R.id.value_info_textview);
+        user_bottom_textview= (TextView) findViewById(R.id.user_bottom_textview);
+
         //TODO init view
     }
 
+    @Override
+    public void updateName(String name) {
+        user_bottom_textview.setText(name);
+    }
+
+    @Override
+    public void updatePer(String per) {
+        value_info_textview.setText(per);
+    }
 }

@@ -26,6 +26,7 @@ import com.nineoldandroids.animation.Animator;
 import com.rao.MySchool.adapter.CircularPagerAdapter;
 import com.rao.MySchool.been.DatabaseHelper;
 import com.rao.MySchool.been.MyApplication;
+import com.rao.MySchool.inteface.UpdateZKL;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.text.SimpleDateFormat;
@@ -60,6 +61,8 @@ public class ZklActivity extends Activity{
     int TodayFinishTime=0,AllFinish=0;
     private static final int BAR_ANIMATION_TIME = 1000;
 
+    UpdateZKL mstatus;
+    CircularInnerViewActivity mcurActy;
     Cursor cursor3;
     MyBindService.MyBinder binder;
 
@@ -67,11 +70,11 @@ public class ZklActivity extends Activity{
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.e("zkl", "--Service Disconnected--");
+             Log.e("zkl", "--Service Disconnected--");
         }
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.e("zkl", "--Service Connected--");
+             Log.e("zkl", "--Service Connected--");
             // 取得Service对象中的Binder对象
             binder = (MyBindService.MyBinder) service;
         }
@@ -83,9 +86,8 @@ public class ZklActivity extends Activity{
         setContentView(R.layout.activity_zkl);
 
         findView();
-        updateProgressTwo();
         initViews();
-
+        updateProgressTwo();
     }
 
 
@@ -254,7 +256,7 @@ public class ZklActivity extends Activity{
   public void startMyDream(){
     start_dream.setVisibility(View.GONE);
     stop_dream.setVisibility(View.VISIBLE);
-
+    mstatus.updateName("暂停");
     // 绑定服务到当前activity中
     final Intent intent = new Intent();
     // 指定开启服务的action
@@ -270,6 +272,8 @@ public class ZklActivity extends Activity{
     public  void stopMyDream(){
         start_dream.setVisibility(View.VISIBLE);
         stop_dream.setVisibility(View.GONE);
+        mstatus.updateName("开始");
+        AllFinish+=binder.getCount();
 
         Cursor cursor2 = sqLiteDatabase.rawQuery("select * from mystatus ;",null);
         if (cursor2.getCount()==0){
@@ -320,6 +324,7 @@ public class ZklActivity extends Activity{
         progressTwo.setProgress(progress2);
         Log.e("zkl","progress1="+progress1);
         mCircularBarPager.getCircularBar().animateProgress(0, progress1, 1000);
+        mstatus.updatePer(progress1+"%");
         myApplication.setTodayTime(TodayFinishTime);
         updateProgressTwoColor();
 
@@ -392,9 +397,10 @@ public class ZklActivity extends Activity{
     private void initViews(){
 
         View[] views = new View[1];
-        views[0] = new CircularInnerViewActivity(this);
         //views[1] = new CircularInnerViewActivity(this);
-
+        mcurActy=new CircularInnerViewActivity(this);
+        views[0] = mcurActy;
+        mstatus=(UpdateZKL)mcurActy;
         mCircularBarPager.setViewPagerAdapter(new CircularPagerAdapter(this, views));
 
         ViewPager viewPager = mCircularBarPager.getViewPager();
@@ -457,6 +463,7 @@ public class ZklActivity extends Activity{
             if ("time".equals(myApplication.getZklWhter())) {
                 progressTwo.setProgress(progress2);
                 mCircularBarPager.getCircularBar().animateProgress(progress1, myApplication.getProGress(), 1000);
+                mstatus.updatePer(myApplication.getProGress()+"%");
                 updateProgressTwoColor();
                 todayFinish(myApplication.getTodayFinishTime());
 
@@ -479,6 +486,7 @@ public class ZklActivity extends Activity{
                         stop_dream.setVisibility(View.GONE);
                         mCircularBarPager.setVisibility(View.VISIBLE);
                         mCircularBarPager.getCircularBar().animateProgress(0, 0, 1000);
+                        mstatus.updateName("开始");
                     }
 
                 } else if (shownum == "1" || "1".equals(shownum)) {
@@ -552,6 +560,7 @@ public class ZklActivity extends Activity{
                 myApplication.setProGress(0);
                 AllFinish=0;
                 mCircularBarPager.getCircularBar().animateProgress(0, 0, 1000);
+                mstatus.updatePer("0%");
                 run1.setVisibility(View.VISIBLE);
                 run2.setVisibility(View.GONE);
                 run3.setVisibility(View.GONE);
