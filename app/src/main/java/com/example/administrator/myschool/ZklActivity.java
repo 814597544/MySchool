@@ -262,9 +262,9 @@ public class ZklActivity extends Activity{
 
                 /*@@@@@@@在普通的activity中绑定和解绑bindservice时用bindservice，但在Tab的activity中要用getApplicationContext().bindService@@@@@@@*/
     getApplicationContext().bindService(intent, connection, Context.BIND_AUTO_CREATE);
-    Log.e("start------","start");
+     Log.e("start------","start");
      myApplication.setGoPain(true);
-    startTimer();
+     startTimer();
     }
 
     public  void stopMyDream(){
@@ -282,8 +282,9 @@ public class ZklActivity extends Activity{
             binder=null;
             getApplicationContext().unbindService(connection);
         }else{
-
+          String lastDate=null;
             while (cursor2.moveToNext()) {
+                lastDate=cursor2.getString(0);
                 if ( cursor2.getString(0).equals(myApplication.getTodayDate())){
                     TodayFinishTime=Integer.parseInt(cursor2.getString(1));
                     sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+(TodayFinishTime+binder.getCount()),myApplication.getTodayDate()});
@@ -296,7 +297,7 @@ public class ZklActivity extends Activity{
                 }
 
             }
-            if ( !cursor2.getString(0).equals(myApplication.getTodayDate())){
+            if ( !lastDate.equals(myApplication.getTodayDate())){
                 sqLiteDatabase.execSQL("insert into mystatus(date,time)  values(?,?);",
                         new Object[]{myApplication.getTodayDate(),""+binder.getCount()});
 
@@ -308,8 +309,8 @@ public class ZklActivity extends Activity{
                 getApplicationContext().unbindService(connection);
             }
         }
-        myApplication.setGoPain(false);
-        stopTimer();
+           myApplication.setGoPain(false);
+           stopTimer();
     }
 
     private void updateProgressTwo() {

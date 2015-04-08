@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -101,10 +102,14 @@ public class DreamingActivity  extends Activity {
     /**
      * Line
      */
-    private final static int LINE_MAX = 5;
+    private final static int LINE_MAX = 13;
     private final static int LINE_MIN = 0;
-    private final static String[] lineLabels = {"2/18", "2/20", "2/22", "2/24", "2/26", "2/28"};
-    private final static float[][] lineValues = { {1f, 2f, 2f, 3f, 1f, 5f}};
+   /* private final static String[] lineLabels = {"2/18", "2/19","2/20","2/21","2/22","2/23", "2/24", "2/25","2/26", "2/28"};
+    private final static float[][] lineValues = { {1f,3f,4f,1f,2.5f, 2f, 2f, 3f, 1f, 5f}};*/
+    String[] lineLabels;
+    float[][] lineValues ;
+    List<String> MyDate = new ArrayList();
+    List<String> MyTime = new ArrayList();
     private static LineChartView mLineChart;
     private Paint mLineGridPaint;
     private TextView mLineTooltip;
@@ -138,6 +143,7 @@ public class DreamingActivity  extends Activity {
         databaseHelper = new DatabaseHelper(this);
         sqLiteDatabase = databaseHelper.getReadableDatabase();
         myApplication= (MyApplication) getApplication();
+        chartData();
 
         titleName= (TextView) findViewById(R.id.title);
         titleName.setText("梦想图表");
@@ -280,11 +286,28 @@ public class DreamingActivity  extends Activity {
 
     }
 
-
-
-
-
-
+    /*-------加载图表数据-------*/
+    private void chartData() {
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from mystatus ;", null);
+        if (cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                MyDate.add(cursor.getString(0));
+                MyTime.add(cursor.getString(1));
+            }
+            lineLabels=new String[MyDate.size()];
+            lineValues=new float[1][MyTime.size()];
+            for (int i=0;i<MyDate.size();i++){
+               lineLabels[i]=MyDate.get(i).substring(5);
+               double time=(double)(Float.parseFloat(MyTime.get(i))/3600);
+               lineValues[0][i]=(float)time;
+            }
+        }else{
+            lineLabels = new String[1];
+            lineLabels[0]="";
+            lineValues =new float[1][1];
+            lineValues[0][0]=0;
+        }
+    }
 
 
 
