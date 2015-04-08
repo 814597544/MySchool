@@ -12,8 +12,26 @@ public class MyApplication extends Application{
     String BreakTime;
     String WastTime;
     String TodayDate;
+    String EndTime,StartTime;
     int TodayFinishTime=0,todayTime=0,allTime=0,proGress;
     boolean GoPain=false;
+
+
+    public String getStartTime() {
+        return StartTime;
+    }
+
+    public void setStartTime(String startTime) {
+        StartTime = startTime;
+    }
+
+    public String getEndTime() {
+        return EndTime;
+    }
+
+    public void setEndTime(String endTime) {
+        EndTime = endTime;
+    }
 
     public String getTodayDate() {
         return TodayDate;

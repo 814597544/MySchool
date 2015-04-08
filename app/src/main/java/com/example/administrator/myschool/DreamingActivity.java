@@ -189,7 +189,7 @@ public class DreamingActivity  extends Activity {
         }
 
 
-        show_dreamName.setOnClickListener(new View.OnClickListener() {
+      /*  show_dreamName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -205,7 +205,7 @@ public class DreamingActivity  extends Activity {
                 intent1.setAction("com.rao.myproject.Status");
                 sendBroadcast(intent1);
             }
-        });
+        });*/
 
 /*-------删除梦想--------*/
         title_right= (TextView) findViewById(R.id.title_right);

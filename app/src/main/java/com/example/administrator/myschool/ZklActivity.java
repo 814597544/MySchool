@@ -97,6 +97,7 @@ public class ZklActivity extends Activity{
         sqLiteDatabase = databaseHelper.getReadableDatabase();
         myApplication= (MyApplication) getApplication();
         getNowTime();
+        getDreamTime();
         today_finishtime= (TextView) findViewById(R.id.today_finishtime);
 
         /*--------广播更新----------*/
@@ -456,6 +457,27 @@ public class ZklActivity extends Activity{
             }
         });
     }
+
+    public void getDreamTime() {
+        Cursor cos = sqLiteDatabase.rawQuery("select * from mydream ;",null);
+        while (cos.moveToNext()) {
+            myApplication.setEndTime(cos.getString(4));
+            myApplication.setEndTime(cos.getString(4));
+        }
+    }
+    public void  isEnd(){
+        sqLiteDatabase.execSQL("update mydream  set status=? where status=?;",new String[]{"1","0"});
+        myApplication.setStatus("1");
+        myApplication.setDreamTime("0");
+        myApplication.setBreakTime("0");
+        myApplication.setWastTime("0");
+        myApplication.setTodayTime(0);
+        myApplication.setZklWhter("delete");
+
+        Intent intent1 = new Intent();
+        intent1.setAction("com.rao.myproject.Status");
+        sendBroadcast(intent1);
+    }
     /*广播接受收器*/
     public class MyReceiver extends BroadcastReceiver {
         @Override
@@ -665,7 +687,7 @@ public class ZklActivity extends Activity{
                 /* ------发送广播------*/
                     myApplication.setZklWhter("time");
                     myApplication.setTodayFinishTime(myApplication.getTodayTime()+binder.getCount());
-
+                    //如果完成当天的目标，则停止计时并自动保存数据
                     if (myApplication.getTodayFinishTime()>3600*Double.parseDouble(myApplication.getDreamTime())){
                         // 解除绑定
                         binder=null;
@@ -683,7 +705,11 @@ public class ZklActivity extends Activity{
                         }else{
                             sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+myApplication.getTodayFinishTime(),myApplication.getTodayDate()});
                         }
-
+                       // 如果是梦想的最后一天，梦想结束并自动保存数据
+                        if (myApplication.getTodayDate().equals(myApplication.getEndTime())){
+                            isEnd();
+                            myApplication.setStatus("1");
+                        }
                     }
 
                     Log.e("$$$$$$$","progress2="+progress2);
