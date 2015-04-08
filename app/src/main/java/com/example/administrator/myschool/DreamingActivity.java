@@ -102,14 +102,15 @@ public class DreamingActivity  extends Activity {
     /**
      * Line
      */
-    private final static int LINE_MAX = 13;
-    private final static int LINE_MIN = 0;
+     int LINE_MAX = 13;
+     int LINE_MIN = 0;
    /* private final static String[] lineLabels = {"2/18", "2/19","2/20","2/21","2/22","2/23", "2/24", "2/25","2/26", "2/28"};
     private final static float[][] lineValues = { {1f,3f,4f,1f,2.5f, 2f, 2f, 3f, 1f, 5f}};*/
     String[] lineLabels;
     float[][] lineValues ;
     List<String> MyDate = new ArrayList();
     List<String> MyTime = new ArrayList();
+    float MAX=0,MIN=13f;
     private static LineChartView mLineChart;
     private Paint mLineGridPaint;
     private TextView mLineTooltip;
@@ -301,6 +302,34 @@ public class DreamingActivity  extends Activity {
                double time=(double)(Float.parseFloat(MyTime.get(i))/3600);
                lineValues[0][i]=(float)time;
             }
+
+          /*---------优化图表纵坐标---------*/
+            MIN=lineValues[0][0];
+            MAX=lineValues[0][0];
+         for (int j=1;j<lineValues.length;j++){
+               if (lineValues[0][j]<MIN){
+                   MIN=lineValues[0][j];
+               }
+             if (lineValues[0][j]>MAX){
+                 MAX=lineValues[0][j];
+             }
+         }
+      if (MIN>=0&&MIN<4){
+          LINE_MIN=0;
+       }else if (MIN>=4&&MIN<8){
+          LINE_MIN=4;
+      }else {
+          LINE_MIN=8;
+      }
+
+     if (MAX>=0&&MAX<4){
+          LINE_MAX=4;
+      }else if (MAX>=4&&MAX<8){
+          LINE_MAX=8;
+      }else{
+          LINE_MAX=13;
+        }
+
         }else{
             lineLabels = new String[1];
             lineLabels[0]="";
