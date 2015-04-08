@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -58,7 +59,7 @@ public class ZklActivity extends Activity{
 
     private TimerTask task = null;																			//定时器任务（用于首页Gallery切换）
     private Timer time = null	;
-    int TodayFinishTime=0,AllFinish=0;
+    int TodayFinishTime=0,AllFinish=0,sTime=-1,eTime=1,nTime=0;
     private static final int BAR_ANIMATION_TIME = 1000;
 
     UpdateZKL mstatus;
@@ -97,7 +98,10 @@ public class ZklActivity extends Activity{
         sqLiteDatabase = databaseHelper.getReadableDatabase();
         myApplication= (MyApplication) getApplication();
         getNowTime();
-        getDreamTime();
+        gainDreamTime();
+        if (nTime>eTime){
+            isEnd();
+        }
         today_finishtime= (TextView) findViewById(R.id.today_finishtime);
 
         /*--------广播更新----------*/
@@ -242,7 +246,11 @@ public class ZklActivity extends Activity{
         start_dream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             startMyDream();
+             if (nTime<sTime){
+               Toast.makeText(getApplicationContext(), "亲，未到开始日期，不能开始梦想！", Toast.LENGTH_SHORT).show();
+             }else{
+                 startMyDream();
+             }
             }
         });
         stop_dream.setOnClickListener(new View.OnClickListener() {
@@ -458,13 +466,30 @@ public class ZklActivity extends Activity{
         });
     }
 
-    public void getDreamTime() {
+    public void gainDreamTime() {
         Cursor cos = sqLiteDatabase.rawQuery("select * from mydream ;",null);
+        if (cos.getCount()!=0){
         while (cos.moveToNext()) {
-            myApplication.setEndTime(cos.getString(4));
+            myApplication.setStartTime(cos.getString(3));
             myApplication.setEndTime(cos.getString(4));
         }
-    }
+        String s="",e="",n="";
+        String[] st=myApplication.getStartTime().split("-");
+        String[] et=myApplication.getEndTime().split("-");
+        String[] nt=myApplication.getTodayDate().split("-");
+        for (int i=0;i<st.length;i++){
+            s+=st[i];
+            e+=et[i];
+            n+=nt[i];
+        }
+
+        sTime=Integer.parseInt(s);
+        eTime=Integer.parseInt(e);
+        nTime=Integer.parseInt(n);
+          Log.e("sTime",sTime+"");
+           Log.e("eTime",eTime+"");
+            Log.e("nTime",nTime+"");
+    }}
     public void  isEnd(){
         sqLiteDatabase.execSQL("update mydream  set status=? where status=?;",new String[]{"1","0"});
         myApplication.setStatus("1");
