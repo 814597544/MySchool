@@ -142,6 +142,7 @@ public class AddDreamActivity extends Activity{
         add_finish= (Button) findViewById(R.id.add_finish);
     }
 
+
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -158,6 +159,7 @@ public class AddDreamActivity extends Activity{
                 myApplication.setZklWhter("dreamS");
                 myApplication.setWastTime(13 - format(angt)+"");
                 myApplication.setAllTime(Integer.parseInt(allTime));
+
                 Intent intent = new Intent();
                 intent.setAction("com.rao.myproject.Status");
                 sendBroadcast(intent);

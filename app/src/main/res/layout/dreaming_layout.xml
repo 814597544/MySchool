@@ -9,17 +9,12 @@
     >
     <include layout="@layout/home_head"/>
 
-    <!--<ScrollView
-        android:layout_width="match_parent"
-        android:background="#f8ffffff"
-        android:layout_height="match_parent"
-        android:fillViewport="false"
-        >-->
+
 <LinearLayout
     android:id="@+id/no_dream"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:visibility="visible"
+    android:visibility="gone"
     android:gravity="center"
     android:orientation="vertical">
 <ImageView
@@ -38,7 +33,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/have_dream"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -156,13 +151,16 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="1">
 
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:orientation="horizontal"
-                            android:gravity="bottom|center_horizontal"
+                            android:gravity="bottom"
+                            android:layout_marginLeft="10dp"
                             android:layout_weight="1">
                             <TextView
                                 android:id="@+id/tv_dream"
@@ -170,7 +168,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="#19C5EB"
                                 android:text="梦想 0%"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 />
 
                         </LinearLayout>
@@ -179,7 +177,8 @@
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:orientation="horizontal"
-                            android:gravity="center_vertical|center_horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
                             android:layout_weight="1">
                             <TextView
                                 android:id="@+id/tv_break"
@@ -187,7 +186,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="#1FB88A"
                                 android:text="休息 0%"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 />
 
                         </LinearLayout>
@@ -196,7 +195,8 @@
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:orientation="horizontal"
-                            android:gravity="top|center_horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
                             android:layout_weight="1">
                             <TextView
                                 android:id="@+id/tv_wast"
@@ -204,11 +204,116 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="#F85737"
                                 android:text="虚度 0%"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 />
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/sum_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/line_grid"
+                                android:text="所需时间 0h"
+                                android:textSize="10sp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/finish_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/line_grid"
+                                android:text="奋斗时间 0h"
+                                android:textSize="10sp"
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/avg_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/line_grid"
+                                android:text="每天目标 0h"
+                                android:textSize="10sp"
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/dm_status"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/line_grid"
+                                android:text="梦想状态 进行中"
+                                android:textSize="10sp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/s_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/line_grid"
+                                android:text="开始时间 2015-04-08"
+                                android:textSize="10sp"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:gravity="top"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/e_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/line_grid"
+                                android:text="结束时间 2015-04-08"
+                                android:textSize="10sp"
+                                />
+
+                        </LinearLayout>
 
 
                     </LinearLayout>

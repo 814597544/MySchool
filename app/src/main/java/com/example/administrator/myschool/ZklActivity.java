@@ -290,10 +290,6 @@ public class ZklActivity extends Activity{
                     new Object[]{myApplication.getTodayDate(),""+binder.getCount()});
             myApplication.setTodayTime(binder.getCount());
             Log.e("stop------","stopn");
-
-            // 解除绑定
-            binder=null;
-            getApplicationContext().unbindService(connection);
         }else{
           String lastDate=null;
             while (cursor2.moveToNext()) {
@@ -302,9 +298,7 @@ public class ZklActivity extends Activity{
                     TodayFinishTime=Integer.parseInt(cursor2.getString(1));
                     sqLiteDatabase.execSQL("update mystatus set  time =? where date=? ;", new String[]{""+(TodayFinishTime+binder.getCount()),myApplication.getTodayDate()});
                     myApplication.setTodayTime(TodayFinishTime + binder.getCount());
-                    // 解除绑定
-                    binder=null;
-                    getApplicationContext().unbindService(connection);
+
                     Log.e("stop------", "stopu");
                     break;
                 }
@@ -316,12 +310,12 @@ public class ZklActivity extends Activity{
 
                 myApplication.setTodayTime(binder.getCount());
                 Log.e("stop------","stopi");
-
-                // 解除绑定
-                binder=null;
-                getApplicationContext().unbindService(connection);
             }
         }
+           // 解除绑定
+           binder=null;
+           getApplicationContext().unbindService(connection);
+
            myApplication.setGoPain(false);
            stopTimer();
     }
@@ -507,6 +501,7 @@ public class ZklActivity extends Activity{
     public class MyReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(final Context context, Intent intent) {
+
             if ("time".equals(myApplication.getZklWhter())) {
                 progressTwo.setProgress(progress2);
                 mCircularBarPager.getCircularBar().animateProgress(progress1, myApplication.getProGress(), 1000);
@@ -515,6 +510,7 @@ public class ZklActivity extends Activity{
                 todayFinish(myApplication.getTodayFinishTime());
 
             }else if ("dreamS".equals(myApplication.getZklWhter())) {
+                gainDreamTime();
                 shownum = myApplication.getStatus();
                 zkl_show_dream.setText(myApplication.getDreamTime() + "小时");
                 zkl_show_break.setText(myApplication.getBreakTime() + "小时");
@@ -604,6 +600,7 @@ public class ZklActivity extends Activity{
                     getApplicationContext().unbindService(connection);
                     stopTimer();
                 }
+                gainDreamTime();
                 myApplication.setProGress(0);
                 AllFinish=0;
                 mCircularBarPager.getCircularBar().animateProgress(0, 0, 1000);
@@ -780,9 +777,7 @@ public class ZklActivity extends Activity{
         super.onDestroy();
         myApplication.setGoPain(false);
         if (binder!=null){
-        // 解除绑定
-        binder=null;
-        getApplicationContext().unbindService(connection);
-        stopTimer();}
+        stopMyDream();
+     }
     }
 }

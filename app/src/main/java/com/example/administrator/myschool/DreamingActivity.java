@@ -51,6 +51,7 @@ import java.util.List;
 public class DreamingActivity  extends Activity {
     TextView titleName,show_dreamName,title_right;
     TextView tv_dream,tv_break,tv_wast;
+    TextView sum_time,finish_time,avg_time,dm_status,s_time,e_time;
     LinearLayout title_return,finish,have_dream,no_dream;
     MagnificentChart magnificentChart;
     DatabaseHelper databaseHelper;
@@ -165,47 +166,14 @@ public class DreamingActivity  extends Activity {
         tv_dream= (TextView) findViewById(R.id.tv_dream);
         tv_break= (TextView) findViewById(R.id.tv_break);
         tv_wast= (TextView) findViewById(R.id.tv_wast);
-        Cursor cursor = sqLiteDatabase.rawQuery("select * from mydream ;",null);
-        if (cursor.getCount()==0){
-            finish.setVisibility(View.GONE);
-            have_dream.setVisibility(View.GONE);
-            no_dream.setVisibility(View.VISIBLE);
-        }else {
-            finish.setVisibility(View.VISIBLE);
-            have_dream.setVisibility(View.VISIBLE);
-            no_dream.setVisibility(View.GONE);
+        sum_time= (TextView) findViewById(R.id.sum_time);
+        finish_time= (TextView) findViewById(R.id.finish_time);
+        avg_time= (TextView) findViewById(R.id.avg_time);
+        dm_status= (TextView) findViewById(R.id.dm_status);
+        s_time= (TextView) findViewById(R.id.s_time);
+        e_time= (TextView) findViewById(R.id.e_time);
+        showNum();                 
 
-            while (cursor.moveToNext()) {
-                show_dreamName.setText(cursor.getString(0));
-                try {
-                    Dream=(int)(Double.parseDouble(cursor.getString(2))*100/24);
-                    Break=11*100/24;
-                    Wast=(100-Dream-Break)/1;
-                    tv_dream.setText("梦想"+Dream+"%");
-                    tv_wast.setText("虚度"+Wast+"%");
-                    tv_break.setText("休息"+Break+"%");
-                }catch (Exception e){}
-            }
-        }
-
-
-      /*  show_dreamName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                sqLiteDatabase.execSQL("update mydream  set status=? where status=?;",new String[]{"1","0"});
-                myApplication.setStatus("1");
-                myApplication.setDreamTime("0");
-                myApplication.setBreakTime("0");
-                myApplication.setWastTime("0");
-                myApplication.setTodayTime(0);
-                myApplication.setZklWhter("delete");
-
-                Intent intent1 = new Intent();
-                intent1.setAction("com.rao.myproject.Status");
-                sendBroadcast(intent1);
-            }
-        });*/
 
 /*-------删除梦想--------*/
         title_right= (TextView) findViewById(R.id.title_right);
@@ -285,6 +253,50 @@ public class DreamingActivity  extends Activity {
         initLineChart();
         updateLineChart();
 
+    }
+
+    /*---------加载梦想信息-----------*/
+    private void showNum() {
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from mydream ;",null);
+        if (cursor.getCount()==0){
+            finish.setVisibility(View.GONE);
+            have_dream.setVisibility(View.GONE);
+            no_dream.setVisibility(View.VISIBLE);
+        }else {
+            finish.setVisibility(View.VISIBLE);
+            have_dream.setVisibility(View.VISIBLE);
+            no_dream.setVisibility(View.GONE);
+
+            while (cursor.moveToNext()) {
+                show_dreamName.setText(cursor.getString(0));
+                sum_time.setText("所需时间 "+cursor.getString(1)+"h");
+                avg_time.setText("每天目标 "+cursor.getString(2)+"h");
+                s_time.setText("开始时间 "+cursor.getString(3));
+                e_time.setText("结束时间 "+cursor.getString(4));
+                if ("0".equals(cursor.getString(5))){
+                    dm_status.setText("梦想状态 进行中");
+                }else {
+                    dm_status.setText("梦想状态 已结束");
+                }
+
+                Cursor curt = sqLiteDatabase.rawQuery("select time from mystatus ;",null);
+                float finishTime=0;
+                while (curt.moveToNext()) {
+                    try {
+                    finishTime+=(Float.parseFloat(curt.getString(0))-1);
+                    }catch (Exception e){}
+                }
+                finish_time.setText("奋斗时间 "+(finishTime/3600)+"h");
+                try {
+                    Dream=(int)((finishTime/36)/24);
+                    Break=11*100/24;
+                    Wast=(100-Dream-Break)/1;
+                    tv_dream.setText("梦想 "+Dream+"%");
+                    tv_wast.setText("虚度 "+Wast+"%");
+                    tv_break.setText("休息 "+Break+"%");
+                }catch (Exception e){}
+            }
+        }
     }
 
     /*-------加载图表数据-------*/
