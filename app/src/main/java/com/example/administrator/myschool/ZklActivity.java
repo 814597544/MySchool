@@ -761,6 +761,7 @@ public class ZklActivity extends Activity{
     }
 
 
+
     private void todayFinish(int time){
         int H=time/3600;
         int M=(time%3600)/60;

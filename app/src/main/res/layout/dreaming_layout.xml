@@ -239,6 +239,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/line_grid"
+                                android:singleLine="true"
                                 android:text="奋斗时间 0h"
                                 android:textSize="10sp"
                                 />
