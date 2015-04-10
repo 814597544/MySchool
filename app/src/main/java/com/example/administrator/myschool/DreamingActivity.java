@@ -289,7 +289,7 @@ public class DreamingActivity  extends Activity {
                 }
                 finish_time.setText("奋斗时间 "+(finishTime/3600)+"h");
                 try {
-                    Dream=(int)((finishTime/36)/24);
+                    Dream=(int)((finishTime/36)/(24*curt.getCount()));
                     Break=11*100/24;
                     Wast=(100-Dream-Break)/1;
                     tv_dream.setText("梦想 "+Dream+"%");
