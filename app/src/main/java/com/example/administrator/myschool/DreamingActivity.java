@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -318,26 +319,28 @@ public class DreamingActivity  extends Activity {
           /*---------优化图表纵坐标---------*/
             MIN=lineValues[0][0];
             MAX=lineValues[0][0];
-         for (int j=1;j<lineValues.length;j++){
+         for (int j=1;j<lineLabels.length;j++){
                if (lineValues[0][j]<MIN){
                    MIN=lineValues[0][j];
+                   Log.e("lineValues[0][j]",lineValues[0][j]+"");
                }
              if (lineValues[0][j]>MAX){
                  MAX=lineValues[0][j];
              }
          }
-      if (MIN>=0&&MIN<4){
-          LINE_MIN=0;
-       }else if (MIN>=4&&MIN<8){
-          LINE_MIN=4;
-      }else {
-          LINE_MIN=8;
-      }
+            Log.e("MIN------MAX",MIN+"-------"+MAX);
+      if (MIN>=2&&MIN<=12){
+                LINE_MIN=(int)(MIN-2);
+            }else if (MIN>12){
+                LINE_MIN=(int)(MIN-3);;
+            }else {
+                LINE_MIN=0;
+            }
 
-     if (MAX>=0&&MAX<4){
-          LINE_MAX=4;
-      }else if (MAX>=4&&MAX<8){
-          LINE_MAX=8;
+     if (MAX>=1&&MAX<=11){
+          LINE_MAX=(int)(MAX+2);
+      }else if (MAX<1){
+          LINE_MAX=(int)(MAX+3);
       }else{
           LINE_MAX=13;
         }
