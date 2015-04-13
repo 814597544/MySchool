@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -66,6 +67,7 @@ public class ZklActivity extends Activity{
     CircularInnerViewActivity mcurActy;
     Cursor cursor3;
     MyBindService.MyBinder binder;
+    PowerManager.WakeLock mWakeLock;
 
 
     private ServiceConnection connection = new ServiceConnection() {
@@ -267,7 +269,7 @@ public class ZklActivity extends Activity{
     stop_dream.setVisibility(View.VISIBLE);
     mstatus.updateName("暂停");
     // 绑定服务到当前activity中
-    final Intent intent = new Intent();
+    final Intent intent = new Intent(ZklActivity.this,MyBindService.class);
     // 指定开启服务的action
     intent.setAction("furao");
 
@@ -393,8 +395,16 @@ public class ZklActivity extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
+        releaseWakeLock();
       /*  getNowTime();
         Log.e("time--",myApplication.getTodayDate());*/
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        acquireWakeLock();
     }
 
     private void initViews(){
@@ -776,9 +786,36 @@ public class ZklActivity extends Activity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        releaseWakeLock();
         myApplication.setGoPain(false);
         if (binder!=null){
         stopMyDream();
      }
     }
+
+    //申请设备电源锁
+    private void acquireWakeLock()
+    {
+        if (null == mWakeLock)
+        {
+            PowerManager pm = (PowerManager)this.getSystemService(Context.POWER_SERVICE);
+            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK|PowerManager.ON_AFTER_RELEASE,"");
+            if (null != mWakeLock)
+            {
+                mWakeLock.acquire();
+            }
+        }
+    }
+
+    //释放设备电源锁
+    private void releaseWakeLock()
+    {
+        if (null != mWakeLock)
+        {
+            mWakeLock.release();
+            mWakeLock = null;
+        }
+    }
+
+
 }
