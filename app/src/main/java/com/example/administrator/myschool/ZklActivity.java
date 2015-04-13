@@ -786,7 +786,6 @@ public class ZklActivity extends Activity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        releaseWakeLock();
         myApplication.setGoPain(false);
         if (binder!=null){
         stopMyDream();
