@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="150">
+        <!--让图片自适应Progressbar-->
+    <clip
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:clipOrientation="horizontal"
+        android:drawable="@drawable/cartoon_run3"
+        android:gravity="center" >
+    </clip>
+    </item>
+
+    <item android:duration="150">
+    <clip
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:clipOrientation="horizontal"
+        android:drawable="@drawable/cartoon_run4"
+        android:gravity="center" >
+    </clip>
+    </item>
+</animation-list>

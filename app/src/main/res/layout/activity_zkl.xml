@@ -76,11 +76,17 @@
                 android:gravity="center_horizontal|bottom"
                 android:layout_weight="1">
 
+                <ProgressBar
+                    android:id="@+id/run11"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:visibility="gone"
+                    android:indeterminateDrawable="@anim/cutton_run"/>
                 <ImageView
                     android:id="@+id/run1"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/cartoon_run"/>
+                    android:background="@drawable/cartoon_stop"/>
 
 
             </LinearLayout>
@@ -104,12 +110,17 @@
                 android:gravity="center_horizontal|bottom"
                 android:layout_weight="1">
 
+                <ProgressBar
+                    android:id="@+id/run22"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:visibility="gone"
+                    android:indeterminateDrawable="@anim/cutton_run"/>
                 <ImageView
                     android:id="@+id/run2"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:visibility="gone"
-                    android:background="@drawable/cartoon_run"/>
+                    android:background="@drawable/cartoon_stop"/>
 
 
             </LinearLayout>
@@ -133,12 +144,17 @@
                 android:gravity="center_horizontal|bottom"
                 android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/run3"
-                    android:visibility="gone"
+                <ProgressBar
+                    android:id="@+id/run33"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@drawable/cartoon_run"/>
+                    android:visibility="gone"
+                    android:indeterminateDrawable="@anim/cutton_run"/>
+                <ImageView
+                    android:id="@+id/run3"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/cartoon_stop"/>
 
 
             </LinearLayout>

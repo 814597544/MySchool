@@ -18,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,11 +45,12 @@ import static com.nineoldandroids.animation.Animator.*;
 public class ZklActivity extends Activity{
     private RoundCornerProgressBar progressTwo;
     private ImageView add,start_dream,stop_dream,run1,run2,run3;
-
+    private ProgressBar run11,run22,run33;
     private int progress2 = 0,progress1=0;
     private CircularBarPager mCircularBarPager;
     TextView titleName,zkl_show_dream,zkl_show_wast,zkl_show_break,today_finishtime;
     String shownum = null,MyDreamTime=null;
+    boolean isRun=false;
 
 
     DatabaseHelper databaseHelper;
@@ -143,6 +145,9 @@ public class ZklActivity extends Activity{
         run1= (ImageView) findViewById(R.id.run1);
         run2= (ImageView) findViewById(R.id.run2);
         run3= (ImageView) findViewById(R.id.run3);
+        run11= (ProgressBar) findViewById(R.id.run11);
+        run22= (ProgressBar) findViewById(R.id.run22);
+        run33= (ProgressBar) findViewById(R.id.run33);
         start_dream= (ImageView) findViewById(R.id.start_dream);
         stop_dream= (ImageView) findViewById(R.id.stop_dream);
 
@@ -259,12 +264,15 @@ public class ZklActivity extends Activity{
             @Override
             public void onClick(View v) {
               stopMyDream();
+              updateProgressTwoColor();
             }
         });
+
         }
 
 
   public void startMyDream(){
+    isRun=true;
     start_dream.setVisibility(View.GONE);
     stop_dream.setVisibility(View.VISIBLE);
     mstatus.updateName("暂停");
@@ -281,6 +289,7 @@ public class ZklActivity extends Activity{
     }
 
     public  void stopMyDream(){
+        isRun=false;
         start_dream.setVisibility(View.VISIBLE);
         stop_dream.setVisibility(View.GONE);
         mstatus.updateName("开始");
@@ -377,19 +386,56 @@ public class ZklActivity extends Activity{
     private void updateProgressTwoColor() {
         if(progress2 <= 300) {
             progressTwo.setProgressColor(getResources().getColor(R.color.custom_progress_red_progress));
-            run1.setVisibility(View.VISIBLE);
-            run2.setVisibility(View.GONE);
-            run3.setVisibility(View.GONE);
+            if (isRun){
+                run1.setVisibility(View.GONE);
+                run2.setVisibility(View.GONE);
+                run3.setVisibility(View.GONE);
+                run11.setVisibility(View.VISIBLE);
+                run22.setVisibility(View.GONE);
+                run33.setVisibility(View.GONE);
+            }else {
+                run1.setVisibility(View.VISIBLE);
+                run2.setVisibility(View.GONE);
+                run3.setVisibility(View.GONE);
+                run11.setVisibility(View.GONE);
+                run22.setVisibility(View.GONE);
+                run33.setVisibility(View.GONE);
+            }
+
         } else if(progress2 > 300 && progress2 <= 750) {
             progressTwo.setProgressColor(getResources().getColor(R.color.custom_progress_orange_progress));
-            run1.setVisibility(View.GONE);
-            run2.setVisibility(View.VISIBLE);
-            run3.setVisibility(View.GONE);
+            if (isRun){
+                run1.setVisibility(View.GONE);
+                run2.setVisibility(View.GONE);
+                run3.setVisibility(View.GONE);
+                run11.setVisibility(View.GONE);
+                run22.setVisibility(View.VISIBLE);
+                run33.setVisibility(View.GONE);
+            }else {
+                run1.setVisibility(View.GONE);
+                run2.setVisibility(View.VISIBLE);
+                run3.setVisibility(View.GONE);
+                run11.setVisibility(View.GONE);
+                run22.setVisibility(View.GONE);
+                run33.setVisibility(View.GONE);
+            }
         } else if(progress2 > 750) {
             progressTwo.setProgressColor(getResources().getColor(R.color.custom_progress_green_progress));
-            run1.setVisibility(View.GONE);
-            run2.setVisibility(View.GONE);
-            run3.setVisibility(View.VISIBLE);
+            if (isRun){
+                run1.setVisibility(View.GONE);
+                run2.setVisibility(View.GONE);
+                run3.setVisibility(View.GONE);
+                run11.setVisibility(View.GONE);
+                run22.setVisibility(View.GONE);
+                run33.setVisibility(View.VISIBLE);
+            }else {
+                run1.setVisibility(View.GONE);
+                run2.setVisibility(View.GONE);
+                run3.setVisibility(View.VISIBLE);
+                run11.setVisibility(View.GONE);
+                run22.setVisibility(View.GONE);
+                run33.setVisibility(View.GONE);
+            }
         }
     }
     @Override
