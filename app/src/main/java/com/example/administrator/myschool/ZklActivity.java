@@ -772,6 +772,7 @@ public class ZklActivity extends Activity{
                         getApplicationContext().unbindService(connection);
                         stopTimer();
 
+                        isRun=false;
                         myApplication.setStatus("0");
                         myApplication.setZklWhter("dreamS");
                         myApplication.setGoPain(false);
