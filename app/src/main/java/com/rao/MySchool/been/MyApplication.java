@@ -15,7 +15,15 @@ public class MyApplication extends Application{
     String EndTime,StartTime;
     int TodayFinishTime=0,todayTime=0,allTime=0,proGress;
     boolean GoPain=false;
+    boolean isRun=false;
 
+    public boolean getRun() {
+        return isRun;
+    }
+
+    public void setRun(boolean isRun) {
+        this.isRun = isRun;
+    }
 
     public String getStartTime() {
         return StartTime;
@@ -88,6 +96,7 @@ public class MyApplication extends Application{
         setGoPain(false);
         setTodayTime(0);
         setTodayFinishTime(0);
+        setRun(false);
     }
 
     public String getStatus() {

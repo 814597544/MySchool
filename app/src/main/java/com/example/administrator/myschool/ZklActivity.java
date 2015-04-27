@@ -50,7 +50,6 @@ public class ZklActivity extends Activity{
     private CircularBarPager mCircularBarPager;
     TextView titleName,zkl_show_dream,zkl_show_wast,zkl_show_break,today_finishtime;
     String shownum = null,MyDreamTime=null;
-    boolean isRun=false;
 
 
     DatabaseHelper databaseHelper;
@@ -272,7 +271,7 @@ public class ZklActivity extends Activity{
 
 
   public void startMyDream(){
-    isRun=true;
+      myApplication.setRun(true);
     start_dream.setVisibility(View.GONE);
     stop_dream.setVisibility(View.VISIBLE);
     mstatus.updateName("暂停");
@@ -289,7 +288,7 @@ public class ZklActivity extends Activity{
     }
 
     public  void stopMyDream(){
-        isRun=false;
+        myApplication.setRun(false);
         start_dream.setVisibility(View.VISIBLE);
         stop_dream.setVisibility(View.GONE);
         mstatus.updateName("开始");
@@ -386,7 +385,7 @@ public class ZklActivity extends Activity{
     private void updateProgressTwoColor() {
         if(progress2 <= 300) {
             progressTwo.setProgressColor(getResources().getColor(R.color.custom_progress_red_progress));
-            if (isRun){
+            if (myApplication.getRun()){
                 run1.setVisibility(View.GONE);
                 run2.setVisibility(View.GONE);
                 run3.setVisibility(View.GONE);
@@ -404,7 +403,7 @@ public class ZklActivity extends Activity{
 
         } else if(progress2 > 300 && progress2 <= 750) {
             progressTwo.setProgressColor(getResources().getColor(R.color.custom_progress_orange_progress));
-            if (isRun){
+            if (myApplication.getRun()){
                 run1.setVisibility(View.GONE);
                 run2.setVisibility(View.GONE);
                 run3.setVisibility(View.GONE);
@@ -421,7 +420,7 @@ public class ZklActivity extends Activity{
             }
         } else if(progress2 > 750) {
             progressTwo.setProgressColor(getResources().getColor(R.color.custom_progress_green_progress));
-            if (isRun){
+            if (myApplication.getRun()){
                 run1.setVisibility(View.GONE);
                 run2.setVisibility(View.GONE);
                 run3.setVisibility(View.GONE);
@@ -567,6 +566,7 @@ public class ZklActivity extends Activity{
 
             }else if ("dreamS".equals(myApplication.getZklWhter())) {
                 gainDreamTime();
+                updateProgressTwoColor();
                 shownum = myApplication.getStatus();
                 zkl_show_dream.setText(myApplication.getDreamTime() + "小时");
                 zkl_show_break.setText(myApplication.getBreakTime() + "小时");
@@ -772,7 +772,7 @@ public class ZklActivity extends Activity{
                         getApplicationContext().unbindService(connection);
                         stopTimer();
 
-                        isRun=false;
+                        myApplication.setRun(false);
                         myApplication.setStatus("0");
                         myApplication.setZklWhter("dreamS");
                         myApplication.setGoPain(false);
