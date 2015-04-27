@@ -120,6 +120,7 @@
                     android:id="@+id/run2"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:visibility="gone"
                     android:background="@drawable/cartoon_stop"/>
 
 
@@ -154,6 +155,7 @@
                     android:id="@+id/run3"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:visibility="gone"
                     android:background="@drawable/cartoon_stop"/>
 
 

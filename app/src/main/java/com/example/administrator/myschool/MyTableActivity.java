@@ -96,7 +96,8 @@ public class MyTableActivity extends Activity implements SwipeRefreshLayout.OnRe
 
 
     private void loadData() {
-        Cursor   cursor = sqLiteDatabase.rawQuery("select  tablename from mytable where week=? and num=?;",new String[]{"星期一","1"});
+        Cursor   cursor = sqLiteDatabase.rawQuery("select  tablename from mytable where week=? and num=? or week=? and num=? or week=? and num=? or week=? and num=? or week=? and num=?;" +
+                "",new String[]{"星期一","1","星期二","1","星期三","1","星期四","1","星期五","1"});
         tableNameList = new ArrayList<MyTable>();
         while (cursor.moveToNext()) {
             myTable=new MyTable();
